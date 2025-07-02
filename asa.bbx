@@ -2280,4 +2280,19 @@
     {#1}%
 }
 
+% ===================== ASA 'n.d.' (No Date) Handling =====================
+% For ASA style, if a work has no date, display 'n.d.' in place of the year.
+% This is achieved by checking if the year field is 'n.d.' (case-insensitive) or undefined,
+% and printing 'n.d.' in place of the year.
+
+% Patch the year field format to display 'n.d.' if appropriate
+\DeclareFieldFormat{year}{%
+  \iffieldundef{#1}
+    {n.d.}%
+    {\iffieldequalstr{#1}{n.d.}
+      {n.d.}%
+      {#1}%
+    }%
+}
+
 \endinput
