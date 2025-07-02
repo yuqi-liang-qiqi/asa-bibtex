@@ -1,63 +1,81 @@
-# A Clean Biblatex Referencing Style for American Sociological Association (ASA-style)
+# biblatex-asa: American Sociological Association (ASA) Style for biblatex
 
-This is a customized `.bst` file for use with BibTeX to produce ASA-style references, closely aligned with the citation and bibliography formatting of *American Sociological Review* and the ASA Style Guide (7th ed., 2022).
+> **Current version is based on the citation style of the American Sociological Review, and is developed on top of the original `biblatex-apa` style.**
+> If future official ASA guidelines differ, a new version will be released to match those changes.
 
-## 💡 Why this version?
+## What is this?
+This project provides a `biblatex` style for LaTeX, following the American Sociological Association (ASA) reference format. It is especially suitable for students, researchers, and anyone submitting to sociology journals.
 
-The widely circulated `asr.bst` (e.g., via [Chris Prener's Gist](https://gist.github.com/chris-prener/e384d441718d7dade6ef7012a5054d9e)) has a few limitations:
+- **This style is adapted from [`biblatex-apa`](https://github.com/plk/biblatex-apa) by Philip Kime, with extensive modifications for ASA requirements.**
+- **Author:** Yuqi Liang  
+- **Email:** yuqi.liang.1900@gmail.com  
+- **GitHub:** [yuqi-liang-qiqi](https://github.com/yuqi-liang-qiqi)
 
-* It inserts a **comma between author and year** in citations like `(Rider and Tan, 2015)`, which **violates ASA style**.
-* Institutional authors appear with full names and are not normalized.
-* It lacks minor refinements for consistency with ASA’s “REFERENCES” guidelines.
+## Who is it for?
+- Anyone writing sociology papers/theses in LaTeX
+- Users who want ASA-style references and citations
+- Beginners who want a ready-to-use template
 
-## ✅ What’s fixed or improved in this version?
+## Quick Start
 
-* 🔹 **Removed comma between author and year** in in-text citations → `(Rider and Tan 2015)` instead of `(Rider and Tan, 2015)`
-* 🔹 Cleaned internal author formatting logic
-* 🔹 Minor adjustments to period placement and spacing
-* 🛠 You can manually format institutional authors with double braces:
+### 1. Requirements
+- A working LaTeX distribution (TeX Live, MiKTeX, etc.)
+- `biblatex` package (usually included)
+- `biber` backend (recommended)
 
-  ```bibtex
-  author = {{U.S. Social Security Administration}},
-  ```
+### 2. Installation
+1. Download `asa.bbx` and `asa.cbx` to the same folder as your `.tex` file.
+2. (Optional) Place them in your local texmf tree for global use.
 
-## 📦 How to use
+### 3. Usage Example
 
-1. Save `asr.bst` in your project folder.
+**Minimal LaTeX file (`test-asa.tex`):**
+```latex
+\documentclass{article}
+\usepackage[backend=biber,style=asa]{biblatex}
+\addbibresource{test-asa.bib}
+\begin{document}
+Here is a citation~\parencite{smith2020}.
+\printbibliography
+\end{document}
+```
 
-2. In your LaTeX document, load `natbib`:
+**Sample bibliography file (`test-asa.bib`):**
+```bibtex
+@article{smith2020,
+  author = {John Smith and Jane Doe},
+  title = {Sociological Research},
+  journal = {American Sociological Review},
+  year = {2020},
+  volume = {85},
+  number = {2},
+  pages = {123-145},
+  doi = {10.1234/asr.2020.12345}
+}
+```
 
-   ```latex
-   \usepackage{natbib}
-   ```
+### 4. Compile Steps
+1. `pdflatex test-asa.tex`
+2. `biber test-asa`
+3. `pdflatex test-asa.tex` (twice for cross-references)
 
-3. Set bibliography style and file:
+### 5. Common Issues
+- **References not showing?** Make sure you run `biber` (not `bibtex`).
+- **File not found?** Ensure `asa.bbx` and `asa.cbx` are in the same folder as your `.tex` file.
+- **Encoding problems?** Save all files as UTF-8.
 
-   ```latex
-   \bibliographystyle{asr}
-   \bibliography{yourbib}
-   ```
+## FAQ
+- **Q: Is this the official ASA style?**  
+  A: This version is based on the style used by the American Sociological Review, and is developed on top of `biblatex-apa`. If the official ASA guidelines differ, a new version will be released.
+- **Q: How do I add new entry types (datasets, theses, etc.)?**  
+  A: See the sample `.bib` file and comments in `asa.bbx` for supported types.
 
-4. Compile using:
+## Contributing
+Pull requests and issues are welcome! Please describe any problems or suggestions clearly.
 
-   ```
-   pdflatex yourfile
-   bibtex yourfile
-   pdflatex yourfile
-   pdflatex yourfile
-   ```
-
-## 📝 Notes
-
-* This style is tested with standard entries: `article`, `book`, `incollection`, `phdthesis`, `misc`, etc.
-* For dissertations, datasets, or `Forthcoming` entries, ensure `.bib` fields like `note` or `howpublished` are clearly written.
-* Compatible with Overleaf or local TeX distributions.
+## License
+Distributed under the LaTeX Project Public License (LPPL).
 
 ---
-
-## 🙌 Acknowledgments
-
-* Based on earlier work by [Chris Prener](https://gist.github.com/chris-prener/e384d441718d7dade6ef7012a5054d9e)
-* Modifications and debugging by [@yuqi-liang-qiqi](https://github.com/yuqi-liang-qiqi)
-* Built with `makebst` and hand-edited for ASA 7th alignment
+For questions or help, contact Yuqi Liang: yuqi.liang.1900@gmail.com
 
