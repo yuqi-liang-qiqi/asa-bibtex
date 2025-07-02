@@ -2268,4 +2268,16 @@
 % postfix will be assigned in alphabetical order by title for same-author, same-year entries.
 % No further code is needed unless custom formatting is required for the year display.
 
+% ===================== ASA 'Forthcoming' Year Handling =====================
+% For ASA style, if a work is accepted but not yet published, the year should display 'Forthcoming'.
+% This is achieved by checking if the year or pubstate field is 'Forthcoming' (case-insensitive),
+% and printing 'Forthcoming' in place of the year.
+
+% Patch the year field format to display 'Forthcoming' if appropriate
+\DeclareFieldFormat{year}{%
+  \iffieldequalstr{#1}{Forthcoming}
+    {Forthcoming}%
+    {#1}%
+}
+
 \endinput
