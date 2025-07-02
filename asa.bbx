@@ -2243,4 +2243,21 @@
   \usebibmacro{setpageref}%
   \finentry}
 
+% ===================== ASA Author List Policy =====================
+% For ASA style, all authors must be listed in full in both citations and bibliography.
+% The use of 'et al.' is not permitted. The following settings and name formats ensure
+% that all author names are always printed, regardless of the number of authors.
+
+% Set the maximum number of names to a very high value to prevent truncation.
+\renewcommand{\maxprtauth}{100}
+
+% Redefine the author name format to always print all names, never using 'et al.'
+\DeclareNameFormat{asaauthor}{%
+  % Print full name (family, given, prefix, suffix) for each author
+  \usebibmacro{name:apa:family-given}{\namepartfamily}{\namepartgiven}{\namepartgiveni}{\namepartprefix}{\namepartsuffix}%
+}
+
+% Use the ASA author format for all name printing
+\DeclareNameAlias{default}{asaauthor}
+
 \endinput
