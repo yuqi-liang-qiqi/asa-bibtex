@@ -114,7 +114,7 @@
 \DeclareBibliographyOption{apamaxprtauth}{%
   \ifstrempty{#1}
     {}
-    {\renewcommand{\maxprtauth}{999}}} % Do not truncate any authors
+    {\renewcommand{\maxprtauth}{#1}}}
 
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -267,6 +267,25 @@
   \nosort{settitles}{\regexp{\A(?:The|An|A)\s+}}
 }
 
+% ===================== ASA Sorting Template =====================
+% The following sorting template is for ASA style, which requires
+% references to be sorted alphabetically by the family name of the first author.
+% This replaces the APA sorting template.
+\DeclareSortingTemplate{asa}{
+  % Sort by presort field if present
+  \sort{\field{presort}}
+  % Sort by author family name (primary key for ASA)
+  \sort{\field{sortname} \field{author} \field{editor}}
+  % Then by year
+  \sort{\field{sortyear} \field{year} \literal{-2000000000}}
+  % Then by title
+  \sort{\field{sorttitle} \field{title}}
+}
+
+% ===================== Set ASA as Default Sorting =====================
+% Set the default sorting scheme to 'asa' for ASA style bibliography.
+% This ensures references are sorted by author family name as required by ASA.
+
 \DeclareSortingTemplate{apa}{
   \sort{
     \field{presort}
@@ -361,7 +380,7 @@
                             pagetracker=true,%
                             pluralothers=true,%
                             sortcites=true,%
-                            sorting=apa,%
+                            sorting=asa,%  % Changed from 'apa' to 'asa' for ASA style
                             uniquelist=minyear,%
                             uniquename=init,%
                             uniqueprimaryauthor=true,%
@@ -592,8 +611,7 @@
     {\addcomma\space\ldots\space}
     {\ifthenelse{\value{listcount}>\maxprtauth\AND\value{listcount}<\value{listtotal}}
       {}
-      %  Use the default name format
-      {\usebibmacro{name:family-given}%
+      {\usebibmacro{name:apa:family-given}%
          {\namepartfamily}%
          {\namepartgiven}%
          {\namepartgiveni}%
@@ -2147,15 +2165,25 @@
   \bibstring{retrieved}\space#1%
   \urldatecomma\bibstring{from}}
 
-% Completely disable printing of DOI and URL
-% This macro usually prints DOI or URL if present.
-% Redefining it to empty will suppress any such output.
-\renewbibmacro*{doi+url}{}
+\newbibmacro*{doi+url}{%
+  \ifboolexpr{          test {\iffieldundef{doi}}
+                 or not togl {bbx:doi}}
+    {\ifboolexpr{       test {\iffieldundef{url}}
+                 or not togl {bbx:url}}
+       {\newunit}
+       {\usebibmacro{url+urldate}%
+        \setunit{\addspace}}}
+    {\printfield{doi}%
+     \setunit{\addspace}}}
 
-% Completely disable printing of URL and retrieval date
-% This macro normally outputs "Retrieved from ..." and the URL.
-% Here we redefine it to do nothing.
-\renewbibmacro*{url+urldate}{}
+\renewbibmacro*{url+urldate}{%
+  \ifthenelse{\iffieldundef{url}\OR\NOT\iffieldundef{doi}}
+    {}
+    {\iffieldundef{urlyear}
+      {}
+      {\printurldate
+       \setunit{\addspace}}%
+     \printfield{url}}}
 
 \newbibmacro*{location+publisher}{%
   \printlist{location}%
