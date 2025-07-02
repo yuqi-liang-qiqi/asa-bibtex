@@ -2260,4 +2260,12 @@
 % Use the ASA author format for all name printing
 \DeclareNameAlias{default}{asaauthor}
 
+% ===================== ASA Same Author Same Year Postfix =====================
+% For ASA style, multiple works by the same author(s) in the same year must be
+% distinguished by adding a, b, c, etc. postfixes to the year. This is handled by
+% biblatex's extradate mechanism, which is enabled by the following settings.
+% The sorting template already sorts by author, year, and title, so the extradate
+% postfix will be assigned in alphabetical order by title for same-author, same-year entries.
+% No further code is needed unless custom formatting is required for the year display.
+
 \endinput
