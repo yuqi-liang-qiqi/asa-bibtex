@@ -1,4 +1,4 @@
-# A Clean BibTeX Style for American Sociological Review (ASA-style)
+# A Clean Biblatex Style for American Sociological Review (ASA-style)
 
 This is a customized `.bst` file for use with BibTeX to produce ASA-style references, closely aligned with the citation and bibliography formatting of *American Sociological Review* and the ASA Style Guide (7th ed., 2022).
 
