@@ -1,4 +1,13 @@
-%% Copyright 2022 Philip Kime
+%% biblatex-asa.bbx -- American Sociological Association (ASA) style for biblatex
+%%
+%% This file is based on biblatex-apa.bbx (by Philip Kime), modified and extended for ASA style requirements.
+%%
+%% Modified by: Yuqi Liang
+%% Date: 2025-07-02
+%% Email: yuqi.liang.1900@gmail.com
+%% Github: https://github.com/yuqi-liang-qiqi
+%%
+%% Original APA style author: Philip Kime
 %%
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3
@@ -10,15 +19,15 @@
 %%
 %% This work has the LPPL maintenance status `maintained'.
 %%
-%% The Current Maintainer of this work is Philip Kime.
+%% The Current Maintainer of this work is Yuqi Liang (for ASA modifications).
 
-\ProvidesFile{apa.bbx}[2023/03/20\space v9.17\space APA biblatex references style]
+\ProvidesFile{asa.bbx}[2025/07/02\space v1.0\space ASA biblatex references style]
 \RequireBiber[3]
 \RequireBibliographyStyle{standard}
-\urlstyle{same} % APA examples all have URLs in same font as text
+\urlstyle{same} % ASA examples all have URLs in same font as text
 
 % Declare the language mapping suffix
-\DeclareLanguageMappingSuffix{-apa}
+\DeclareLanguageMappingSuffix{-asa}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Automated capitalisation after colons
@@ -132,7 +141,7 @@
 % Force roman numerals into arabic using
 % etoolbox macros
 
-\newcommand{\apanum}[1]{\ifrmnum{#1}{\rmntonum{#1}}{#1}}
+\newcommand{\asanum}[1]{\ifrmnum{#1}{\rmntonum{#1}}{#1}}
 
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -490,7 +499,7 @@
 % Set up some standard APA formats
 
 % General format of titles. Ugly Chicago-style lowercasing of English titles
-\DeclareFieldFormat{apacase}{\bbx@colon@search\MakeSentenceCase*{#1}}
+\DeclareFieldFormat{asacase}{\bbx@colon@search\MakeSentenceCase*{#1}}
 
 % HOWPUBLISHED
 \DeclareFieldFormat[unpublished]{howpublished}{\mkbibbrackets{%
@@ -528,32 +537,32 @@
 
 % VOLUME
 \DeclareFieldFormat{volume}{\iffieldundef{maintitle}
-                              {\bibcpstring{volume}~\apanum{#1}}
-                              {\mkbibemph{\bibcpstring{volume}~\apanum{#1}}}}
-\DeclareFieldFormat[article]{volume}{\mkbibemph{\apanum{#1}}}
-\DeclareFieldFormat[inproceedings,periodical]{volume}{\mkbibemph{\apanum{#1}}}
+                              {\bibcpstring{volume}~\asanum{#1}}
+                              {\mkbibemph{\bibcpstring{volume}~\asanum{#1}}}}
+\DeclareFieldFormat[article]{volume}{\mkbibemph{\asanum{#1}}}
+\DeclareFieldFormat[inproceedings,periodical]{volume}{\mkbibemph{\asanum{#1}}}
 
 % VOLUMES
 \DeclareFieldFormat{volumes}{\bibcpstring{volumes}~#1}
 
 % CHAPTER
-\DeclareFieldFormat{chapter}{\bibcpstring{chapter}~\apanum{#1}}
+\DeclareFieldFormat{chapter}{\bibcpstring{chapter}~\asanum{#1}}
 
 % NUMBER
 \DeclareFieldFormat{number}{\iffieldundef{volume}
                              {\ifinteger{\thefield{number}}
-                               {\addspace\mkbibemph{\bibcpstring{number}~\apanum{#1}}\adddot}
-                               {\apanum{#1}}}
-                             {\mkbibemph{\apanum{#1}}}}
-\DeclareFieldFormat[report]{number}{\apanum{#1}}
-\DeclareFieldFormat[article,periodical,inproceedings]{number}{\mkbibparens{\apanum{#1}}}
-\DeclareFieldFormat[reprint]{number}{\mkbibbrackets{\apanum{#1}}}
+                               {\addspace\mkbibemph{\bibcpstring{number}~\asanum{#1}}\adddot}
+                               {\asanum{#1}}}
+                             {\mkbibemph{\asanum{#1}}}}
+\DeclareFieldFormat[report]{number}{\asanum{#1}}
+\DeclareFieldFormat[article,periodical,inproceedings]{number}{\mkbibparens{\asanum{#1}}}
+\DeclareFieldFormat[reprint]{number}{\mkbibbrackets{\asanum{#1}}}
 \DeclareFieldFormat{legmaterialnum}{%
   \ifthenelse{%
     \iffieldequalstr{type}{report}\OR%
-    \iffieldequalstr{type}{execorder}}{\bibcpstring{number}~\apanum{#1}}{\apanum{#1}}}
+    \iffieldequalstr{type}{execorder}}{\bibcpstring{number}~\asanum{#1}}{\asanum{#1}}}
 \DeclareFieldFormat[thesis]{number}{%
-  \bibcpstring{publication}\setunit{\addspace}\bibcpstring{number}~\apanum{#1}}
+  \bibcpstring{publication}\setunit{\addspace}\bibcpstring{number}~\asanum{#1}}
 
 % PAGES
 \DeclareFieldFormat{pageswithprefix}{\mkpageprefix[bookpagination]{#1}}
@@ -792,15 +801,15 @@
     {\printfield{titleaddon}}
     {\iffieldundef{origtitle}
       {\printtext[title]{%
-        \printfield[apacase]{title}%
+        \printfield[asacase]{title}%
         \setunit{\subtitlepunct}%
-        \printfield[apacase]{subtitle}}}
+        \printfield[asacase]{subtitle}}}
       {\printfield{origtitle}%
        \setunit{\addspace}%
        \printtext[brackets]{%
-        \printfield[apacase]{title}%
+        \printfield[asacase]{title}%
         \setunit{\subtitlepunct}%
-        \printfield[apacase]{subtitle}}}%
+        \printfield[asacase]{subtitle}}}%
      \setunit{\addspace}%
      \ifthenelse{\ifentrytype{inbook}\OR\ifentrytype{thesis}}{}{\usebibmacro{addinfo1}}% additional info in parens
      \ifentrytype{thesis}{\usebibmacro{addinfo3}}{}%
@@ -1167,9 +1176,9 @@
   \iffieldundef{title}
     {}
     {\printtext[title]{%
-       \printfield[apacase]{title}%
+       \printfield[asacase]{title}%
        \setunit{\subtitlepunct}%
-       \printfield[apacase]{subtitle}}}}
+       \printfield[asacase]{subtitle}}}}
 
 \renewbibmacro*{title+issuetitle}{%
   \usebibmacro{periodical}%
@@ -1249,9 +1258,9 @@
   \ifthenelse{\iffieldundef{maintitle}\AND\iffieldundef{mainsubtitle}}
     {}
     {\printtext[maintitle]{%
-       \printfield[apacase]{maintitle}%
+       \printfield[asacase]{maintitle}%
        \setunit{\subtitlepunct}%
-       \printfield[apacase]{mainsubtitle}}%
+       \printfield[asacase]{mainsubtitle}}%
     \setunit{\addspace}}
   \printfield{maintitleaddon}}
 
@@ -1259,9 +1268,9 @@
   \ifthenelse{\iffieldundef{booktitle}\AND\iffieldundef{booksubtitle}}
     {}
     {\printtext[booktitle]{%
-       \printfield[apacase]{booktitle}%
+       \printfield[asacase]{booktitle}%
        \setunit{\subtitlepunct}%
-       \printfield[apacase]{booksubtitle}}%
+       \printfield[asacase]{booksubtitle}}%
      \setunit{\addspace}}%
   \printfield{booktitleaddon}}
 
@@ -1297,7 +1306,7 @@
 \newbibmacro*{appentry}{%
   \iffieldundef{appentry}
     {\newunit\newblock}
-    {\printfield[apacase]{appentry}%
+    {\printfield[asacase]{appentry}%
      \newunit\newblock
      \usebibmacro{in}%
      \setunit{\addspace}}}
@@ -1313,7 +1322,7 @@
 
 \newbibmacro*{related:commenton}[1]{%
   \entrydata*{#1}{%
-    \printtext{\mkbibquote{\printfield[apacase]{title}}}}}
+    \printtext{\mkbibquote{\printfield[asacase]{title}}}}}
 
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1408,9 +1417,9 @@
   \entrydata*{#1}{%
     \ifentrytype{article}
       {\mkbibquote{%
-         \printfield[apacase]{title}%
+         \printfield[asacase]{title}%
          \setunit{\subtitlepunct}%
-         \printfield[apacase]{subtitle}}%
+         \printfield[asacase]{subtitle}}%
        \setunit{\addcomma\addspace}%
        \printlabeldateextra
        \setunit{\addcomma\addspace}%
@@ -1438,9 +1447,9 @@
        \setunit{}}
    {\ifentrytype{book}
       {\mkbibemph{%
-         \printfield[apacase]{title}%
+         \printfield[asacase]{title}%
          \setunit{\subtitlepunct}%
-         \printfield[apacase]{subtitle}}%
+         \printfield[asacase]{subtitle}}%
        \setunit{\addcomma\addspace}%
        \printfield[pageswithprefix]{pages}%
        \setunit{\addcomma\addspace}%

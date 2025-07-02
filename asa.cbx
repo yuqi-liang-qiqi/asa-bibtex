@@ -1,4 +1,13 @@
-%% Copyright 2022 Philip Kime
+%% biblatex-asa.cbx -- American Sociological Association (ASA) citation style for biblatex
+%%
+%% This file is based on biblatex-apa.cbx (by Philip Kime), modified and extended for ASA style requirements.
+%%
+%% Modified by: Yuqi Liang
+%% Date: 2025-07-02
+%% Email: yuqi.liang.1900@gmail.com
+%% Github: https://github.com/yuqi-liang-qiqi
+%%
+%% Original APA style author: Philip Kime
 %%
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3
@@ -10,13 +19,13 @@
 %%
 %% This work has the LPPL maintenance status `maintained'.
 %%
-%% The Current Maintainer of this work is Philip Kime.
+%% The Current Maintainer of this work is Yuqi Liang (for ASA modifications).
 
-\ProvidesFile{apa.cbx}[2023/03/20\space v9.17\space APA biblatex citation style]
+\ProvidesFile{asa.cbx}[2025/07/02\space v1.0\space ASA biblatex citation style]
 \RequireBiber[3]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% (APA 8.19) labelyear postfix is not emphasised or italic
+% (ASA 8.19) labelyear postfix is not emphasised or italic
 %            Dashes between labelyear and non-numeric year (or pseudo-year)
 
 \newcommand{\apashortdash}{-}
@@ -26,7 +35,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% (APA 8.11) requires comma separator between authors and years
+% (ASA 8.11) requires comma separator between authors and years
 
 \DeclareDelimFormat{nameyeardelim}{\addcomma\space}
 \DeclareDelimAlias[textcite]{innernameyeardelim}[]{nameyeardelim}
@@ -35,7 +44,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% (APA 8.17) No comma before "et al" if there is only one name
+% (ASA 8.17) No comma before "et al" if there is only one name
 %            preceding it
 
 \DeclareDelimFormat{andothersdelim}{\ifnum\value{listcount}>2 \finalandcomma\fi\addspace}
@@ -44,8 +53,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% (APA 8.10) Suffices are not shown in citations
-% (APA 8.20) Initials only for primary author and only when not unique across all *primary* authors
+% (ASA 8.10) Suffices are not shown in citations
+% (ASA 8.20) Initials only for primary author and only when not unique across all *primary* authors
 
 \newbibmacro*{labelname:doname}[8]{%
   \ifboolexpr{test {\ifnumcomp{\value{listcount}}{>}{1}}
@@ -83,7 +92,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% (APA 8.21) Groups as names
+% (ASA 8.21) Groups as names
 %            SHORTAUTHOR brackets in parencites
 
 \DeclareNameFormat{sabrackets}{%
@@ -107,12 +116,12 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% (APA 8.21) Deal with SHORTAUTHOR fields
-% (APA 8.12) Multiple same author cites in a compact citation call do not
+% (ASA 8.21) Deal with SHORTAUTHOR fields
+% (ASA 8.12) Multiple same author cites in a compact citation call do not
 %            need to be repeated but the full years must be repeated with
 %            their extradate postfixes
-% (APA 8.15) Cite ORIGYEAR/YEAR if ORIGYEAR present
-% (APA 10.1:11) Reprints have original year in citation
+% (ASA 8.15) Cite ORIGYEAR/YEAR if ORIGYEAR present
+% (ASA 10.1:11) Reprints have original year in citation
 
 \def\citeresetapa{\global\let\cbx@apa@names\@empty}
 \citeresetapa
@@ -254,8 +263,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% (APA 8.14) Fall back to title for citations without authors
-% (APA 11) Bizarre and special rules for legal information
+% (ASA 8.14) Fall back to title for citations without authors
+% (ASA 11) Bizarre and special rules for legal information
 
 \DeclareFieldFormat{citetitle}{\mkbibquote{#1}}
 \DeclareFieldFormat[book,manual,report,periodical,legmaterial,jurisdiction,video]{citetitle}{\mkbibemph{#1}}
@@ -267,7 +276,7 @@
                  \ifentrytype{legadminmaterial}}
       {\let\blx@tempa\bibcplstring% \textcite default
        \let\blx@tempb\bibcplstring% \textcite default
-       \iftoggle{apa:inpcite}
+       \iftoggle{asa:inpcite}
          {\iffieldequalstr{type}{execorder}{\let\blx@tempb\bibcpsstring}{}%
           \iffieldequalstr{type}{resolution}{\let\blx@tempa\bibcpsstring}{}%
           \iffieldequalstr{type}{report}{\let\blx@tempa\bibcpsstring\let\blx@tempb\bibcpsstring}{}}
@@ -282,7 +291,7 @@
 
 % CONSTITUTION entrytypes are messier
 \newbibmacro*{cite:noname:const}{%
-  \iftoggle{apa:inpcite}
+  \iftoggle{asa:inpcite}
     {\bibcpsstring{\thefield{source}}%
      \setunit{\addspace}%
      \bibcpsstring{\thefield{type}}%
@@ -303,7 +312,7 @@
      \setunit{\addcomma\addspace}\newblock
      \iffieldundef{part}{}{\bibsstring{paragraph}\setunit{\addspace}\printfield{part}}}
     {}%
-  \iftoggle{apa:intcite}
+  \iftoggle{asa:intcite}
     {\iffieldundef{amendment}{}{\bibcplstring{amendment}%
                                 \setunit{\addspace}%
                                 \printfield{amendment}%
@@ -336,7 +345,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% (APA 10.2:32) Raw field cite formats
+% (ASA 10.2:32) Raw field cite formats
 
 \DeclareFieldFormat{citefield}{%
   \ifcurrentfield{edition}
@@ -470,9 +479,9 @@
   {\usebibmacro{postnote}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% (APA 8.17) ampersand separator in parenthetical cites
+% (ASA 8.17) ampersand separator in parenthetical cites
 
-\newtoggle{apa:inpcite}
+\newtoggle{asa:inpcite}
 
 \DeclareDelimFormat[parencite]{finalnamedelim}
   {\ifnum\value{liststop}>2 \finalandcomma\fi\addspace\&\space}
@@ -480,13 +489,13 @@
 \DeclareCiteCommand{\parencite}[\mkbibparens]
   {\usebibmacro{cite:init}%
    \usebibmacro{prenote}%
-   \toggletrue{apa:inpcite}}
+   \toggletrue{asa:inpcite}}
   {\usebibmacro{citeindex}%
    \usebibmacro{cite}%
    \usebibmacro{cite:post}}
   {}
   {\usebibmacro{postnote}%
-   \togglefalse{apa:inpcite}}
+   \togglefalse{asa:inpcite}}
 
 \DeclareMultiCiteCommand{\parencites}[\mkbibparens]{\parencite}
   {\setunit{\multicitedelim}}
@@ -494,11 +503,11 @@
 \DeclareCiteCommand*{\parencite}[\mkbibparens]
   {\usebibmacro{cite:init}%
    \usebibmacro{prenote}%
-   \toggletrue{apa:inpcite}}
+   \toggletrue{asa:inpcite}}
   {\usebibmacro{citeindex}%
    \usebibmacro{citeyear}%
    \usebibmacro{cite:post}%
-   \togglefalse{apa:inpcite}}
+   \togglefalse{asa:inpcite}}
   {}
   {\usebibmacro{postnote}}
 
@@ -506,7 +515,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% (APA 8.11) No parens round year for cites when the cite is in
+% (ASA 8.11) No parens round year for cites when the cite is in
 %            parentheses. Use new command \nptextcite for such cites
 %            unless using luatex which does it automatically
 
@@ -515,13 +524,13 @@
 \DeclareCiteCommand{\nptextcite}
   {\usebibmacro{cite:init}%
    \usebibmacro{prenote}%
-   \toggletrue{apa:inpcite}}
+   \toggletrue{asa:inpcite}}
   {\usebibmacro{citeindex}%
    \usebibmacro{cite}%
    \usebibmacro{cite:post}}
   {}
   {\usebibmacro{postnote}%
-   \togglefalse{apa:inpcite}}
+   \togglefalse{asa:inpcite}}
 
 \DeclareMultiCiteCommand{\nptextcites}{\nptextcite}
   {\setunit{\multicitedelim}}
@@ -529,11 +538,11 @@
 \DeclareCiteCommand*{\nptextcite}
   {\usebibmacro{cite:init}%
    \usebibmacro{prenote}%
-   \toggletrue{apa:inpcite}}
+   \toggletrue{asa:inpcite}}
   {\usebibmacro{citeindex}%
    \usebibmacro{citeyear}%
    \usebibmacro{cite:post}%
-   \togglefalse{apa:inpcite}}
+   \togglefalse{asa:inpcite}}
   {}
   {\usebibmacro{postnote}}
 
@@ -575,15 +584,15 @@
 \DeclareMultiCiteCommand{\smartcites}[\iffootnote\mkbibparens\mkbibfootnote]
 {\smartcite}{\setunit{\multicitedelim}}
 
-\newtoggle{apa:intcite}
+\newtoggle{asa:intcite}
 
 \DeclareCiteCommand{\cbx@textcite}
   {\usebibmacro{cite:init}%
-   \toggletrue{apa:intcite}}
+   \toggletrue{asa:intcite}}
   {\usebibmacro{citeindex}%
    \usebibmacro{textcite}%
    \usebibmacro{cite:post}%
-   \togglefalse{apa:intcite}}
+   \togglefalse{asa:intcite}}
   {}
   {\usebibmacro{textcite:postnote}}
 
@@ -622,7 +631,7 @@
 \pretocmd{\cbx@textcites@init}{\UseNextMultiCiteHook}{}{}
 
 \ifdef\luatexversion
-  {\directlua{require'apa'}%
+  {\directlua{require'asa'}%
    \glet\textcitei\textcite
    \glet\parencitei\parencite
    \gdef\textcite{\BLTXAPAifInParensTF{\nptextcite}{\textcitei}}%
