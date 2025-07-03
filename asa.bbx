@@ -271,9 +271,8 @@
   \addperiod\space%
   \usebibmacro{asa:title:quoted}%
   \iffieldundef{note}
-    {}
-    {\setunit{\space}\mkbibparens{\printfield{note}}}%
-  \addperiod\space%
+    {\addperiod\space}
+    {\addperiod\space(\thefield{note})\addperiod\space}%
   \iflistundef{location}
     {}
     {\printlist{location}\setunit{\addcolon\space}}%
