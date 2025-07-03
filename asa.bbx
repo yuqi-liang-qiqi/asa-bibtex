@@ -54,8 +54,11 @@
   \ifboolexpr{
     test {\ifdefvoid\namepartgiven}
   }
-  {% Institutional author: keep natural order
-   \namepartfamily}
+  {% Institutional author: print full name as-is
+   \namepartfamily%
+   \ifdefvoid\namepartprefix{}{\namepartprefix\space}%
+   \ifdefvoid\namepartsuffix{}{\space\namepartsuffix}%
+  }
   {% Personal author
    \ifnumequal{\value{listcount}}{1}
      {% First author: "Last, First"
