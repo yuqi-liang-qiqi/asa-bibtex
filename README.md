@@ -1,7 +1,7 @@
 # biblatex-asa: American Sociological Association (ASA) Style for biblatex
 
-> **Current version is based on the citation style of the American Sociological Review, and is developed on top of the original `biblatex-apa` style.**
-> If future official ASA guidelines differ, a new version will be released to match those changes.
+> **A complete and independent implementation of ASA citation style, following the format requirements of the American Sociological Review.**
+> This package provides native ASA formatting without requiring any external style dependencies.
 
 ## Why You Do NOT Need MacTeX or Homebrew for This Project
 
@@ -17,9 +17,15 @@ This project only requires standard LaTeX, biblatex, and biber. You do NOT need 
 - No need for Homebrew or MacTeX unless you want the full MacTeX suite for other reasons.
 
 ## What is this?
-This project provides a `biblatex` style for LaTeX, following the American Sociological Association (ASA) reference format. It is especially suitable for students, researchers, and anyone submitting to sociology journals.
+This project provides a complete `biblatex` style implementation for LaTeX, following the American Sociological Association (ASA) reference format. It is especially suitable for students, researchers, and anyone submitting to sociology journals.
 
-- **This style is adapted from [`biblatex-apa`](https://github.com/plk/biblatex-apa) by Philip Kime, with extensive modifications for ASA requirements.**
+- **This is a fully independent ASA style implementation, built from the ground up to meet ASA formatting requirements.**
+- **Key Features:**
+  - Native ASA citation and bibliography formatting
+  - Support for all major entry types (articles, books, datasets, theses, etc.)
+  - Proper handling of multiple authors, publication dates, and special cases
+  - Correct page number formatting (Pp. vs direct notation)
+  - No external style dependencies required
 - **Author:** Yuqi Liang  
 - **Email:** yuqi.liang.1900@gmail.com  
 - **GitHub:** [yuqi-liang-qiqi](https://github.com/yuqi-liang-qiqi)
@@ -77,11 +83,41 @@ Here is a citation~\parencite{smith2020}.
 - **File not found?** Ensure `asa.bbx` and `asa.cbx` are in the same folder as your `.tex` file.
 - **Encoding problems?** Save all files as UTF-8.
 
+## ASA Format Features Implemented
+
+This implementation provides complete ASA formatting including:
+
+### ✅ Bibliography Format
+- **Author names**: First author inverted (Last, First), subsequent authors normal order
+- **All authors listed**: No "et al." truncation in bibliography (ASA requirement)
+- **Publication dates**: Proper handling of years, "Forthcoming", and "n.d."
+- **Same-year publications**: Automatic a/b/c suffixes for disambiguation
+
+### ✅ Citation Format  
+- **In-text citations**: Proper family name display with "et al." for 3+ authors
+- **Two authors**: "Author1 and Author2" (no comma before "and")
+- **Spacing**: Correct spacing before parentheses: `Author (Year)`
+
+### ✅ Entry Type Support
+- **Articles**: Journal name, volume(issue): pages format
+- **Books**: Complete publisher and location information
+- **Book Chapters**: Proper "Pp. X–Y in..." formatting
+- **Datasets**: DOI support with proper URL formatting  
+- **Theses**: Department, institution, and location details
+- **Websites**: URL handling with access dates
+
+### ✅ Page Number Formatting
+- **Book chapters**: `Pp. 63–93` (capital P)
+- **Journal articles**: Direct notation `15(3): 100–110`
+- **Automatic handling**: No manual intervention required
+
 ## FAQ
 - **Q: Is this the official ASA style?**  
-  A: This version is based on the style used by the American Sociological Review, and is developed on top of `biblatex-apa`. If the official ASA guidelines differ, a new version will be released.
+  A: This is an independent implementation following the format requirements of the American Sociological Review and ASA Style Guide. It provides comprehensive ASA formatting without relying on external styles.
 - **Q: How do I add new entry types (datasets, theses, etc.)?**  
-  A: See the sample `.bib` file and comments in `asa.bbx` for supported types.
+  A: See the sample `.bib` file and comments in `asa.bbx` for supported types. The style includes native drivers for all major ASA-required entry types.
+- **Q: Do I need to install biblatex-apa first?**  
+  A: No! This is a completely independent implementation. You only need standard biblatex and biber.
 
 ## Contributing
 Pull requests and issues are welcome! Please describe any problems or suggestions clearly.
