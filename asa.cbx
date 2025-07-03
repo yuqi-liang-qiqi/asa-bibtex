@@ -52,7 +52,7 @@
 % Date formatting for citations
 % ========================================
 
-\newbibmacro*{cite:labeldate+extradate}{%
+\renewbibmacro*{cite:labeldate+extradate}{%
   \iffieldundef{labelyear}
     {\printtext{n.d.}}
     {\iffieldequalstr{labelyear}{Forthcoming}
@@ -66,7 +66,7 @@
 % Basic citation macros
 % ========================================
 
-\newbibmacro*{cite:label}{%
+\renewbibmacro*{cite:label}{%
   \iffieldundef{label}
     {\printtext[bibhyperref]{\printfield[citetitle]{labeltitle}}}
     {\printtext[bibhyperref]{\printfield{label}}}%
@@ -145,7 +145,7 @@
 % Multiple citation formatting
 % ========================================
 
-\newbibmacro*{textcite:postnote}{%
+\renewbibmacro*{textcite:postnote}{%
   \iffieldundef{postnote}
     {\ifbool{cbx:parens}
        {\bibcloseparen\global\boolfalse{cbx:parens}}
@@ -171,9 +171,9 @@
 % Prenote and postnote formatting
 % ========================================
 
-\newbibmacro*{prenote}{\printfield{prenote}}
+\renewbibmacro*{prenote}{\printfield{prenote}}
 
-\newbibmacro*{postnote}{%
+\renewbibmacro*{postnote}{%
   \iffieldundef{postnote}
     {}
     {\setunit{\postnotedelim}%
