@@ -3,6 +3,19 @@
 > **Current version is based on the citation style of the American Sociological Review, and is developed on top of the original `biblatex-apa` style.**
 > If future official ASA guidelines differ, a new version will be released to match those changes.
 
+## Why You Do NOT Need MacTeX or Homebrew for This Project
+
+This project only requires standard LaTeX, biblatex, and biber. You do NOT need to install MacTeX via Homebrew (e.g., `brew install --cask mactex`).
+
+- The official TeX Live installer (https://tug.org/texlive/) is sufficient and recommended.
+- TeX Live 2025 has been tested and works perfectly for compiling this project.
+- You do not need extra GUI tools or the large MacTeX "full package" unless you have special requirements (e.g., TeXShop, system-wide fonts, or other GUI tools).
+- Using the official TeX Live installer saves disk space and gives you more control over your TeX environment.
+
+**Summary:**
+- If you can compile with `pdflatex`, `biber`, and `biblatex` from TeX Live, you are ready to use this project.
+- No need for Homebrew or MacTeX unless you want the full MacTeX suite for other reasons.
+
 ## What is this?
 This project provides a `biblatex` style for LaTeX, following the American Sociological Association (ASA) reference format. It is especially suitable for students, researchers, and anyone submitting to sociology journals.
 
