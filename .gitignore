@@ -1,10 +1,59 @@
-   *.aux
-   *.bbl
-   *.bcf
-   *.blg
-   *.log
-   *.pdf
-   *.run.xml
-   .idea/
-   venv/
-   install-tl-*/
+# LaTeX auxiliary files
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
+
+# LaTeX intermediate files
+*.dvi
+*.xdv
+*-converted-to.*
+
+# Bibliography auxiliary files (bibtex/biber/biblatex)
+*.bbl
+*.bcf
+*.blg
+*-blx.aux
+*-blx.bib
+*.run.xml
+
+# LaTeX build tool files
+*.fdb_latexmk
+*.synctex
+*.synctex(busy)
+*.synctex.gz
+*.synctex.gz(busy)
+*.pdfsync
+
+# LaTeX build directories
+auto/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+*.swp
+*.swo
+*~
+
+# IDE files
+.idea/
+
+# Temporary files
+*.tmp
+*.temp
+*-temp.*
+
+# Package specific
+*.bcf
+*.run.xml
