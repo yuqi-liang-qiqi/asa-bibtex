@@ -79,6 +79,37 @@ Open `test-asa.pdf` to view your formatted bibliography.
 
 ---
 
+## Understanding the Compilation Workflow (For Beginners)
+
+When using LaTeX with biblatex and biber, the process of generating your final PDF with correct citations and bibliography involves several steps. Here's why:
+
+1. **First pdflatex run:**
+   - LaTeX reads your `.tex` file and notes all the citation commands (like `\textcite{bernard1957}`), but it does not yet know what the actual references look like.
+   - It writes this information into an auxiliary file (`.aux` and `.bcf`).
+   - The PDF is created, but citations may appear as question marks or as `<empty citation>` because the bibliography data is not yet included.
+
+2. **biber run:**
+   - Biber reads the `.bcf` file and your `.bib` file.
+   - It finds all the citation keys, looks up the full reference information, sorts and formats the bibliography, and writes this into a `.bbl` file.
+   - No PDF is created at this step, but the `.bbl` file is now ready for LaTeX to use.
+
+3. **Second pdflatex run:**
+   - LaTeX now reads the `.bbl` file and inserts the formatted bibliography and in-text citations into your document.
+   - The PDF is updated, and you should see your references and citations appear correctly.
+
+4. **Third pdflatex run (optional but recommended):**
+   - This final run ensures that all cross-references (such as citation labels, page numbers, and bibliography sorting) are fully resolved.
+   - Sometimes, changes in the bibliography can affect the layout, so this step guarantees everything is up to date.
+
+**In summary:**
+- The first `pdflatex` run prepares the groundwork.
+- `biber` fills in the citation and bibliography details.
+- The second and third `pdflatex` runs make sure everything is correctly displayed and cross-referenced in the PDF.
+
+> **Tip:** After the first `pdflatex`, your PDF may update, but without running `biber` and the subsequent `pdflatex` runs, your citations and bibliography will be incomplete or missing.
+
+---
+
 ## Notes: Overleaf vs. Local Compilation
 
 - **Overleaf** automates all compilation steps and manages the TeX environment for you.

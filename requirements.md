@@ -47,6 +47,7 @@ Deschenes, Elizabeth Piper, Susan Turner, and Joan Petersilia. 2000. "Intensive 
 - [x] 支持作者名只倒置第一个作者（2025-07-02 完成，apaauthor 格式已实现）
 - [x] 期刊、书籍、网站等不同类型的格式细节调整（2025-07-02 完成，driver 已实现）
 - [x] 测试样例覆盖所有类型（2025-07-02 完成，test-asa.bib 已覆盖主要类型，建议补充边界测试）
+- [x] 极端/边界测试（2025-07-03 完成，test-asa.bib 和 test-asa.tex 已覆盖边界情况）
 
 ### apa 与 asa 差异对比
 
