@@ -47,25 +47,35 @@
 % Author name formatting
 % ========================================
 
-% First author: "Last, First Middle"
-% Other authors: "First Middle Last"
-\DeclareNameFormat{asa-first}{%
-  \usebibmacro{name:family-given}
-    {\namepartfamily}
-    {\namepartgiven}
-    {\namepartprefix}
-    {\namepartsuffix}%
-  \usebibmacro{name:andothers}%
+% ASA author name format: First author "Last, First", others "First Last"
+\DeclareNameFormat{author}{%
+  \ifnumequal{\value{listcount}}{1}
+    {% First author: "Last, First"
+     \usebibmacro{name:family-given}
+       {\namepartfamily}
+       {\namepartgiven}
+       {\namepartprefix}
+       {\namepartsuffix}}
+    {% Other authors: "First Last"
+     \usebibmacro{name:given-family}
+       {\namepartfamily}
+       {\namepartgiven}
+       {\namepartprefix}
+       {\namepartsuffix}}%
 }
 
-\DeclareNameFormat{asa-other}{%
+% Editor name format: All editors "First Last"
+\DeclareNameFormat{editor}{%
   \usebibmacro{name:given-family}
     {\namepartfamily}
     {\namepartgiven}
     {\namepartprefix}
     {\namepartsuffix}%
-  \usebibmacro{name:andothers}%
 }
+
+% Set name delimiters for ASA style
+\renewcommand*{\multinamedelim}{\addcomma\space}
+\renewcommand*{\finalnamedelim}{\addcomma\space\bibstring{and}\space}
 
 % Custom author macro for ASA style
 \newbibmacro*{asa:author}{%
@@ -75,12 +85,7 @@
     not test {\ifnameundef{author}}
   }
   {%
-    % First author
-    \printnames[asa-first][1-1]{author}%
-    % Other authors
-    \ifnumgreater{\value{author}}{1}
-      {\addcomma\space\printnames[asa-other][2-999]{author}}
-      {}%
+    \printnames{author}%
   }
   {}%
 }
@@ -151,7 +156,7 @@
   \newunit%
   \iffieldundef{translator}
     {}
-    {\printtext{Translated by \printnames{translator}}%
+    {\printtext{Translated by \printnames[editor]{translator}}%
      \newunit}%
   \usebibmacro{asa:publisher+location}%
   \setunit{\bibpagerefpunct}\newblock%
@@ -192,7 +197,7 @@
   \ifnameundef{editor}
     {}
     {\setunit{\addcomma\space}%
-     \printtext{edited by \printnames[asa-other]{editor}}}%
+     \printtext{edited by \printnames[editor]{editor}}}%
   \newunit%
   \usebibmacro{asa:publisher+location}%
   \setunit{\bibpagerefpunct}\newblock%

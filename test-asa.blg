@@ -1,18 +1,18 @@
 [0] Config.pm:308> INFO - This is Biber 2.20
 [0] Config.pm:311> INFO - Logfile is 'test-asa.blg'
-[79] biber-darwin:340> INFO - === Thu Jul  3, 2025, 12:23:13
-[94] Biber.pm:420> INFO - Reading 'test-asa.bcf'
-[198] Biber.pm:991> INFO - Using all citekeys in bib section 0
-[214] Biber.pm:4463> INFO - Processing section 0
-[225] Biber.pm:4654> INFO - Looking for bibtex file 'test-asa.bib' for section 0
-[227] bibtex.pm:1713> INFO - LaTeX decoding ...
-[250] bibtex.pm:1519> INFO - Found BibTeX data source 'test-asa.bib'
-[375] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[375] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[375] Biber.pm:4283> INFO - Sorting list 'nyt/global//global/global/global' of type 'entry' with template 'nyt' and locale 'en-US'
-[375] Biber.pm:4289> INFO - No sort tailoring available for locale 'en-US'
-[396] bbl.pm:676> INFO - Writing 'test-asa.bbl' with encoding 'UTF-8'
-[408] bbl.pm:779> INFO - Output to test-asa.bbl
-[408] Biber.pm:131> WARN - legacy year field 'n.d.' in entry 'doe_nodate' is not an integer - this will probably not sort properly.
-[408] Biber.pm:131> WARN - legacy year field 'Forthcoming' in entry 'szelenyiForthcoming' is not an integer - this will probably not sort properly.
-[408] Biber.pm:133> INFO - WARNINGS: 2
+[86] biber-darwin:340> INFO - === Thu Jul  3, 2025, 12:31:10
+[104] Biber.pm:420> INFO - Reading 'test-asa.bcf'
+[216] Biber.pm:991> INFO - Using all citekeys in bib section 0
+[233] Biber.pm:4463> INFO - Processing section 0
+[245] Biber.pm:4654> INFO - Looking for bibtex file 'test-asa.bib' for section 0
+[248] bibtex.pm:1713> INFO - LaTeX decoding ...
+[274] bibtex.pm:1519> INFO - Found BibTeX data source 'test-asa.bib'
+[402] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[402] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[402] Biber.pm:4283> INFO - Sorting list 'nyt/global//global/global/global' of type 'entry' with template 'nyt' and locale 'en-US'
+[402] Biber.pm:4289> INFO - No sort tailoring available for locale 'en-US'
+[427] bbl.pm:676> INFO - Writing 'test-asa.bbl' with encoding 'UTF-8'
+[439] bbl.pm:779> INFO - Output to test-asa.bbl
+[439] Biber.pm:131> WARN - legacy year field 'n.d.' in entry 'doe_nodate' is not an integer - this will probably not sort properly.
+[440] Biber.pm:131> WARN - legacy year field 'Forthcoming' in entry 'szelenyiForthcoming' is not an integer - this will probably not sort properly.
+[440] Biber.pm:133> INFO - WARNINGS: 2
