@@ -286,10 +286,9 @@
   \usebibmacro{date+extradate}%
   \addperiod\space%
   \usebibmacro{asa:title:quoted}%
-  \addperiod\space%
   \iffieldundef{version}
-    {}
-    {\printfield{version}\setunit{\addperiod\space}}%
+    {\addperiod\space}
+    {\addperiod\space\printfield{version}\addperiod\space}%
   \usebibmacro{asa:publisher+location}%
   \addperiod\space%
   \iffieldundef{doi}
