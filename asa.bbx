@@ -163,6 +163,13 @@
 }
 
 % ========================================
+% Field formats
+% ========================================
+
+% Pages format for incollection: ensure "Pp." prefix
+\DeclareFieldFormat[incollection]{pages}{Pp. #1}
+
+% ========================================
 % Entry drivers
 % ========================================
 
@@ -214,7 +221,7 @@
   \addperiod\space%
   \usebibmacro{asa:title:quoted}%
   \addperiod\space%
-  \printtext{Pp. \printfield{pages} in\space}%
+  \printtext{\printfield{pages} in\space}%
   \printfield[title]{booktitle}%
   \ifnameundef{editor}
     {}
