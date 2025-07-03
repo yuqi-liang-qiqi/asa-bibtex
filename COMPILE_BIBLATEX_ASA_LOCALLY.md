@@ -58,7 +58,14 @@ sudo tlmgr install biblatex biber
 \end{document}
 ```
 
+
 ## 6. Compile Your Document (LaTeX + biber Workflow)
+
+Before running the commands, delete temporary files locally:
+
+```sh
+rm -f test-asa.aux test-asa.bbl test-asa.bcf test-asa.blg test-asa.log test-asa.run.xml test-asa.pdf
+```
 
 Open a terminal in your project directory and run:
 

@@ -1,3 +1,11 @@
+<!--
+ * @Author: Yuqi Liang dawson1900@live.com
+ * @Date: 2025-07-02 21:12:30
+ * @LastEditors: Yuqi Liang dawson1900@live.com
+ * @LastEditTime: 2025-07-03 12:01:58
+ * @FilePath: /biblatex-asa/requirements.md
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 Turn biblatex-apa to biblatex-asa (american sociological association) style.
 
 biblatex-apa is a package for formatting bibliographies in APA style, while biblatex-asa is for ASA style. The two styles have different requirements for citations and references. Original link: https://ctan.org/pkg/biblatex-apa?lang=en
@@ -37,17 +45,16 @@ Deschenes, Elizabeth Piper, Susan Turner, and Joan Petersilia. 2000. "Intensive 
 
 ### TODO/任务清单
 
-- [x] 参考文献按作者姓氏字母顺序排列（2025-07-02 完成，已实现排序模板，建议补充极端测试）
-- [x] 所有作者均需列出全名（不可用"et al."）（2025-07-02 完成，已实现 apaauthor 格式）
-- [x] 同一作者多篇文献按年份排序，同年用 a/b/c 区分（2025-07-02 完成，已实现 year postfix 机制，建议补充测试）
-- [x] 未出版但已接受的文献用"Forthcoming"代替年份（2025-07-02 完成，样例已覆盖）
-- [x] 无日期用"n.d."代替（2025-07-02 完成，已支持 nodate 字符串）
-- [x] 论文集、学位论文、数据集等特殊类型支持（2025-07-02 完成，driver 已覆盖，建议补充测试）
-- [x] 数据集引用需包含 DOI（2025-07-02 完成，dataset driver 已实现）
-- [x] 支持作者名只倒置第一个作者（2025-07-02 完成，apaauthor 格式已实现）
-- [x] 期刊、书籍、网站等不同类型的格式细节调整（2025-07-02 完成，driver 已实现）
-- [x] 测试样例覆盖所有类型（2025-07-02 完成，test-asa.bib 已覆盖主要类型，建议补充边界测试）
-- [x] 极端/边界测试（2025-07-03 完成，test-asa.bib 和 test-asa.tex 已覆盖边界情况）
+- [] 参考文献按作者姓氏字母顺序排列，第一个“姓, 名”，后面“名 姓”（没有逗号）
+- [] 所有作者均需列出全名（不可用"et al."）
+- [] 同一作者多篇文献按年份排序，同年用 a/b/c 区分（
+- [] 未出版但已接受的文献用"Forthcoming"代替年份
+- [] 无日期用"n.d."代替
+- [] 论文集、学位论文、数据集等特殊类型支持
+- [] 数据集引用需包含 DOI
+- [] 期刊、书籍、网站等不同类型的格式细节调整
+- [] 测试样例覆盖所有类型
+- [] 极端/边界测试
 
 ### apa 与 asa 差异对比
 
@@ -60,14 +67,17 @@ Deschenes, Elizabeth Piper, Susan Turner, and Joan Petersilia. 2000. "Intensive 
 | 无日期              | n.d.                             | n.d.                          |
 | 数据集引用          | DOI 可选                         | DOI 必须                      |
 | 作者倒置            | 所有作者                         | 仅第一个作者                  |
+| 日期显示            | 年/月/日均可（如有）                | 只显示年份（year），区间用year--endyear，特殊情况用Forthcoming和n.d. |
+
+**ASA date policy:** Only the year is shown in references (no month or day). If a date range is needed (e.g., 1990--1992), print year--endyear. Special cases: 'Forthcoming' and 'n.d.' are used as year values when appropriate.
 
 ### 开发进度追踪
 
 - [x] 需求分析（2025-07-02 完成，requirements.md 已详细列出）
-- [x] 样式文件初步修改（2025-07-02 完成，apa.bbx 已大幅修改）
-- [x] 参考文献排序实现（2025-07-02 完成，已实现排序模板，建议补充极端测试）
-- [x] 作者名处理实现（2025-07-02 完成，apaauthor 格式已实现）
-- [x] 特殊类型支持（数据集、学位论文等）（2025-07-02 完成，driver 已覆盖，建议补充测试）
-- [x] 测试样例编写（2025-07-02 完成，test-asa.bib 已覆盖主要类型，建议补充边界测试）
-- [x] 文档完善（2025-07-02 完成，requirements.md、README.md 已有说明）
+- [] 样式文件初步修改（2025-07-02 完成，apa.bbx 已大幅修改）
+- [] 参考文献排序实现（2025-07-02 完成，已实现排序模板，建议补充极端测试）
+- [] 作者名处理实现（2025-07-02 完成，apaauthor 格式已实现）
+- [] 特殊类型支持（数据集、学位论文等）（2025-07-02 完成，driver 已覆盖，建议补充测试）
+- [] 测试样例编写（2025-07-02 完成，test-asa.bib 已覆盖主要类型，建议补充边界测试）
+- [] 文档完善（2025-07-02 完成，requirements.md、README.md 已有说明）
 - [ ] 终极验收
