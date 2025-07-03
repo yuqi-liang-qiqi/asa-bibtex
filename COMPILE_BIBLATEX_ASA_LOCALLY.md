@@ -125,4 +125,53 @@ When using LaTeX with biblatex and biber, the process of generating your final P
 
 ---
 
+## 8. ASA Format Requirements and Important Details
+
+### Page Number Formatting: Pp. vs pp.
+
+The ASA format has specific requirements for page number prefixes that differ by publication type:
+
+**📖 Book Chapters/Collections (incollection type):**
+```
+Sampson, Robert J. 1992. "Family Management and Child Development: Insights 
+from Social Disorganization Theory." Pp. 63–93 in Advances in Criminology 
+Theory, Vol. 3, Facts, Frameworks, and Forecasts, edited by J. McCord. 
+New Brunswick, NJ: Transaction.
+```
+- Uses **capital "Pp."** before page numbers
+- Format: `Pp. [start]–[end] in [book title]`
+
+**📄 Journal Articles (article type):**
+```
+Lee, Alex. 2021. "Urbanization Trends". Urban Studies 15(3): 100–110.
+```
+- Page numbers appear directly after volume/issue
+- Format: `[volume]([issue]): [start]–[end]`
+- No "pp." prefix needed
+
+**🎓 Other Types:**
+- Some entry types may use lowercase "pp." depending on context
+- The biblatex-asa style automatically handles these distinctions
+
+### Why This Distinction Matters
+
+This formatting difference reflects traditional academic publishing conventions:
+- **Book chapters** are treated as discrete sections within larger works, hence "Pp." (Pages)
+- **Journal articles** are complete works within a serial publication, using direct page notation
+- This follows the American Sociological Association's official style guide requirements
+
+### Technical Implementation
+
+Our `asa.bbx` file handles this automatically through:
+```latex
+% Specific formatting for incollection pages
+\DeclareFieldFormat[incollection]{pages}{Pp. #1}
+
+% Article pages use default formatting (no prefix)
+```
+
+This ensures proper formatting without manual intervention while compiling your bibliography.
+
+---
+
 If you encounter errors, check your PATH, package installation, and file locations. Share error messages for help! 
