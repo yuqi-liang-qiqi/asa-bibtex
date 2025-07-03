@@ -78,11 +78,20 @@
     {\printtext[bibhyperref]{\printnames{labelname}}}%
 }
 
-\newbibmacro*{cite:labelname+labeldate}{%
+% For parenthetical citations (parencite) - simple author year format
+\newbibmacro*{cite:labelname+labeldate:parens}{%
   \usebibmacro{cite:labelname}%
   \setunit{\addspace}%
-  \usebibmacro{cite:labeldate+extradate}%
+  \iffieldundef{labelyear}
+    {\printtext{n.d.}}
+    {\iffieldequalstr{labelyear}{Forthcoming}
+      {\printtext{Forthcoming}}
+      {\iffieldequalstr{labelyear}{n.d.}
+        {\printtext{n.d.}}
+        {\printfield{labelyear}\printfield{extradate}}}}%
 }
+
+
 
 % ========================================
 % Citation commands
@@ -92,7 +101,7 @@
 \DeclareCiteCommand{\parencite}[\mkbibparens]
   {\usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
-   \usebibmacro{cite:labelname+labeldate}}
+   \usebibmacro{cite:labelname+labeldate:parens}}
   {\multicitedelim}
   {\usebibmacro{postnote}}
 
@@ -102,7 +111,14 @@
   {\usebibmacro{citeindex}%
    \usebibmacro{cite:labelname}%
    \addspace%
-   \mkbibparens{\usebibmacro{cite:labeldate+extradate}}}
+   \mkbibparens{%
+     \iffieldundef{labelyear}
+       {\printtext{n.d.}}
+       {\iffieldequalstr{labelyear}{Forthcoming}
+         {\printtext{Forthcoming}}
+         {\iffieldequalstr{labelyear}{n.d.}
+           {\printtext{n.d.}}
+           {\printfield{labelyear}\printfield{extradate}}}}}}
   {\ifbool{cbx:parens}
      {\bibcloseparen\global\boolfalse{cbx:parens}}
      {}%
@@ -113,7 +129,7 @@
 \DeclareCiteCommand{\cite}[\mkbibparens]
   {\usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
-   \usebibmacro{cite:labelname+labeldate}}
+   \usebibmacro{cite:labelname+labeldate:parens}}
   {\multicitedelim}
   {\usebibmacro{postnote}}
 
@@ -121,7 +137,7 @@
 \DeclareCiteCommand{\autocite}[\mkbibparens]
   {\usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
-   \usebibmacro{cite:labelname+labeldate}}
+   \usebibmacro{cite:labelname+labeldate:parens}}
   {\multicitedelim}
   {\usebibmacro{postnote}}
 
