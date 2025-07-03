@@ -35,33 +35,18 @@
 
 % Citation name format: use family names only in citations
 \DeclareNameFormat{labelname}{%
-  \ifcase\value{uniquename}%
-    \usebibmacro{name:family}
-      {\namepartfamily}
-      {\namepartgiven}
-      {\namepartprefix}
-      {\namepartsuffix}%
-  \or
-    \ifuseprefix
-      {\usebibmacro{name:family-given}
-         {\namepartfamily}
-         {\namepartgiven}
-         {\namepartprefix}
-         {\namepartsuffix}}
-      {\usebibmacro{name:family-given}
-         {\namepartfamily}
-         {\namepartgiven}
-         {\namepartprefix}
-         {\namepartsuffix}}%
-  \or
-    \usebibmacro{name:family-given}
-      {\namepartfamily}
-      {\namepartgiven}
-      {\namepartprefix}
-      {\namepartsuffix}%
-  \fi
+  \usebibmacro{name:family}
+    {\namepartfamily}
+    {\namepartgiven}
+    {\namepartprefix}
+    {\namepartsuffix}%
   \usebibmacro{name:andothers}%
 }
+
+% Set name delimiters for citations
+\DeclareDelimFormat[cite,parencite,textcite]{multinamedelim}{\addspace}
+\DeclareDelimFormat[cite,parencite,textcite]{finalnamedelim}{\addspace and\space}
+\DeclareDelimFormat[cite,parencite,textcite]{revsdnamedelim}{\addspace and\space}
 
 % ========================================
 % Date formatting for citations
