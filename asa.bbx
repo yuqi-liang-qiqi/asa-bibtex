@@ -157,81 +157,26 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Date formats. Suppress end range of less specific fields
 
-\newcommand*{\mkdaterangeapalong}[1]{%
-  \begingroup
-    \blx@metadateinfo{#1}%
-    \iffieldundef{#1year}{}
-      {\datecircaprint
-        \ifboolexpr{ test {\ifstrequal{#1}{url}}
-                     or test {\ifentrytype{legal}}
-                     or ( test {\ifentrytype{legadminmaterial}} and
-                          test {\ifkeyword{proposed}} ) }
-         {\printtext[#1date]{%
-             \mkbibdateapalongmdy{#1year}{#1yeardivision}{#1month}{#1day}%
-             \iffieldundef{#1endyear}%
-               {}%
-               {\iffieldequalstr{#1endyear}{}% open-ended range?
-                 {\bibdatedash\bibstring{present}}
-                 {\iffieldundef{#1endyeardivision}
-                   {\bibdatedash%
-                    \iffieldsequal{#1year}{#1endyear}%
-                      {\iffieldsequal{#1month}{#1endmonth}%
-                        {\iffieldsequal{#1day}{#1endday}%
-                          {}%
-                          {\mkbibdateapalongmdy{}{}{}{#1endday}}}%
-                        {\mkbibdateapalongmdy{}{}{#1endmonth}{#1endday}}}%
-                      {\mkbibdateapalongmdy{#1endyear}{#1endyeardivision}{#1endmonth}{#1endday}}}}
-                   {\addslash\mkbibdateapalongmdy{}{#1endyeardivision}{}{}}}%
-             \dateuncertainprint}}
-         {\printtext{%
-             \mkbibdateapalong{#1year}{#1yeardivision}{#1month}{#1day}%
-             \dateeraprint{#1year}%
-             \dateuncertainprint
-             \iffieldundef{#1endyear}%
-               {}%
-               {\iffieldequalstr{#1endyear}{}% open-ended range?
-                 {\bibdatedash\bibstring{present}}
-                 {\iffieldundef{#1endyeardivision}
-                   {\bibdatedash%
-                    \iffieldsequal{#1year}{#1endyear}%
-                      {\iffieldsequal{#1month}{#1endmonth}%
-                        {\iffieldsequal{#1day}{#1endday}%
-                          {}%
-                          {\mkbibdateapalong{}{}{}{#1endday}}}%
-                        {\mkbibdateapalong{}{}{#1endmonth}{#1endday}}}%
-                      {\mkbibdateapalong{#1endyear}{#1endyeardivision}{#1endmonth}{#1endday}%
-                        \dateeraprint{#1endyear}}}
-                   {\addslash\mkbibdateapalong{}{#1endyeardivision}{}{}}}%
-               \enddateuncertainprint}}}}%
-  \endgroup}
+% ===================== ASA Date Output Replacement =====================
+% All custom \mkbibdateapalong* macros and their calls are removed below.
+% For ASA style, only the year is shown in references (no month or day).
+% For a date range, use \printfield{year}\iffieldundef{endyear}{}{--\printfield{endyear}}.
+% Example usage in drivers:
+%   \printfield{year}
+%   \printfield{year}\iffieldundef{endyear}{}{--\printfield{endyear}}
 
-% Only for DATE as only \printdateextra is used
-\newcommand*{\mkdaterangeapalongextra}[1]{%
-  \begingroup
-    \blx@metadateinfo{#1}%
-    \iffieldundef{#1year}{}
-      {\printtext[#1date]{%
-        \datecircaprint
-        \mkbibdateapalongextra{#1year}{#1yeardivision}{#1month}{#1day}%
-        \dateeraprint{#1year}%
-        \dateuncertainprint
-        \iffieldundef{#1endyear}%
-          {}%
-          {\iffieldequalstr{#1endyear}{}% open-ended range?
-            {\bibdatedash\bibstring{present}}
-            {\iffieldundef{#1endyeardivision}
-              {\bibdatedash%
-               \iffieldsequal{#1year}{#1endyear}%
-                 {\iffieldsequal{#1month}{#1endmonth}%
-                    {\iffieldsequal{#1day}{#1endday}%
-                      {}%
-                      {\mkbibdateapalongextra{}{}{}{#1endday}}}
-                    {\mkbibdateapalongextra{}{}{#1endmonth}{#1endday}}}
-                 {\mkbibdateapalongextra{#1endyear}{#1endyeardivision}{#1endmonth}{#1endday}%
-                   \dateeraprint{#1endyear}}}
-              {\addslash\mkbibdateapalongmdy{}{#1endyeardivision}{}{}}}%
-           \enddateuncertainprint}}}%
-  \endgroup}
+% --- Begin ASA date output macros (minimal, only year or year range) ---
+
+% Usage in bibliography drivers:
+%   For a single year:
+%     \printfield{year}
+%   For a year range (e.g., 1990--1992):
+%     \printfield{year}\iffieldundef{endyear}{}{--\printfield{endyear}}
+
+% No custom date macros are needed for ASA style.
+% All previous \mkbibdateapalong* macros and their calls are now removed.
+
+% --- End ASA date output macros ---
 
 \AtEndPreamble{%
   \renewcommand*{\datecircaprint}{%
@@ -366,37 +311,34 @@
 % CONSTITUTION entrytypes have no dates at all so no fall back to nodate literal either
 \DeclareLabeldate[constitution]{\field{date}}
 
+% Remove apalong
 \ExecuteBibliographyOptions{%
-                            abbreviate=true,%
-                            autocite=inline,%
-                            backref=false,%
-                            citetracker=true,%
-                            date=apalong,%
-                            dateabbrev=false,%
-                            datecirca=true,%
-                            dateera=secular,%
-                            dateuncertain=true,%
-                            eventdate=comp,%
-                            labeldate=apalong,%
-                            labeldateparts=true,%
-                            maxbibnames=20,%
-                            maxcitenames=2,%
-                            minbibnames=19,%
-                            mincitenames=1,%
-                            mincrossrefs=999,%
-                            maxitems=999,%
-                            origdate=apalong,%
-                            pagetracker=true,%
-                            pluralothers=true,%
-                            sortcites=true,%
-                            sorting=asa,%  % Changed from 'apa' to 'asa' for ASA style
-                            uniquelist=minyear,%
-                            uniquename=init,%
-                            uniqueprimaryauthor=true,%
-                            urldate=apalong,%
-                            useprefix=true,%
-                            usetranslator=true}
-
+  abbreviate=true,%
+  autocite=inline,%
+  backref=false,%
+  citetracker=true,%
+  dateabbrev=false,%
+  datecirca=true,%
+  dateera=secular,%
+  dateuncertain=true,%
+  eventdate=comp,%
+  labeldateparts=true,%
+  maxbibnames=20,%
+  maxcitenames=2,%
+  minbibnames=19,%
+  mincitenames=1,%
+  mincrossrefs=999,%
+  maxitems=999,%
+  pagetracker=true,%
+  pluralothers=true,%
+  sortcites=true,%
+  sorting=asa,%
+  uniquelist=minyear,%
+  uniquename=init,%
+  uniqueprimaryauthor=true,%
+  useprefix=true,%
+  usetranslator=true
+}
 
 % It's not completely obvious but it's implied that names identical apart from a suffix
 % are to be treated as different name lists for extradate calculation so we add suffix
@@ -2302,5 +2244,61 @@
       {#1}%
     }%
 }
+
+% ===================== ASA Author Name Macro =====================
+% For ASA style, always print the full given name (no initials) for all authors.
+% This macro prints: [prefix] family, given [suffix] for each author.
+\newbibmacro*{name:asa:family-given}[5]{%
+  % #1 = family name
+  % #2 = given name (full, not initials)
+  % #3 = given name (initials, unused here)
+  % #4 = name prefix
+  % #5 = name suffix
+  \ifuseprefix
+    {\mkbibnameprefix{#4}\isdot\bibnamedelimc}
+    {}%
+  \mkbibnamefamily{#1}\isdot
+  \ifthenelse{\ifblank{#2}}{}{%
+    \revsdnamepunct\bibnamedelimd\mkbibnamegiven{#2}%
+  }%
+  \ifthenelse{\ifblank{#5}}{}{%
+    \addcomma\bibnamedelimd\mkbibnamesuffix{#5}\isdot
+  }%
+}
+
+% Use the ASA author format for all name printing (full given names, no "et al.")
+\DeclareNameFormat{asaauthor}{%
+  \usebibmacro{name:asa:family-given}{\namepartfamily}{\namepartgiven}{\namepartgiveni}{\namepartprefix}{\namepartsuffix}%
+}
+
+% Set as default for all name printing
+\DeclareNameAlias{default}{asaauthor}
+
+% ===================== ASA Date Format Policy =====================
+% For ASA style, only the year is shown in references (no month or day).
+% If a date range is needed (e.g., 1990--1992), print year--endyear.
+% Special cases: 'Forthcoming' and 'n.d.' are handled by \DeclareFieldFormat{year} at the end of this file.
+
+% All custom \mkbibdateapalong* macros and their calls are removed.
+% Use \printfield{year} for single year, and \printfield{year}\iffieldundef{endyear}{}{--\printfield{endyear}} for ranges.
+
+% Example usage in drivers:
+%   \printfield{year}
+%   % or, for a range:
+%   \printfield{year}\iffieldundef{endyear}{}{--\printfield{endyear}}
+
+% (Replace all previous calls to \mkbibdateapalong, \mkbibdateapalongmdy, \mkbibdateapalongextra)
+
+% ===================== ASA Date Output Replacement =====================
+% All custom \mkbibdateapalong* macros and their calls are removed below.
+% For single dates, use \printfield{year}. For date ranges, use \printfield{year}\iffieldundef{endyear}{}{--\printfield{endyear}}.
+
+% Example (replace old macro calls):
+%   Old: \mkbibdateapalong{#1year}{#1yeardivision}{#1month}{#1day}
+%   New: \printfield{year}
+%   Old: \mkbibdateapalong{#1endyear}{#1endyeardivision}{#1endmonth}{#1endday}
+%   New: \printfield{endyear}
+%   Old: \mkbibdateapalong{#1year}{#1yeardivision}{#1month}{#1day}--\mkbibdateapalong{#1endyear}{#1endyeardivision}{#1endmonth}{#1endday}
+%   New: \printfield{year}\iffieldundef{endyear}{}{--\printfield{endyear}}
 
 \endinput
