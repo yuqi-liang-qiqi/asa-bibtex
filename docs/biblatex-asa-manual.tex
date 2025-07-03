@@ -1,0 +1,236 @@
+\documentclass[11pt,a4paper]{ltxdoc}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{listings}
+\usepackage{fancyvrb}
+\usepackage{url}
+\usepackage{hyperref}
+
+% Package being documented
+\usepackage[backend=biber]{biblatex}
+\addbibresource{../tests/test-asa.bib}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  commentstyle=\color{gray},
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,
+  backgroundcolor=\color{gray!10}
+}
+
+\title{The \textsf{biblatex-asa} Package\\
+       \Large American Sociological Association Style for \textsf{biblatex}}
+\author{Yuqi Liang\\
+        \texttt{yuqi.liang.1900@gmail.com}}
+\date{Version 1.0.0\\January 7, 2025}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+The \textsf{biblatex-asa} package provides a complete implementation of the American Sociological Association (ASA) citation and bibliography style for LaTeX using the \textsf{biblatex} package. This implementation follows the format requirements of the \emph{American Sociological Review} and provides native ASA formatting without requiring external style dependencies.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}
+
+The \textsf{biblatex-asa} package provides citation and bibliography formatting according to the American Sociological Association (ASA) style guide. This package is particularly useful for:
+
+\begin{itemize}
+  \item Students writing sociology papers or theses
+  \item Researchers submitting to sociology journals
+  \item Anyone requiring ASA-style citations and references
+\end{itemize}
+
+\subsection{Key Features}
+
+\begin{itemize}
+  \item Complete ASA citation and bibliography formatting
+  \item Support for all major entry types (articles, books, datasets, etc.)
+  \item Proper handling of multiple authors and publication dates
+  \item Correct page number formatting
+  \item No external style dependencies required
+  \item Full integration with \textsf{biblatex}
+\end{itemize}
+
+\section{Installation}
+
+\subsection{Package Requirements}
+
+The \textsf{biblatex-asa} package requires:
+\begin{itemize}
+  \item A working LaTeX distribution (TeX Live, MiKTeX, etc.)
+  \item The \textsf{biblatex} package
+  \item The \textsf{biber} backend (recommended)
+\end{itemize}
+
+\subsection{Installation Methods}
+
+\subsubsection{Local Installation}
+
+For use in a single project, copy the following files to your project directory:
+\begin{itemize}
+  \item \texttt{biblatex-asa.sty}
+  \item \texttt{asa.bbx}
+  \item \texttt{asa.cbx}
+\end{itemize}
+
+\subsubsection{System-wide Installation}
+
+For system-wide installation, place the files in your local \texttt{texmf} tree:
+\begin{verbatim}
+texmf/tex/latex/biblatex-asa/
+\end{verbatim}
+
+After installation, update your filename database:
+\begin{itemize}
+  \item TeX Live: run \texttt{texhash} or \texttt{mktexlsr}
+  \item MiKTeX: run \texttt{initexmf --update-fndb}
+\end{itemize}
+
+\section{Usage}
+
+\subsection{Basic Usage}
+
+To use the \textsf{biblatex-asa} package in your document:
+
+\begin{lstlisting}[language=TeX]
+\documentclass{article}
+\usepackage{biblatex-asa}
+\addbibresource{references.bib}
+
+\begin{document}
+This is a citation \parencite{key2023}.
+\textcite{author2022} argues that...
+\printbibliography
+\end{document}
+\end{lstlisting}
+
+\subsection{Direct Style Usage}
+
+Alternatively, you can use the ASA style directly with \textsf{biblatex}:
+
+\begin{lstlisting}[language=TeX]
+\usepackage[backend=biber,style=asa]{biblatex}
+\addbibresource{references.bib}
+\end{lstlisting}
+
+\subsection{Package Options}
+
+The \textsf{biblatex-asa} package accepts the following options:
+
+\begin{description}
+  \item[\texttt{giveninits}] Use initials for given names
+  \item[\texttt{nogiveninits}] Use full given names (default)
+  \item[\texttt{backend=biber}] Use biber backend (recommended)
+  \item[\texttt{backend=bibtex}] Use bibtex backend
+\end{description}
+
+Example with options:
+\begin{lstlisting}[language=TeX]
+\usepackage[giveninits,backend=biber]{biblatex-asa}
+\end{lstlisting}
+
+\section{Citation Commands}
+
+\subsection{Standard Commands}
+
+The package supports all standard \textsf{biblatex} citation commands:
+
+\begin{description}
+  \item[\cs{parencite}] Parenthetical citation: (Author Year)
+  \item[\cs{textcite}] In-text citation: Author (Year)
+  \item[\cs{cite}] Bare citation: Author Year
+  \item[\cs{footcite}] Footnote citation
+\end{description}
+
+\subsection{Convenience Commands}
+
+The package also provides convenience commands:
+
+\begin{description}
+  \item[\cs{asacite}] Equivalent to \cs{parencite}
+  \item[\cs{asatextcite}] Equivalent to \cs{textcite}
+\end{description}
+
+\section{Compilation}
+
+To compile a document using \textsf{biblatex-asa}:
+
+\begin{enumerate}
+  \item \texttt{pdflatex document.tex}
+  \item \texttt{biber document}
+  \item \texttt{pdflatex document.tex}
+  \item \texttt{pdflatex document.tex}
+\end{enumerate}
+
+\section{ASA Format Implementation}
+
+\subsection{Citation Format}
+
+\begin{itemize}
+  \item Single author: (Smith 2020)
+  \item Two authors: (Smith and Jones 2020)
+  \item Three or more authors: (Smith et al. 2020)
+  \item Multiple citations: (Smith 2020; Jones 2021)
+\end{itemize}
+
+\subsection{Bibliography Format}
+
+\begin{itemize}
+  \item Authors: First author inverted (Last, First), others normal order
+  \item All authors listed (no "et al." truncation)
+  \item Proper handling of organizational authors
+  \item Correct page number formatting
+\end{itemize}
+
+\section{Supported Entry Types}
+
+The \textsf{biblatex-asa} package supports all standard \textsf{biblatex} entry types with proper ASA formatting:
+
+\begin{itemize}
+  \item \texttt{@article} - Journal articles
+  \item \texttt{@book} - Books
+  \item \texttt{@incollection} - Book chapters
+  \item \texttt{@inproceedings} - Conference proceedings
+  \item \texttt{@misc} - Miscellaneous sources
+  \item \texttt{@online} - Online sources
+  \item \texttt{@report} - Reports
+  \item \texttt{@thesis} - Theses and dissertations
+\end{itemize}
+
+\section{Troubleshooting}
+
+\subsection{Common Issues}
+
+\begin{description}
+  \item[References not showing] Ensure you run \texttt{biber} (not \texttt{bibtex})
+  \item[File not found errors] Check that all package files are in the correct location
+  \item[Encoding problems] Save all files as UTF-8
+\end{description}
+
+\section{License and Contact}
+
+This work is distributed under the LaTeX Project Public License (LPPL), version 1.3c or later.
+
+\begin{description}
+  \item[Author:] Yuqi Liang
+  \item[Email:] \texttt{yuqi.liang.1900@gmail.com}
+  \item[GitHub:] \url{https://github.com/yuqi-liang-qiqi/biblatex-asa}
+\end{description}
+
+\section{Acknowledgments}
+
+This package was developed independently to provide comprehensive ASA formatting for the \textsf{biblatex} system. Thanks to the \textsf{biblatex} and \textsf{biber} development teams for their excellent software.
+
+\end{document} 

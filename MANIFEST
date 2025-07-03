@@ -5,6 +5,7 @@ This package contains the following files:
 Root documentation:
   README.md                     - Main documentation and usage instructions
   INSTALL                       - Installation instructions  
+  LICENSE                       - LaTeX Project Public License (LPPL)
   MANIFEST                      - This file (package contents list)
 
 Source files (src/):
@@ -13,6 +14,8 @@ Source files (src/):
   src/asa.cbx                  - Citation style file
 
 Documentation (docs/):
+  docs/biblatex-asa-manual.tex - User manual source file
+  docs/biblatex-asa-manual.pdf - User manual (PDF)
   docs/COMPILE_BIBLATEX_ASA_LOCALLY.md - Technical implementation details
   docs/requirements.md         - ASA style format requirements
 
@@ -40,10 +43,11 @@ Installation:
 
 License:
   This work is distributed under the LaTeX Project Public License (LPPL),
-  version 1.3 or later.
+  version 1.3c or later.
 
 Author:
   Yuqi Liang
+  Email: yuqi.liang.1900@gmail.com
   
 Date:
   2025-01-07 
