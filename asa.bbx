@@ -30,15 +30,16 @@
 % Date formatting
 % ========================================
 
-% Only show year, handle special cases
+% Only show year, handle special cases  
 \newbibmacro*{date+extradate}{%
-  \iffieldundef{year}%
+  \iffieldundef{labelyear}%
     {\printtext{n.d.}}%
-    {\iffieldequalstr{year}{Forthcoming}%
+    {\iffieldequalstr{labelyear}{Forthcoming}%
       {\printtext{Forthcoming}}%
-      {\iffieldequalstr{year}{n.d.}%
+      {\iffieldequalstr{labelyear}{n.d.}%
         {\printtext{n.d.}}%
-        {\printfield{year}\printfield{extradate}}%
+        {\printfield{labelyear}%
+         \printfield{extradate}}%
       }%
     }%
 }
@@ -48,20 +49,28 @@
 % ========================================
 
 % ASA author name format: First author "Last, First", others "First Last"
+% But institutional authors keep natural order
 \DeclareNameFormat{author}{%
-  \ifnumequal{\value{listcount}}{1}
-    {% First author: "Last, First"
-     \usebibmacro{name:family-given}
-       {\namepartfamily}
-       {\namepartgiven}
-       {\namepartprefix}
-       {\namepartsuffix}}
-    {% Other authors: "First Last"
-     \usebibmacro{name:given-family}
-       {\namepartfamily}
-       {\namepartgiven}
-       {\namepartprefix}
-       {\namepartsuffix}}%
+  \ifboolexpr{
+    test {\ifdefvoid\namepartgiven}
+  }
+  {% Institutional author: keep natural order
+   \namepartfamily}
+  {% Personal author
+   \ifnumequal{\value{listcount}}{1}
+     {% First author: "Last, First"
+      \usebibmacro{name:family-given}
+        {\namepartfamily}
+        {\namepartgiven}
+        {\namepartprefix}
+        {\namepartsuffix}}
+     {% Other authors: "First Last"
+      \usebibmacro{name:given-family}
+        {\namepartfamily}
+        {\namepartgiven}
+        {\namepartprefix}
+        {\namepartsuffix}}%
+  }%
 }
 
 % Editor name format: All editors "First Last"
@@ -102,12 +111,25 @@
   }
   {}
   {%
-    \printtext[title]{%
-      \printfield[titlecase]{title}%
-      \setunit{\subtitlepunct}%
-      \printfield[titlecase]{subtitle}%
-    }%
-    \newunit%
+    \printfield[titlecase]{title}%
+    \setunit{\subtitlepunct}%
+    \printfield[titlecase]{subtitle}%
+  }%
+}
+
+\newbibmacro*{asa:title:quoted}{%
+  \ifboolexpr{
+    test {\iffieldundef{title}}
+    and
+    test {\iffieldundef{subtitle}}
+  }
+  {}
+  {%
+    \textquotedblleft%
+    \printfield[titlecase]{title}%
+    \setunit{\subtitlepunct}%
+    \printfield[titlecase]{subtitle}%
+    \textquotedblright%
   }%
 }
 
@@ -149,15 +171,15 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{asa:author}%
-  \setunit*{\addperiod\space}%
+  \setunit{\addperiod\space}%
   \usebibmacro{date+extradate}%
-  \setunit*{\addperiod\space}%
+  \setunit{\addperiod\space}%
   \usebibmacro{asa:title}%
-  \newunit%
+  \setunit{\addperiod\space}%
   \iffieldundef{translator}
     {}
     {\printtext{Translated by \printnames[editor]{translator}}%
-     \newunit}%
+     \setunit{\addperiod\space}}%
   \usebibmacro{asa:publisher+location}%
   \setunit{\bibpagerefpunct}\newblock%
   \usebibmacro{pageref}%
@@ -169,11 +191,11 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{asa:author}%
-  \setunit*{\addperiod\space}%
+  \addperiod\space%
   \usebibmacro{date+extradate}%
-  \setunit*{\addperiod\space}%
-  \printtext{\mkbibquote{\usebibmacro{asa:title}}}%
-  \newunit%
+  \addperiod\space%
+  \usebibmacro{asa:title:quoted}%
+  \addperiod\space%
   \usebibmacro{asa:journal+volume+pages}%
   \newunit%
   \printfield{url}%
@@ -187,18 +209,18 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{asa:author}%
-  \setunit*{\addperiod\space}%
+  \setunit{\addperiod\space}%
   \usebibmacro{date+extradate}%
-  \setunit*{\addperiod\space}%
-  \printtext{\mkbibquote{\usebibmacro{asa:title}}}%
-  \newunit%
-  \printtext{Pp.\space\printfield{pages}\space in\space}%
+  \setunit{\addperiod\space}%
+  \usebibmacro{asa:title:quoted}%
+  \setunit{\addperiod\space}%
+  \printtext{Pp. \printfield{pages} in\space}%
   \printfield[title]{booktitle}%
   \ifnameundef{editor}
     {}
     {\setunit{\addcomma\space}%
      \printtext{edited by \printnames[editor]{editor}}}%
-  \newunit%
+  \setunit{\addperiod\space}%
   \usebibmacro{asa:publisher+location}%
   \setunit{\bibpagerefpunct}\newblock%
   \usebibmacro{pageref}%
@@ -210,11 +232,11 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{asa:author}%
-  \setunit*{\addperiod\space}%
+  \setunit{\addperiod\space}%
   \usebibmacro{date+extradate}%
-  \setunit*{\addperiod\space}%
-  \printtext{\mkbibquote{\usebibmacro{asa:title}}}%
-  \newunit%
+  \setunit{\addperiod\space}%
+  \usebibmacro{asa:title:quoted}%
+  \setunit{\addperiod\space}%
   \printfield{type}%
   \iffieldundef{department}
     {}
@@ -234,19 +256,19 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{asa:author}%
-  \setunit*{\addperiod\space}%
+  \setunit{\addperiod\space}%
   \usebibmacro{date+extradate}%
-  \setunit*{\addperiod\space}%
-  \printtext{\mkbibquote{\usebibmacro{asa:title}}}%
+  \setunit{\addperiod\space}%
+  \usebibmacro{asa:title:quoted}%
   \iffieldundef{note}
     {}
-    {\setunit*{\space}\mkbibparens{\printfield{note}}}%
-  \newunit%
+    {\setunit{\space}\mkbibparens{\printfield{note}}}%
+  \setunit{\addperiod\space}%
   \iflistundef{location}
     {}
     {\printlist{location}\setunit{\addcolon\space}}%
   \printlist{publisher}%
-  \newunit%
+  \setunit{\addperiod\space}%
   \iffieldundef{url}
     {}
     {\mkbibparens{\printfield{url}}}%
@@ -260,16 +282,16 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{asa:author}%
-  \setunit*{\addperiod\space}%
+  \setunit{\addperiod\space}%
   \usebibmacro{date+extradate}%
-  \setunit*{\addperiod\space}%
-  \printtext{\mkbibquote{\usebibmacro{asa:title}}}%
-  \newunit%
+  \setunit{\addperiod\space}%
+  \usebibmacro{asa:title:quoted}%
+  \setunit{\addperiod\space}%
   \iffieldundef{version}
     {}
-    {\printfield{version}\newunit}%
+    {\printfield{version}\setunit{\addperiod\space}}%
   \usebibmacro{asa:publisher+location}%
-  \newunit%
+  \setunit{\addperiod\space}%
   \iffieldundef{doi}
     {}
     {\mkbibparens{https://doi.org/\printfield{doi}}}%
