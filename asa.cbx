@@ -23,6 +23,12 @@
   giveninits=false
 }
 
+% Ensure bibliography shows all authors (override citation settings)
+\AtBeginBibliography{%
+  \defcounter{maxnames}{999}%
+  \defcounter{minnames}{1}%
+}
+
 % ========================================
 % Name formatting for citations
 % ========================================

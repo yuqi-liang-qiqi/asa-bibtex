@@ -16,8 +16,8 @@
   uniquename=full,
   uniquelist=false,
   sorting=nyt,
-  maxnames=999,
-  minnames=1,
+  maxbibnames=999,
+  minbibnames=1,
   maxcitenames=999,
   mincitenames=1,
   isbn=false,
@@ -294,7 +294,7 @@
   \addperiod\space%
   \iffieldundef{doi}
     {}
-    {\mkbibparens{https://doi.org/\printfield{doi}}}%
+    {\mkbibparens{https//doi.org/\thefield{doi}}}%
   \setunit{\bibpagerefpunct}\newblock%
   \usebibmacro{pageref}%
   \usebibmacro{finentry}%
