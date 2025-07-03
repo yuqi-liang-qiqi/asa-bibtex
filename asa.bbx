@@ -171,15 +171,15 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{asa:author}%
-  \setunit{\addperiod\space}%
+  \addperiod\space%
   \usebibmacro{date+extradate}%
-  \setunit{\addperiod\space}%
+  \addperiod\space%
   \usebibmacro{asa:title}%
-  \setunit{\addperiod\space}%
+  \addperiod\space%
   \iffieldundef{translator}
     {}
     {\printtext{Translated by \printnames[editor]{translator}}%
-     \setunit{\addperiod\space}}%
+     \addperiod\space}%
   \usebibmacro{asa:publisher+location}%
   \setunit{\bibpagerefpunct}\newblock%
   \usebibmacro{pageref}%
@@ -209,18 +209,18 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{asa:author}%
-  \setunit{\addperiod\space}%
+  \addperiod\space%
   \usebibmacro{date+extradate}%
-  \setunit{\addperiod\space}%
+  \addperiod\space%
   \usebibmacro{asa:title:quoted}%
-  \setunit{\addperiod\space}%
+  \addperiod\space%
   \printtext{Pp. \printfield{pages} in\space}%
   \printfield[title]{booktitle}%
   \ifnameundef{editor}
     {}
     {\setunit{\addcomma\space}%
      \printtext{edited by \printnames[editor]{editor}}}%
-  \setunit{\addperiod\space}%
+  \addperiod\space%
   \usebibmacro{asa:publisher+location}%
   \setunit{\bibpagerefpunct}\newblock%
   \usebibmacro{pageref}%
@@ -232,11 +232,11 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{asa:author}%
-  \setunit{\addperiod\space}%
+  \addperiod\space%
   \usebibmacro{date+extradate}%
-  \setunit{\addperiod\space}%
+  \addperiod\space%
   \usebibmacro{asa:title:quoted}%
-  \setunit{\addperiod\space}%
+  \addperiod\space%
   \printfield{type}%
   \iffieldundef{department}
     {}
@@ -256,19 +256,19 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{asa:author}%
-  \setunit{\addperiod\space}%
+  \addperiod\space%
   \usebibmacro{date+extradate}%
-  \setunit{\addperiod\space}%
+  \addperiod\space%
   \usebibmacro{asa:title:quoted}%
   \iffieldundef{note}
     {}
     {\setunit{\space}\mkbibparens{\printfield{note}}}%
-  \setunit{\addperiod\space}%
+  \addperiod\space%
   \iflistundef{location}
     {}
     {\printlist{location}\setunit{\addcolon\space}}%
   \printlist{publisher}%
-  \setunit{\addperiod\space}%
+  \addperiod\space%
   \iffieldundef{url}
     {}
     {\mkbibparens{\printfield{url}}}%
@@ -282,16 +282,16 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{asa:author}%
-  \setunit{\addperiod\space}%
+  \addperiod\space%
   \usebibmacro{date+extradate}%
-  \setunit{\addperiod\space}%
+  \addperiod\space%
   \usebibmacro{asa:title:quoted}%
-  \setunit{\addperiod\space}%
+  \addperiod\space%
   \iffieldundef{version}
     {}
     {\printfield{version}\setunit{\addperiod\space}}%
   \usebibmacro{asa:publisher+location}%
-  \setunit{\addperiod\space}%
+  \addperiod\space%
   \iffieldundef{doi}
     {}
     {\mkbibparens{https://doi.org/\printfield{doi}}}%
