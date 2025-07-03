@@ -18,7 +18,7 @@
   uniquelist=false,
   maxnames=2,
   minnames=1,
-  maxcitenames=2,
+  maxcitenames=1,
   mincitenames=1,
   giveninits=false
 }
@@ -27,33 +27,25 @@
 % Name formatting for citations
 % ========================================
 
-% Citation name format: "Last" for single names, "Last and Last" for two, "Last et al." for more
+% Citation name format: use family names only in citations
 \DeclareNameFormat{labelname}{%
-  \ifcase\value{uniquename}%
-    \usebibmacro{name:family}
-      {\namepartfamily}
-      {\namepartgiven}
-      {\namepartprefix}
-      {\namepartsuffix}%
-  \or
-    \ifuseprefix
-      {\usebibmacro{name:family-given}
-         {\namepartfamily}
-         {\namepartgiven}
-         {\namepartprefix}
-         {\namepartsuffix}}
-      {\usebibmacro{name:family-given}
-         {\namepartfamily}
-         {\namepartgiven}
-         {\namepartprefix}
-         {\namepartsuffix}}%
-  \or
-    \usebibmacro{name:family-given}
-      {\namepartfamily}
-      {\namepartgiven}
-      {\namepartprefix}
-      {\namepartsuffix}%
-  \fi
+  \usebibmacro{name:family}
+    {\namepartfamily}
+    {\namepartgiven}
+    {\namepartprefix}
+    {\namepartsuffix}%
+}
+
+% Configure "et al." display for citations
+\DeclareDelimFormat{andothersdelim}{\addspace}
+\renewbibmacro*{name:andothers}{%
+  \ifboolexpr{
+    test {\ifnumgreater{\value{listcount}}{\value{maxnames}}}
+    or
+    test \ifmorenames
+  }
+  {\printdelim{andothersdelim}\bibstring{andothers}}
+  {}%
 }
 
 % ========================================
@@ -109,7 +101,7 @@
   {\boolfalse{cbx:parens}}
   {\usebibmacro{citeindex}%
    \printtext[bibhyperref]{\printnames{labelname}}%
-   \setunit{\addspace}%
+   \addspace%
    \mkbibparens{\usebibmacro{cite:labeldate+extradate}}}
   {\ifbool{cbx:parens}
      {\bibcloseparen\global\boolfalse{cbx:parens}}
