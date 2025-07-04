@@ -2,7 +2,7 @@
  * @Author: Yuqi Liang dawson1900@live.com
  * @Date: 2025-07-02 21:12:30
  * @LastEditors: Yuqi Liang dawson1900@live.com
- * @LastEditTime: 2025-07-04 10:08:23
+ * @LastEditTime: 2025-07-04 12:10:50
  * @FilePath: /biblatex-asa/requirements.md
  * @Description: Referencing requirements of American Sociological Review
 -->
