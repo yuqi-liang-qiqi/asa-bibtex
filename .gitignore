@@ -11,6 +11,7 @@
 *.cb
 *.cb2
 .*.lb
+*.hd
 
 # LaTeX intermediate files
 *.dvi
@@ -36,10 +37,6 @@
 # LaTeX build directories
 auto/
 
-# System files
-.DS_Store
-Thumbs.db
-
 # Editor files
 .vscode/
 *.swp
@@ -48,12 +45,20 @@ Thumbs.db
 
 # IDE files
 .idea/
+*.iml
 
 # Temporary files
 *.tmp
 *.temp
 *-temp.*
 
-# Package specific
-*.bcf
-*.run.xml
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
