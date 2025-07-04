@@ -1,14 +1,78 @@
-# biblatex-asa: American Sociological Association (ASA) Style for biblatex
+<div align="center">
+  <img src="assets/logo.svg" alt="biblatex-asa Logo" width="200"/>
+  
+  <h1>biblatex-asa</h1>
+  <h3>American Sociological Association (ASA) Style for biblatex</h3>
+  
+  <p>
+    <strong>A complete implementation of ASA citation style for biblatex, following the format requirements of the American Sociological Review.</strong><br/>
+    This package provides native ASA formatting built on top of biblatex's standard framework.
+  </p>
+  
+  <p>
+    <a href="https://www.latex-project.org/lppl/"><img src="https://img.shields.io/badge/License-LPPL-blue.svg" alt="License: LPPL"/></a>
+    <a href="https://github.com/yuqi-liang-qiqi/biblatex-asa/releases"><img src="https://img.shields.io/github/v/release/yuqi-liang-qiqi/biblatex-asa?label=Latest%20Release" alt="Latest Release"/></a>
+    <a href="https://ctan.org/pkg/biblatex-asa"><img src="https://img.shields.io/badge/CTAN-biblatex--asa-brightgreen" alt="CTAN Package"/></a>
+    <a href="docs/biblatex-asa-manual.pdf"><img src="https://img.shields.io/badge/Documentation-PDF-red" alt="Documentation"/></a>
+  </p>
+  
+  <p>
+    <a href="#installation">Quick Start</a> •
+    <a href="#usage">Usage Guide</a> •
+    <a href="#examples">Examples</a> •
+    <a href="docs/biblatex-asa-manual.pdf">Full Manual</a> •
+    <a href="#contributing">Contributing</a>
+  </p>
+</div>
 
-> **A complete implementation of ASA citation style for biblatex, following the format requirements of the American Sociological Review.**  
-> This package provides native ASA formatting built on top of biblatex's standard framework.
+---
 
-[![License: LPPL](https://img.shields.io/badge/License-LPPL-blue.svg)](https://www.latex-project.org/lppl/)
+## Features
+
+<table>
+<tr>
+<td width="50%">
+
+### **Core Features**
+- Native ASA citation and bibliography formatting
+- Support for all major entry types (articles, books, datasets, theses, etc.)
+- Proper handling of multiple authors, publication dates, and special cases
+- Correct page number formatting (Pp. vs direct notation)
+- Built on biblatex's reliable standard and authoryear frameworks
+
+</td>
+<td width="50%">
+
+### **Who is it for?**
+- Anyone writing sociology papers/theses in LaTeX
+- Users who want ASA-style references and citations
+- Beginners who want a ready-to-use template
+- Researchers submitting to sociology journals
+
+</td>
+</tr>
+</table>
+
+### New to LaTeX or Referencing Systems?
+
+If you're new to LaTeX, biblatex, or academic referencing in general, we recommend starting with our comprehensive **[User Manual](docs/biblatex-asa-manual.pdf)**, which includes:
+
+- **Beginner's Guide** (Section 1.2): Understanding different referencing styles (ASA, APA, Chicago, Harvard)
+- **BibTeX vs. biblatex**: Why we use the modern biblatex system  
+- **Citation Commands**: When to use `\parencite{}`, `\textcite{}`, and more
+- **Step-by-step examples**: From installation to your first compiled document
+
+The manual is designed to be beginner-friendly while maintaining academic rigor—perfect for building a solid foundation!
+
+---
 
 ## Table of Contents
 
+<details>
+<summary>Navigation</summary>
+
 - [About](#about)
-- [Project Structure](#project-structure)
+- [Project Structure](#project-structure)  
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -19,57 +83,55 @@
 - [Contributing](#contributing)
 - [License](#license)
 
+</details>
+
+---
+
 ## About
 
-This project provides a complete `biblatex` style implementation for LaTeX, following the American Sociological Association (ASA) reference format. It is especially suitable for students, researchers, and anyone submitting to sociology journals.
+This project provides a **complete `biblatex` style implementation** for LaTeX, following the American Sociological Association (ASA) reference format. It is especially suitable for students, researchers, and anyone submitting to sociology journals.
 
-**Key Features:**
-- ✅ Native ASA citation and bibliography formatting
-- ✅ Support for all major entry types (articles, books, datasets, theses, etc.)
-- ✅ Proper handling of multiple authors, publication dates, and special cases
-- ✅ Correct page number formatting (Pp. vs direct notation)
-- ✅ Built on biblatex's reliable standard and authoryear frameworks
-- ✅ Comprehensive ASA format implementation
-
-**Who is it for?**
-- Anyone writing sociology papers/theses in LaTeX
-- Users who want ASA-style references and citations
-- Beginners who want a ready-to-use template
-
-**Author:** Yuqi Liang  
-**Email:** yuqi.liang.1900@gmail.com  
-**GitHub:** [yuqi-liang-qiqi](https://github.com/yuqi-liang-qiqi)
-
-### 📚 New to LaTeX or Referencing Systems?
-
-If you're new to LaTeX, biblatex, or academic referencing in general, we recommend starting with our comprehensive **[User Manual](docs/biblatex-asa-manual.pdf)**, which includes:
-
-- **Beginner's Guide** (Section 1.2): Understanding different referencing styles (ASA, APA, Chicago, Harvard)
-- **BibTeX vs. biblatex**: Why we use the modern biblatex system
-- **Citation Commands**: When to use `\parencite{}`, `\textcite{}`, and more
-- **Step-by-step examples**: From installation to your first compiled document
-
-The manual is designed to be beginner-friendly while maintaining academic rigor—perfect for building a solid foundation!
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><strong>Author</strong></td>
+      <td align="center"><strong>Contact</strong></td>
+      <td align="center"><strong>GitHub</strong></td>
+    </tr>
+    <tr>
+      <td align="center">Yuqi Liang</td>
+      <td align="center"><a href="mailto:yuqi.liang.1900@gmail.com">yuqi.liang.1900@gmail.com</a></td>
+      <td align="center"><a href="https://github.com/yuqi-liang-qiqi">@yuqi-liang-qiqi</a></td>
+    </tr>
+  </table>
+</div>
 
 ## Project Structure
+
+<details>
+<summary>Click to expand project structure</summary>
 
 ```
 biblatex-asa/
 ├── README.md                     # Main documentation
-├── INSTALL                       # Installation instructions
+├── INSTALL                       # Installation instructions  
 ├── MANIFEST                      # Package contents list
 ├── .gitignore                    # Git ignore patterns
 │
-├── src/                          # 📦 Source files
-│   ├── biblatex-asa.sty         # LaTeX package wrapper
-│   ├── asa.bbx                  # Bibliography style file
-│   └── asa.cbx                  # Citation style file
+├── assets/                       # Project assets
+│   └── logo.svg                  # Project logo
 │
-├── docs/                         # 📚 Documentation
+├── src/                          # Core package files
+│   ├── biblatex-asa.sty         # LaTeX package wrapper
+│   ├── asa.bbx                  # Bibliography style definitions
+│   └── asa.cbx                  # Citation style definitions
+│
+├── docs/                         # Documentation
+│   ├── biblatex-asa-manual.pdf
 │   ├── COMPILE_BIBLATEX_ASA_LOCALLY.md
 │   └── requirements.md
 │
-├── examples/                     # 📝 Usage examples
+├── examples/                     # Usage examples
 │   ├── basic/                   # Basic usage example
 │   │   ├── example.tex
 │   │   ├── example.bib
@@ -78,15 +140,19 @@ biblatex-asa/
 │       ├── example-with-package.tex
 │       └── example.bib
 │
-├── tests/                        # 🧪 Test files
+├── tests/                        # Test files
 │   ├── test-asa.tex
 │   ├── test-asa.bib
 │   └── test-asa.pdf
 │
-└── scripts/                      # 🔧 Build and utility scripts
+└── scripts/                      # Build automation
     ├── build.sh                 # Build and test script
     └── clean.sh                 # Cleanup temporary files
 ```
+
+</details>
+
+---
 
 ## Requirements
 
@@ -103,10 +169,10 @@ You will need a recent LaTeX distribution and the following packages:
 
 This project works with any standard LaTeX installation. You do NOT need to install MacTeX via Homebrew:
 
-- ✅ The official [TeX Live installer](https://tug.org/texlive/) is sufficient and recommended
-- ✅ TeX Live 2025 has been tested and works perfectly
-- ✅ No extra GUI tools or the large MacTeX "full package" required
-- ✅ Using the official TeX Live installer saves disk space and gives you more control
+- The official [TeX Live installer](https://tug.org/texlive/) is sufficient and recommended
+- TeX Live 2025 has been tested and works perfectly
+- No extra GUI tools or the large MacTeX "full package" required
+- Using the official TeX Live installer saves disk space and gives you more control
 
 **Summary:** If you can compile with `pdflatex`, `biber`, and `biblatex` from TeX Live, you are ready to use this project.
 
@@ -204,10 +270,12 @@ Here is a citation~\parencite{smith2020}.
 
 ```bash
 pdflatex document.tex
-biber document        # Use biber, not bibtex
+biber document        # Use biber, not bibtex  
 pdflatex document.tex
 pdflatex document.tex
 ```
+
+> **Pro Tip**: Most modern LaTeX editors (VS Code, TeXShop, etc.) can be configured to run this sequence automatically!
 
 ## Examples
 
@@ -232,18 +300,18 @@ The project includes comprehensive examples in the [`examples/`](examples/) dire
 
 This implementation provides complete ASA formatting including:
 
-### ✅ Bibliography Format
+### Bibliography Format
 - **Author names**: First author inverted (Last, First), subsequent authors normal order
 - **All authors listed**: No "et al." truncation in bibliography (ASA requirement)
 - **Publication dates**: Proper handling of years, "Forthcoming", and "n.d."
 - **Same-year publications**: Automatic a/b/c suffixes for disambiguation
 
-### ✅ Citation Format  
+### Citation Format  
 - **In-text citations**: Proper family name display with "et al." for 3+ authors
 - **Two authors**: "Author1 and Author2" (no comma before "and")
 - **Spacing**: Correct spacing before parentheses: `Author (Year)`
 
-### ✅ Entry Type Support
+### Entry Type Support
 - **Articles**: Journal name, volume(issue): pages format
 - **Books**: Complete publisher and location information
 - **Book Chapters**: Proper "Pp. X–Y in..." formatting
@@ -251,7 +319,7 @@ This implementation provides complete ASA formatting including:
 - **Theses**: Department, institution, and location details
 - **Websites**: URL handling with access dates
 
-### ✅ Page Number Formatting
+### Page Number Formatting
 - **Book chapters**: `Pp. 63–93` (capital P)
 - **Journal articles**: Direct notation `15(3): 100–110`
 - **Automatic handling**: No manual intervention required
