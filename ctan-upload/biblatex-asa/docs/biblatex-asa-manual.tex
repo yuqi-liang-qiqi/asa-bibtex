@@ -41,9 +41,13 @@
 
 \title{The \textsf{biblatex-asa} Package\\
        \Large American Sociological Association Style for \textsf{biblatex}}
-\author{Yuqi Liang\\
-        \texttt{yuqi.liang.1900@gmail.com}}
-\date{Version 1.0.0\\July 3, 2025}
+\author{%
+  \begin{tabular}{@{}c@{\hspace{3cm}}c@{}}
+    Yuqi Liang & Version 1.0.0 \\
+    \texttt{dawson1900@live.com} & July 4, 2025
+  \end{tabular}%
+}
+\date{}
 
 \begin{document}
 
@@ -59,18 +63,7 @@ The \textsf{biblatex-asa} package provides a complete implementation of the Amer
 
 The \textsf{biblatex-asa} package provides citation and bibliography formatting according to the American Sociological Association (ASA) style guide. This package is particularly useful for students writing sociology papers or theses, researchers submitting to sociology journals, and anyone requiring ASA-style citations and references.
 
-\subsection{Features}
-
-\begin{itemize}
-  \item Complete ASA citation and bibliography formatting
-  \item Support for all major entry types (articles, books, datasets, etc.)
-  \item Proper handling of multiple authors and publication dates
-  \item Correct page number formatting for different entry types
-  \item Full integration with \textsf{biblatex}
-  \item Unicode support via \texttt{biber} backend
-\end{itemize}
-
-\section{Requirements}
+\subsection{Requirements}
 
 You will need:
 
@@ -199,6 +192,28 @@ For Overleaf users, the compilation sequence is handled automatically.
   \item Proper handling of publication dates, DOIs, and URLs
 \end{itemize}
 
+\section{Package Details}
+
+The detailed implementation and examples for this package are contained in the source files and example documents distributed with this package:
+
+\begin{description}
+  \item[\texttt{biblatex-asa.sty}] The main package file that provides a convenient wrapper interface. This file loads the ASA style and sets up appropriate defaults for American Sociological Association formatting.
+
+  \item[\texttt{asa.bbx}] The bibliography style file that defines how references appear in the bibliography section. This file contains the core formatting logic for ASA-style reference lists, including author ordering, journal formatting, and special handling for different entry types.
+
+  \item[\texttt{asa.cbx}] The citation style file that controls how citations appear in the text. This implements ASA parenthetical citation format, including proper handling of multiple authors, page numbers, and year disambiguation.
+
+  \item[\texttt{examples/basic/example.tex}] A basic example document demonstrating standard usage of the ASA style. This example shows fundamental citation commands and bibliography generation using direct biblatex style loading.
+
+  \item[\texttt{examples/with-package/example-with-package.tex}] An example using the convenience package wrapper. This demonstrates the recommended approach for most users and includes various citation scenarios and entry types.
+
+  \item[\texttt{tests/test-asa.tex}] A comprehensive test document that exercises all supported entry types and citation formats. This document serves as both a validation tool and a reference for advanced formatting scenarios.
+
+  \item[\texttt{tests/test-asa.bib}] The bibliography database containing test entries for all major bibliographic entry types. These entries demonstrate proper field usage and formatting expectations for ASA style.
+\end{description}
+
+Users new to the package should start with the \texttt{with-package} example, which provides a complete working example with detailed comments. Advanced users and package developers may find \texttt{tests/test-asa.tex} useful for understanding edge cases and comprehensive formatting options.
+
 \section{Supported Entry Types}
 
 The package supports all standard \textsf{biblatex} entry types with ASA formatting:
@@ -228,7 +243,7 @@ This work is distributed under the LaTeX Project Public License (LPPL), version 
 
 \begin{description}
   \item[Author:] Yuqi Liang, University of Oxford
-  \item[Email:] \texttt{yuqi.liang.1900@gmail.com}
+  \item[Email:] \texttt{dawson1900@live.com}
   \item[GitHub:] \url{https://github.com/yuqi-liang-qiqi/biblatex-asa}
 \end{description}
 

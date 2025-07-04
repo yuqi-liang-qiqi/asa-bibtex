@@ -1,6 +1,6 @@
 Permission is granted to copy, distribute and/or modify this software under
-the terms of the LaTeX Project Public License, version
-1.3c or later (http://www.latex-project.org/lppl.txt). The current
+the terms of the LaTeX Project Public License (LPPL), version 1.3c or later
+(http://www.latex-project.org/lppl.txt). The current
 maintainer is Yuqi Liang (© 2025).
 
 This package is a biblatex style for ASA (American Sociological Association)

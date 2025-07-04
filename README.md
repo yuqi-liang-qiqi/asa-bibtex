@@ -398,7 +398,7 @@ Contributions are welcome! Please:
 
 ## License
 
-This work is distributed under the LaTeX Project Public License (LPPL), version 1.3 or later.
+This work is distributed under the LaTeX Project Public License (LPPL), version 1.3c or later.
 
 ## Acknowledgments
 

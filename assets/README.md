@@ -17,7 +17,7 @@ The logo is used in:
 
 - **Format**: SVG (vector format)
 - **Recommended display width**: 200px for README
-- **License**: Same as project (LPPL-1.3c)
+- **License**: Same as project (LPPL-1.3c or later)
 
 ## Contributing
 
