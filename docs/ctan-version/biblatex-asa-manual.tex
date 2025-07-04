@@ -199,6 +199,28 @@ For Overleaf users, the compilation sequence is handled automatically.
   \item Proper handling of publication dates, DOIs, and URLs
 \end{itemize}
 
+\section{Package Details}
+
+The detailed implementation and examples for this package are contained in the source files and example documents distributed with this package:
+
+\begin{description}
+  \item[\texttt{biblatex-asa.sty}] The main package file that provides a convenient wrapper interface. This file loads the ASA style and sets up appropriate defaults for American Sociological Association formatting.
+
+  \item[\texttt{asa.bbx}] The bibliography style file that defines how references appear in the bibliography section. This file contains the core formatting logic for ASA-style reference lists, including author ordering, journal formatting, and special handling for different entry types.
+
+  \item[\texttt{asa.cbx}] The citation style file that controls how citations appear in the text. This implements ASA parenthetical citation format, including proper handling of multiple authors, page numbers, and year disambiguation.
+
+  \item[\texttt{examples/basic/example.tex}] A basic example document demonstrating standard usage of the ASA style. This example shows fundamental citation commands and bibliography generation using direct biblatex style loading.
+
+  \item[\texttt{examples/with-package/example-with-package.tex}] An example using the convenience package wrapper. This demonstrates the recommended approach for most users and includes various citation scenarios and entry types.
+
+  \item[\texttt{tests/test-asa.tex}] A comprehensive test document that exercises all supported entry types and citation formats. This document serves as both a validation tool and a reference for advanced formatting scenarios.
+
+  \item[\texttt{tests/test-asa.bib}] The bibliography database containing test entries for all major bibliographic entry types. These entries demonstrate proper field usage and formatting expectations for ASA style.
+\end{description}
+
+Users new to the package should start with the \texttt{with-package} example, which provides a complete working example with detailed comments. Advanced users and package developers may find \texttt{tests/test-asa.tex} useful for understanding edge cases and comprehensive formatting options.
+
 \section{Supported Entry Types}
 
 The package supports all standard \textsf{biblatex} entry types with ASA formatting:

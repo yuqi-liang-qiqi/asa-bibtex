@@ -435,6 +435,36 @@ To compile a document using \textsf{biblatex-asa} on your local machine, you nee
   \item Navigate to your document's folder using \texttt{cd /path/to/your/folder}
 \end{itemize}
 
+\section{Package Details}
+
+The detailed implementation and examples for this package are contained in the source files and example documents distributed with this package:
+
+\begin{description}
+  \item[\texttt{biblatex-asa.sty}] The main package file that provides a convenient wrapper interface. This file loads the ASA style and sets up appropriate defaults for American Sociological Association formatting. For most users, this is the easiest way to use the package—simply load it with \texttt{\cs{usepackage}\{biblatex-asa\}} and you're ready to go.
+
+  \item[\texttt{asa.bbx}] The bibliography style file that defines how references appear in the bibliography section. This file contains the core formatting logic for ASA-style reference lists, including author ordering, journal formatting, and special handling for different entry types. This is where the "magic" happens—it tells LaTeX exactly how to format your reference list according to ASA guidelines.
+
+  \item[\texttt{asa.cbx}] The citation style file that controls how citations appear in the text. This implements ASA parenthetical citation format, including proper handling of multiple authors, page numbers, and year disambiguation. When you use \texttt{\cs{parencite}} or \texttt{\cs{textcite}}, this file determines the exact formatting.
+
+  \item[\texttt{examples/basic/example.tex}] A basic example document demonstrating standard usage of the ASA style. This example shows fundamental citation commands and bibliography generation using direct biblatex style loading. If you're curious about how the package works "under the hood," this example shows the minimal setup.
+
+  \item[\texttt{examples/with-package/example-with-package.tex}] An example using the convenience package wrapper. This demonstrates the recommended approach for most users and includes various citation scenarios and entry types. This is probably the best starting point for new users—it shows practical usage with real examples.
+
+  \item[\texttt{tests/test-asa.tex}] A comprehensive test document that exercises all supported entry types and citation formats. This document serves as both a validation tool and a reference for advanced formatting scenarios. If you encounter unusual entry types or complex citation situations, this file might have examples.
+
+  \item[\texttt{tests/test-asa.bib}] The bibliography database containing test entries for all major bibliographic entry types. These entries demonstrate proper field usage and formatting expectations for ASA style. You can use this as a reference for how to structure your own \texttt{.bib} entries.
+\end{description}
+
+\textbf{Getting Started Recommendations:}
+
+\begin{itemize}
+  \item \textbf{Complete beginners:} Start with \texttt{examples/with-package/example-with-package.tex}. It provides a complete working example with detailed comments that explain what each command does.
+  
+  \item \textbf{Experienced LaTeX users:} You might prefer \texttt{examples/basic/example.tex} for a minimal setup, or dive directly into \texttt{tests/test-asa.tex} to see comprehensive formatting options.
+  
+  \item \textbf{Package developers or curious users:} Examine \texttt{asa.bbx} and \texttt{asa.cbx} to understand the implementation details. These files show how biblatex styles are constructed and customized.
+\end{itemize}
+
 \section{ASA Format Implementation}
 
 \subsection{Citation Format}
