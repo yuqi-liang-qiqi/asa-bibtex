@@ -40,6 +40,17 @@ This project provides a complete `biblatex` style implementation for LaTeX, foll
 **Email:** yuqi.liang.1900@gmail.com  
 **GitHub:** [yuqi-liang-qiqi](https://github.com/yuqi-liang-qiqi)
 
+### 📚 New to LaTeX or Referencing Systems?
+
+If you're new to LaTeX, biblatex, or academic referencing in general, we recommend starting with our comprehensive **[User Manual](docs/biblatex-asa-manual.pdf)**, which includes:
+
+- **Beginner's Guide** (Section 1.2): Understanding different referencing styles (ASA, APA, Chicago, Harvard)
+- **BibTeX vs. biblatex**: Why we use the modern biblatex system
+- **Citation Commands**: When to use `\parencite{}`, `\textcite{}`, and more
+- **Step-by-step examples**: From installation to your first compiled document
+
+The manual is designed to be beginner-friendly while maintaining academic rigor—perfect for building a solid foundation!
+
 ## Project Structure
 
 ```
