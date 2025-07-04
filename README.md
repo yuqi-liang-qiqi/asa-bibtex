@@ -5,7 +5,8 @@
   <h3>American Sociological Association (ASA) Style for biblatex</h3>
   
   <p>
-    <strong>A complete implementation of ASA citation style for biblatex, following the format requirements of the American Sociological Review.</strong><br/>
+    <strong>A complete implementation of ASA citation style for biblatex,</strong><br/>
+    <strong>following the format requirements of the American Sociological Review.</strong><br/>
     This package provides native ASA formatting built on top of biblatex's standard framework.
   </p>
   
