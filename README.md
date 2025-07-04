@@ -108,7 +108,7 @@ This project provides a **complete `biblatex` style implementation** for LaTeX, 
     </tr>
     <tr>
       <td align="center">Yuqi Liang</td>
-      <td align="center"><a href="mailto:yuqi.liang.1900@gmail.com">yuqi.liang.1900@gmail.com</a></td>
+      <td align="center"><a href="mailto:dawson1900@live.com">dawson1900@live.com</a></td>
       <td align="center"><a href="https://github.com/yuqi-liang-qiqi">@yuqi-liang-qiqi</a></td>
     </tr>
   </table>
@@ -414,5 +414,5 @@ I am deeply grateful to my supervisor Professor Ridhi Kashyap, my mentor Profess
 
 ---
 
-**For questions or help, contact Yuqi Liang: yuqi.liang.1900@gmail.com**
+**For questions or help, contact Yuqi Liang: dawson1900@live.com**
 
