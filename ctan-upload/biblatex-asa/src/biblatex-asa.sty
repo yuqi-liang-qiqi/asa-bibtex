@@ -12,25 +12,25 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{biblatex-asa}[2025/01/07 v1.0.0 ASA citation style for biblatex]
 
-% Package options
-\newif\ifasa@giveninits
-\asa@giveninitstfalse  % Default: use full given names (ASA style)
+\makeatletter
 
-\DeclareOption{giveninits}{\asa@giveninitstrue}
-\DeclareOption{nogiveninits}{\asa@giveninitstfalse}
+% Package options - simplified approach
+\def\asa@giveninits{false}  % Default: use full given names (ASA style)
+
+\DeclareOption{giveninits}{\def\asa@giveninits{true}}
+\DeclareOption{nogiveninits}{\def\asa@giveninits{false}}
 \DeclareOption{backend=biber}{\PassOptionsToPackage{backend=biber}{biblatex}}
 \DeclareOption{backend=bibtex}{\PassOptionsToPackage{backend=bibtex}{biblatex}}
 \DeclareOption*{\PassOptionsToPackage{\CurrentOption}{biblatex}}
 
 \ProcessOptions\relax
 
-% Load biblatex with ASA style
-\RequirePackage{biblatex}
+% Load biblatex with our custom ASA style
+\RequirePackage[style=asa]{biblatex}
 
 % Set biblatex options for ASA style
 \ExecuteBibliographyOptions{
-  style=asa,
-  giveninits=\ifasa@giveninits true\else false\fi,
+  giveninits=\asa@giveninits,
   autocite=inline,
   autopunct=true,
   labeldateparts=true,
@@ -43,6 +43,8 @@
 }
 
 
+
+\makeatother
 
 \endinput
 %% End of biblatex-asa.sty 

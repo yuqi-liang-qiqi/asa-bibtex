@@ -1,7 +1,7 @@
 # biblatex-asa: American Sociological Association (ASA) Style for biblatex
 
-> **A complete and independent implementation of ASA citation style, following the format requirements of the American Sociological Review.**  
-> This package provides native ASA formatting without requiring any external style dependencies.
+> **A complete implementation of ASA citation style for biblatex, following the format requirements of the American Sociological Review.**  
+> This package provides native ASA formatting built on top of biblatex's standard framework.
 
 [![License: LPPL](https://img.shields.io/badge/License-LPPL-blue.svg)](https://www.latex-project.org/lppl/)
 
@@ -28,8 +28,8 @@ This project provides a complete `biblatex` style implementation for LaTeX, foll
 - ✅ Support for all major entry types (articles, books, datasets, theses, etc.)
 - ✅ Proper handling of multiple authors, publication dates, and special cases
 - ✅ Correct page number formatting (Pp. vs direct notation)
-- ✅ No external style dependencies required
-- ✅ Fully independent implementation built from the ground up
+- ✅ Built on biblatex's reliable standard and authoryear frameworks
+- ✅ Comprehensive ASA format implementation
 
 **Who is it for?**
 - Anyone writing sociology papers/theses in LaTeX
@@ -39,6 +39,17 @@ This project provides a complete `biblatex` style implementation for LaTeX, foll
 **Author:** Yuqi Liang  
 **Email:** yuqi.liang.1900@gmail.com  
 **GitHub:** [yuqi-liang-qiqi](https://github.com/yuqi-liang-qiqi)
+
+### 📚 New to LaTeX or Referencing Systems?
+
+If you're new to LaTeX, biblatex, or academic referencing in general, we recommend starting with our comprehensive **[User Manual](docs/biblatex-asa-manual.pdf)**, which includes:
+
+- **Beginner's Guide** (Section 1.2): Understanding different referencing styles (ASA, APA, Chicago, Harvard)
+- **BibTeX vs. biblatex**: Why we use the modern biblatex system
+- **Citation Commands**: When to use `\parencite{}`, `\textcite{}`, and more
+- **Step-by-step examples**: From installation to your first compiled document
+
+The manual is designed to be beginner-friendly while maintaining academic rigor—perfect for building a solid foundation!
 
 ## Project Structure
 
@@ -79,11 +90,14 @@ biblatex-asa/
 
 ## Requirements
 
-This project only requires standard LaTeX components:
+You will need a recent LaTeX distribution and the following packages:
 
-- **LaTeX distribution**: TeX Live, MiKTeX, or similar
-- **biblatex package**: Usually included with LaTeX distributions
-- **biber backend**: Recommended (comes with modern LaTeX distributions)
+- **LaTeX distribution**: TeX Live 2020 or later, MiKTeX 2020 or later
+- **biblatex**: Version 3.14 or later (provides the underlying bibliography system)
+- **biber**: Version 2.14 or later (recommended backend for processing bibliography data)
+- **etoolbox**: (automatically loaded by biblatex, provides programming facilities)
+
+**Note**: This package is built on top of biblatex's `standard` and `authoryear` styles.
 
 ### Why You Do NOT Need MacTeX or Homebrew
 
@@ -98,40 +112,44 @@ This project works with any standard LaTeX installation. You do NOT need to inst
 
 ## Installation
 
-### Option 1: Local Installation (Recommended for single project)
+### Option 1: Automatic Installation (Recommended)
 
-1. **Download the source files:**
-   ```bash
-   # Copy these files to your project directory:
+For most users, install through your TeX distribution's package manager:
+
+**TeX Live:**
+```bash
+tlmgr install biblatex-asa
+```
+
+**MiKTeX:** The package is available through MiKTeX Package Manager or automatically installed when first used.
+
+**Overleaf:** The package is pre-installed and ready to use.
+
+Then in your LaTeX document:
+```latex
+\usepackage{biblatex-asa}
+\addbibresource{your-bibliography.bib}
+```
+
+### Option 2: Manual Installation (Development/Latest Version)
+
+1. **Download from CTAN or GitHub**
+2. **For single project:** Copy these files to your project directory:
+   ```
    src/biblatex-asa.sty
    src/asa.bbx  
    src/asa.cbx
    ```
 
-2. **In your LaTeX document, use:**
-   ```latex
-   \usepackage{biblatex-asa}
-   \addbibresource{your-bibliography.bib}
-   ```
+3. **For system-wide installation:** See the [`INSTALL`](INSTALL) file for detailed instructions.
 
-### Option 2: Direct Style Usage
+### Option 3: Direct Style Usage
 
-1. **Copy style files to your project:**
-   ```bash
-   # Copy these files to your project directory:
-   src/asa.bbx
-   src/asa.cbx
-   ```
-
-2. **In your LaTeX document, use:**
-   ```latex
-   \usepackage[backend=biber,style=asa]{biblatex}
-   \addbibresource{your-bibliography.bib}
-   ```
-
-### Option 3: System-wide Installation
-
-See the [`INSTALL`](INSTALL) file for detailed system-wide installation instructions.
+If you only need the style files:
+```latex
+\usepackage[backend=biber,style=asa]{biblatex}
+\addbibresource{your-bibliography.bib}
+```
 
 ## Usage
 
@@ -276,13 +294,13 @@ Example with options:
 ## FAQ
 
 **Q: Is this the official ASA style?**  
-A: This is an independent implementation following the format requirements of the American Sociological Review and ASA Style Guide. It provides comprehensive ASA formatting without relying on external styles.
+A: This is an implementation following the format requirements of the American Sociological Review and ASA Style Guide. It provides comprehensive ASA formatting built on biblatex's framework.
 
 **Q: How do I add new entry types (datasets, theses, etc.)?**  
 A: See the sample `.bib` files in [`examples/`](examples/) and [`tests/`](tests/) and comments in [`src/asa.bbx`](src/asa.bbx) for supported types. The style includes native drivers for all major ASA-required entry types.
 
 **Q: Do I need to install biblatex-apa first?**  
-A: No! This is a completely independent implementation. You only need standard biblatex and biber.
+A: No! This package only requires biblatex (version 3.14+) and biber (version 2.14+). It's built on biblatex's standard framework.
 
 **Q: Can I use this with other bibliography styles?**  
 A: This package is specifically designed for ASA style. For other styles, use the appropriate biblatex style.
@@ -299,6 +317,18 @@ Contributions are welcome! Please:
 ## License
 
 This work is distributed under the LaTeX Project Public License (LPPL), version 1.3 or later.
+
+## Acknowledgments
+
+This package was developed independently to provide comprehensive ASA formatting for the biblatex system. Thanks to the biblatex and biber development teams for their excellent software.
+
+On a personal note, from the very first day I started learning programming, I dreamed of creating an open-source software package. For years, I had always envisioned developing a Python package, and after seven years of learning programming, I finally realized this dream by creating [Sequenzo](https://github.com/Liang-Team/Sequenzo/tree/main). 
+
+The development of this biblatex-asa package, however, represents a different chapter in my programming journey—an unexpected detour that became equally meaningful. Unlike Sequenzo, which was a deliberate pursuit of my long-held ambition, this LaTeX package emerged as a serendipitous outcome born out of practical necessity.
+
+When submitting my work to the *American Sociological Review*, I discovered that biblatex lacked ASA-specific citation tools, offering only APA and other styles. The prospect of switching from LaTeX to Word and managing references through Zotero seemed too time-consuming and energy-draining for me. So I decided to create my own solution.
+
+I am deeply grateful to my supervisor Professor Ridhi Kashyap, my mentor Professor Tim Liao, and my family for providing me with the space to explore and grow. I also thank my partner and friends for their thoughtful companionship and unwavering support. Life continues, and the journey goes on.
 
 ---
 
