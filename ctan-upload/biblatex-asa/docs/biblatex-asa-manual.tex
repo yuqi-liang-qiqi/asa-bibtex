@@ -9,7 +9,20 @@
 \usepackage{listings}
 \usepackage{fancyvrb}
 \usepackage{url}
-\usepackage{hyperref}
+
+% Define custom blue color
+\definecolor{customblue}{HTML}{4169E1}
+
+% Configure hyperref with custom colors
+\usepackage[
+  colorlinks=true,
+  linkcolor=customblue,
+  urlcolor=customblue,
+  citecolor=customblue,
+  filecolor=customblue,
+  bookmarksnumbered=true,
+  bookmarksopen=true
+]{hyperref}
 
 % Package being documented
 \usepackage[backend=biber]{biblatex}
@@ -30,14 +43,14 @@
        \Large American Sociological Association Style for \textsf{biblatex}}
 \author{Yuqi Liang\\
         \texttt{yuqi.liang.1900@gmail.com}}
-\date{Version 1.0.0\\January 7, 2025}
+\date{Version 1.0.0\\July 3, 2025}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-The \textsf{biblatex-asa} package provides a complete implementation of the American Sociological Association (ASA) citation and bibliography style for LaTeX using the \textsf{biblatex} package. This implementation follows the format requirements of the \emph{American Sociological Review} and provides native ASA formatting without requiring external style dependencies.
+The \textsf{biblatex-asa} package provides a complete implementation of the American Sociological Association (ASA) citation and bibliography style for LaTeX using the \textsf{biblatex} package. This implementation follows the format requirements of the \emph{American Sociological Review}, the flagship journal of the American Sociological Association and one of the most prestigious sociology publications worldwide, ensuring compatibility with the highest academic standards in the field.
 \end{abstract}
 
 \tableofcontents
@@ -48,7 +61,7 @@ The \textsf{biblatex-asa} package provides citation and bibliography formatting 
 
 \begin{itemize}
   \item Students writing sociology papers or theses
-  \item Researchers submitting to sociology journals
+  \item Researchers submitting to sociology journals, especially ASA journals such as \emph{American Sociological Review}, \emph{American Journal of Sociology}, \emph{Social Psychology Quarterly}, and others
   \item Anyone requiring ASA-style citations and references
 \end{itemize}
 
@@ -59,44 +72,70 @@ The \textsf{biblatex-asa} package provides citation and bibliography formatting 
   \item Support for all major entry types (articles, books, datasets, etc.)
   \item Proper handling of multiple authors and publication dates
   \item Correct page number formatting
-  \item No external style dependencies required
-  \item Full integration with \textsf{biblatex}
+  \item Self-contained implementation with no external style dependencies (works out-of-the-box without requiring additional style packages or external bibliography style files)
+  \item Full integration with \textsf{biblatex} (leverages biblatex's powerful features including Unicode support, advanced sorting, flexible formatting options, and superior handling of complex bibliographic data compared to traditional BibTeX)
 \end{itemize}
 
 \section{Installation}
 
 \subsection{Package Requirements}
 
-The \textsf{biblatex-asa} package requires:
+You will need to be using a recent LaTeX distribution and the following packages:
+
 \begin{itemize}
-  \item A working LaTeX distribution (TeX Live, MiKTeX, etc.)
-  \item The \textsf{biblatex} package
-  \item The \textsf{biber} backend (recommended)
+  \item \textbf{LaTeX distribution:} TeX Live 2020 or later, MiKTeX 2020 or later
+  \item \textbf{biblatex:} Version 3.14 or later (provides the underlying bibliography system)
+  \item \textbf{biber:} Version 2.14 or later (recommended backend for processing bibliography data)
+  \item \textbf{etoolbox:} Version 2.5 or later (automatically loaded by biblatex, provides programming facilities)
+\end{itemize}
+
+\textbf{Important notes:}
+\begin{itemize}
+  \item The \textsf{biblatex-asa} package is built on top of the \texttt{standard} and \texttt{authoryear} styles from biblatex
+  \item While bibtex backend is supported, \textbf{biber is strongly recommended} for full functionality and better Unicode support
+  \item If you're using an older LaTeX distribution, some features may not work correctly
+  \item The package automatically loads biblatex with appropriate ASA-specific options
 \end{itemize}
 
 \subsection{Installation Methods}
 
-\subsubsection{Local Installation}
+\subsubsection{Automatic Installation (Recommended)}
 
-For use in a single project, copy the following files to your project directory:
+For most users, the package can be installed automatically through your TeX distribution's package manager:
+
 \begin{itemize}
-  \item \texttt{biblatex-asa.sty}
-  \item \texttt{asa.bbx}
-  \item \texttt{asa.cbx}
+  \item \textbf{Overleaf (Easiest for Beginners):} The package is pre-installed and ready to use. Simply add \texttt{\textbackslash usepackage\{biblatex-asa\}} to your document preamble—no download or installation needed! Overleaf automatically handles all package management for you.
+
+  \item \textbf{TeX Live}: The package is available through \texttt{tlmgr}
+  \begin{verbatim}
+  tlmgr install biblatex-asa
+  \end{verbatim}
+  
+  \item \textbf{MiKTeX}: The package is available through the MiKTeX Package Manager or automatically installed when first used
 \end{itemize}
 
-\subsubsection{System-wide Installation}
+\subsubsection{Manual Installation}
 
-For system-wide installation, place the files in your local \texttt{texmf} tree:
-\begin{verbatim}
-texmf/tex/latex/biblatex-asa/
-\end{verbatim}
+If automatic installation is not available or you need the latest development version:
 
-After installation, update your filename database:
-\begin{itemize}
-  \item TeX Live: run \texttt{texhash} or \texttt{mktexlsr}
-  \item MiKTeX: run \texttt{initexmf --update-fndb}
-\end{itemize}
+\begin{enumerate}
+  \item Download the package files from CTAN or GitHub
+  \item For local use in a single project, copy these files to your project directory:
+  \begin{itemize}
+    \item \texttt{biblatex-asa.sty}
+    \item \texttt{asa.bbx}
+    \item \texttt{asa.cbx}
+  \end{itemize}
+  \item For system-wide installation, place the files in your local \texttt{texmf} tree:
+  \begin{verbatim}
+  texmf/tex/latex/biblatex-asa/
+  \end{verbatim}
+  \item Update your filename database (required so LaTeX can find the newly installed files):
+  \begin{itemize}
+    \item TeX Live: run \texttt{texhash} or \texttt{mktexlsr}
+    \item MiKTeX: run \texttt{initexmf --update-fndb}
+  \end{itemize}
+\end{enumerate}
 
 \section{Usage}
 
@@ -136,43 +175,154 @@ The \textsf{biblatex-asa} package accepts the following options:
   \item[\texttt{backend=bibtex}] Use bibtex backend
 \end{description}
 
-Example with options:
+Example with options (note: square brackets \texttt{[]} contain optional parameters, curly braces \texttt{\{\}} contain the package name):
 \begin{lstlisting}[language=TeX]
 \usepackage[giveninits,backend=biber]{biblatex-asa}
 \end{lstlisting}
+
+\textbf{LaTeX Syntax Explanation:}
+\begin{itemize}
+  \item \textbf{Square brackets \texttt{[options]}:} Optional settings that modify how the package behaves
+  \item \textbf{Curly braces \texttt{\{package-name\}}:} Required package name that must be loaded
+  \item Multiple options are separated by commas within the square brackets
+\end{itemize}
 
 \section{Citation Commands}
 
 \subsection{Standard Commands}
 
-The package supports all standard \textsf{biblatex} citation commands:
+The package supports all standard \textsf{biblatex} citation commands. Here are detailed examples of when and how to use each:
 
 \begin{description}
-  \item[\cs{parencite}] Parenthetical citation: (Author Year)
-  \item[\cs{textcite}] In-text citation: Author (Year)
-  \item[\cs{cite}] Bare citation: Author Year
-  \item[\cs{footcite}] Footnote citation
+  \item[\cs{parencite\{key\}}] Parenthetical citation: (Author Year)
+  
+  \textbf{When to use:} At the end of a sentence or when supporting a claim.
+  
+  \textbf{Examples:}
+  \begin{itemize}
+    \item Studies show increasing social inequality \texttt{\cs{parencite\{smith2020\}}} → Studies show increasing social inequality (Smith 2020).
+    \item Research supports this theory \texttt{\cs{parencite\{jones2019,brown2021\}}} → Research supports this theory (Jones 2019; Brown 2021).
+    \item For page-specific references: \texttt{\cs{parencite[p.~42]\{doe2018\}}} → (Doe 2018, p. 42).
+  \end{itemize}
+  
+  \item[\cs{textcite\{key\}}] In-text citation: Author (Year)
+  
+  \textbf{When to use:} When the author's name is part of your sentence.
+  
+  \textbf{Examples:}
+  \begin{itemize}
+    \item \texttt{\cs{textcite\{wilson2022\}} argues that social media impacts behavior} → Wilson (2022) argues that social media impacts behavior.
+    \item \texttt{According to \cs{textcite\{garcia2020\}}, urban development follows predictable patterns} → According to Garcia (2020), urban development follows predictable patterns.
+    \item \texttt{\cs{textcite[pp.~15--20]\{taylor2019\}} provides detailed analysis} → Taylor (2019, pp. 15--20) provides detailed analysis.
+  \end{itemize}
+  
+  \item[\cs{cite\{key\}}] Bare citation: Author Year (no parentheses)
+  
+  \textbf{When to use:} Rarely used in ASA style. Only for special formatting needs where you want to control punctuation manually.
+  
+  \textbf{Examples:}
+  \begin{itemize}
+    \item In narrative text: \texttt{The \cs{cite\{smith2020\}} findings show...} → The Smith 2020 findings show...
+    \item \textbf{Recommendation:} Use \texttt{\cs{parencite}} or \texttt{\cs{textcite}} instead for standard ASA citations.
+  \end{itemize}
+  
+
 \end{description}
 
-\subsection{Convenience Commands}
 
-The package also provides convenience commands:
 
-\begin{description}
-  \item[\cs{asacite}] Equivalent to \cs{parencite}
-  \item[\cs{asatextcite}] Equivalent to \cs{textcite}
-\end{description}
+\subsection{Advanced Citation Examples}
+
+\textbf{Common Usage Patterns:}
+
+\begin{enumerate}
+  \item \textbf{Introducing an author's argument:}
+  \begin{itemize}
+    \item \texttt{\cs{textcite\{author2023\}} argues that...} → Author (2023) argues that...
+    \item \texttt{According to \cs{textcite\{researcher2022\}}, the data shows...} → According to Researcher (2022), the data shows...
+  \end{itemize}
+  
+  \item \textbf{Supporting your claims:}
+  \begin{itemize}
+    \item \texttt{This trend is well-documented \cs{parencite\{study2021\}}.} → This trend is well-documented (Study 2021).
+    \item \texttt{Multiple studies confirm this pattern \cs{parencite\{one2020,two2021,three2022\}}.} → Multiple studies confirm this pattern (One 2020; Two 2021; Three 2022).
+  \end{itemize}
+  
+  \item \textbf{Citing specific pages:}
+  \begin{itemize}
+    \item \texttt{\cs{parencite[p.~25]\{book2019\}}} → (Book 2019, p. 25)
+    \item \texttt{\cs{textcite[pp.~100--105]\{article2020\}}} → Article (2020, pp. 100--105)
+  \end{itemize}
+  
+  \item \textbf{Distinguishing same-year publications:}
+  \begin{itemize}
+    \item \texttt{\cs{parencite\{smith2020a,smith2020b\}}} → (Smith 2020a, 2020b)
+    \item The package automatically handles year disambiguation with a, b, c suffixes.
+  \end{itemize}
+\end{enumerate}
+
+\textbf{Quick Reference - When to Use Which Command:}
+
+\begin{center}
+\begin{tabular}{ll}
+\hline
+\textbf{Situation} & \textbf{Command} \\
+\hline
+End of sentence, supporting claim & \texttt{\cs{parencite}} \\
+Author name is part of your sentence & \texttt{\cs{textcite}} \\
+Special formatting (rarely used) & \texttt{\cs{cite}} \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Important Note:} ASA style uses the author-date citation system. All citations should be in-text using the format: (Author Year) or Author (Year). Footnote citations are not used in ASA style.
 
 \section{Compilation}
 
-To compile a document using \textsf{biblatex-asa}:
+\subsection{Overleaf Compilation (Recommended for Beginners)}
+
+If you're using Overleaf, the compilation process is much simpler:
+
+\begin{itemize}
+  \item Overleaf automatically handles the compilation sequence for you
+  \item Simply click the \textbf{Recompile} button and Overleaf will run the necessary commands in the correct order
+  \item Make sure your project settings use:
+  \begin{itemize}
+    \item \textbf{Compiler:} pdfLaTeX
+    \item \textbf{TeX Live version:} 2020 or later (recommended)
+  \end{itemize}
+  \item You can access these settings via \texttt{Menu > Settings > Compiler}
+\end{itemize}
+
+\subsection{Local Compilation (Command Line)}
+
+To compile a document using \textsf{biblatex-asa} on your local machine, you need to run the following commands in your terminal/command prompt. Make sure you are in the same directory as your \texttt{.tex} file:
 
 \begin{enumerate}
   \item \texttt{pdflatex document.tex}
+  
+  \textbf{What this does:} Compiles your LaTeX document into a PDF for the first time. This creates auxiliary files needed for the bibliography, but the references won't show up yet.
+  
   \item \texttt{biber document}
+  
+  \textbf{What this does:} Processes your bibliography file (\texttt{.bib}) and creates the formatted reference list according to ASA style. Note: use the filename \emph{without} the \texttt{.tex} extension.
+  
   \item \texttt{pdflatex document.tex}
+  
+  \textbf{What this does:} Compiles the document again, now incorporating the processed bibliography. Your citations and reference list will appear.
+  
   \item \texttt{pdflatex document.tex}
+  
+  \textbf{What this does:} Final compilation to ensure all cross-references, page numbers, and table of contents are correct.
 \end{enumerate}
+
+\textbf{Important notes:}
+\begin{itemize}
+  \item Replace \texttt{document} with your actual filename
+  \item You must have a working LaTeX installation (TeX Live, MiKTeX, etc.)
+  \item Open your terminal (Mac/Linux) or Command Prompt (Windows)
+  \item Navigate to your document's folder using \texttt{cd /path/to/your/folder}
+\end{itemize}
 
 \section{ASA Format Implementation}
 
@@ -214,9 +364,47 @@ The \textsf{biblatex-asa} package supports all standard \textsf{biblatex} entry 
 \subsection{Common Issues}
 
 \begin{description}
-  \item[References not showing] Ensure you run \texttt{biber} (not \texttt{bibtex})
-  \item[File not found errors] Check that all package files are in the correct location
-  \item[Encoding problems] Save all files as UTF-8
+  \item[References not showing] Ensure you run \texttt{biber} (not \texttt{bibtex}).
+  
+  \textbf{How to do this:}
+  \begin{itemize}
+    \item If you use the command line, compile your document with this sequence:
+    \begin{enumerate}
+      \item \texttt{pdflatex yourfile.tex}
+      \item \texttt{biber yourfile}
+      \item \texttt{pdflatex yourfile.tex}
+      \item \texttt{pdflatex yourfile.tex}
+    \end{enumerate}
+    \item If you use an editor (TeXShop, TeXworks, Overleaf, VS Code with LaTeX Workshop), make sure the bibliography tool is set to \texttt{biber}, not \texttt{bibtex}. In Overleaf, go to \texttt{Menu > Settings > Compiler} and select \texttt{biber}.
+  \end{itemize}
+  
+  \item[File not found errors] Solutions depend on your installation method.
+  
+  \textbf{For automatic installation (recommended):}
+  \begin{itemize}
+    \item \textbf{TeX Live:} Check if installed: \texttt{tlmgr list --installed \textbar\ grep biblatex-asa}
+    \item If not found, install: \texttt{tlmgr install biblatex-asa}
+    \item Try updating: \texttt{tlmgr update --all}
+    \item \textbf{MiKTeX:} Open MiKTeX Console > Packages, refresh database, search for "biblatex-asa"
+    \item \textbf{Overleaf:} Package should be pre-installed; if issues persist, contact Overleaf support
+  \end{itemize}
+  
+  \textbf{For manual installation:}
+  \begin{itemize}
+    \item Local: Ensure \texttt{biblatex-asa.sty}, \texttt{asa.bbx}, \texttt{asa.cbx} are in your project directory
+    \item System-wide: Files should be in \texttt{texmf/tex/latex/biblatex-asa/}
+    \item Run \texttt{texhash} (TeX Live) or \texttt{initexmf --update-fndb} (MiKTeX) after installation
+         \item If using \texttt{\\def\\input@path\{\{../../src/\}\}}, ensure the path is correct
+  \end{itemize}
+  
+  \item[Encoding problems] Save all files as UTF-8.
+  
+  \textbf{How to do this:}
+  \begin{itemize}
+    \item In most editors (VS Code, Sublime Text, TeXShop, etc.), choose \texttt{Save with Encoding} or \texttt{Save As} and select UTF-8.
+    \item In Overleaf, files are saved as UTF-8 by default.
+    \item If unsure, open the file in your editor and check the encoding setting at the bottom of the window or in the menu.
+  \end{itemize}
 \end{description}
 
 \section{License and Contact}
@@ -224,7 +412,7 @@ The \textsf{biblatex-asa} package supports all standard \textsf{biblatex} entry 
 This work is distributed under the LaTeX Project Public License (LPPL), version 1.3c or later.
 
 \begin{description}
-  \item[Author:] Yuqi Liang
+  \item[Author:] Yuqi Liang, University of Oxford
   \item[Email:] \texttt{yuqi.liang.1900@gmail.com}
   \item[GitHub:] \url{https://github.com/yuqi-liang-qiqi/biblatex-asa}
 \end{description}
