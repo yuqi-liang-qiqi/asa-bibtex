@@ -318,6 +318,18 @@ Contributions are welcome! Please:
 
 This work is distributed under the LaTeX Project Public License (LPPL), version 1.3 or later.
 
+## Acknowledgments
+
+This package was developed independently to provide comprehensive ASA formatting for the biblatex system. Thanks to the biblatex and biber development teams for their excellent software.
+
+On a personal note, from the very first day I started learning programming, I dreamed of creating an open-source software package. For years, I had always envisioned developing a Python package, and after seven years of learning programming, I finally realized this dream by creating [Sequenzo](https://github.com/Liang-Team/Sequenzo/tree/main). 
+
+The development of this biblatex-asa package, however, represents a different chapter in my programming journey—an unexpected detour that became equally meaningful. Unlike Sequenzo, which was a deliberate pursuit of my long-held ambition, this LaTeX package emerged as a serendipitous outcome born out of practical necessity.
+
+When submitting my work to the *American Sociological Review*, I discovered that biblatex lacked ASA-specific citation tools, offering only APA and other styles. The prospect of switching from LaTeX to Word and managing references through Zotero seemed too time-consuming and energy-draining for me. So I decided to create my own solution.
+
+I am deeply grateful to my supervisor Professor Ridhi Kashyap, my mentor Professor Tim Liao, and my family for providing me with the space to explore and grow. I also thank my partner and friends for their thoughtful companionship and unwavering support. Life continues, and the journey goes on.
+
 ---
 
 **For questions or help, contact Yuqi Liang: yuqi.liang.1900@gmail.com**
