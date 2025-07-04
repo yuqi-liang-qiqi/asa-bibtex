@@ -1,0 +1,53 @@
+MANIFEST for biblatex-asa package v1.0.0
+
+This package contains the following files:
+
+Root documentation:
+  README.md                     - Main documentation and usage instructions
+  INSTALL                       - Installation instructions  
+  LICENSE                       - LaTeX Project Public License (LPPL)
+  MANIFEST                      - This file (package contents list)
+
+Source files (src/):
+  src/biblatex-asa.sty         - LaTeX package wrapper
+  src/asa.bbx                  - Bibliography style file
+  src/asa.cbx                  - Citation style file
+
+Documentation (docs/):
+  docs/biblatex-asa-manual.tex - User manual source file
+  docs/biblatex-asa-manual.pdf - User manual (PDF)
+  docs/COMPILE_BIBLATEX_ASA_LOCALLY.md - Technical implementation details
+  docs/requirements.md         - ASA style format requirements
+
+Examples (examples/):
+  examples/basic/
+    example.tex                - Basic usage example
+    example.bib                - Example bibliography database
+    example.pdf                - Compiled example output
+  examples/with-package/
+    example-with-package.tex   - Example using the package wrapper
+    example.bib                - Example bibliography database
+
+Tests (tests/):
+  tests/test-asa.tex          - Comprehensive test document
+  tests/test-asa.bib          - Test bibliography database
+  tests/test-asa.pdf          - Test output
+
+Scripts (scripts/):
+  scripts/build.sh            - Build and test script
+  scripts/clean.sh            - Cleanup script
+
+Installation:
+  To install this package, copy the files from src/ to your local texmf 
+  tree or to your project directory. See INSTALL for detailed instructions.
+
+License:
+  This work is distributed under the LaTeX Project Public License (LPPL),
+  version 1.3c or later.
+
+Author:
+  Yuqi Liang
+  Email: yuqi.liang.1900@gmail.com
+  
+Date:
+  2025-01-07 

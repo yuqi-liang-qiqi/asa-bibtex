@@ -1,0 +1,95 @@
+INSTALLATION INSTRUCTIONS for biblatex-asa
+=============================================
+
+The biblatex-asa package provides American Sociological Association (ASA) 
+citation and bibliography formatting for LaTeX documents using biblatex.
+
+REQUIREMENTS
+------------
+- LaTeX distribution (TeX Live, MiKTeX, etc.)
+- biblatex package
+- biber backend (recommended) or bibtex
+
+INSTALLATION OPTIONS
+-------------------
+
+Option 1: Local Installation (Recommended for single project)
+--------------------------------------------------------------
+1. Copy the following files to your project directory:
+   - biblatex-asa.sty
+   - asa.bbx  
+   - asa.cbx
+
+2. In your LaTeX document, use:
+   \usepackage{biblatex-asa}
+   \addbibresource{your-bibliography.bib}
+
+Option 2: System-wide Installation
+-----------------------------------
+1. Find your local texmf tree:
+   - On TeX Live: typically ~/texmf/
+   - On MiKTeX: typically ~/AppData/Local/MiKTeX/texmf/
+
+2. Create the directory structure:
+   texmf/tex/latex/biblatex-asa/
+
+3. Copy the package files:
+   - biblatex-asa.sty → texmf/tex/latex/biblatex-asa/
+   - asa.bbx → texmf/tex/latex/biblatex-asa/
+   - asa.cbx → texmf/tex/latex/biblatex-asa/
+
+4. Update the filename database:
+   - TeX Live: run `texhash` or `mktexlsr`
+   - MiKTeX: run `initexmf --update-fndb`
+
+Option 3: Package Manager (if available)
+----------------------------------------
+If your LaTeX distribution includes this package, install via:
+- TeX Live: `tlmgr install biblatex-asa`
+- MiKTeX: `mpm --install=biblatex-asa`
+
+USAGE
+-----
+
+Basic usage in your LaTeX document:
+
+```latex
+\documentclass{article}
+\usepackage{biblatex-asa}
+\addbibresource{references.bib}
+
+\begin{document}
+
+This is a citation \parencite{key2023}.
+\textcite{author2022} argues that...
+
+\printbibliography
+
+\end{document}
+```
+
+Package Options:
+- giveninits: Use initials for given names
+- nogiveninits: Use full given names (default)
+- backend=biber: Use biber backend (default)
+- backend=bibtex: Use bibtex backend
+
+Example with options:
+\usepackage[giveninits,backend=biber]{biblatex-asa}
+
+COMPILATION
+-----------
+Compile your document with:
+1. pdflatex document.tex
+2. biber document        (or bibtex document if using bibtex backend)
+3. pdflatex document.tex
+4. pdflatex document.tex
+
+TROUBLESHOOTING
+--------------
+- Ensure all three files (.sty, .bbx, .cbx) are in the same directory
+- Use biber backend for best results
+- Check that your bibliography entries follow standard biblatex format
+- See test-asa.tex for working examples
+
+For more information, see README.md and the example files. 

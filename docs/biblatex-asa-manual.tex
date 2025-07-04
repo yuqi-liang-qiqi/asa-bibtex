@@ -9,7 +9,20 @@
 \usepackage{listings}
 \usepackage{fancyvrb}
 \usepackage{url}
-\usepackage{hyperref}
+
+% Define custom blue color
+\definecolor{customblue}{HTML}{4169E1}
+
+% Configure hyperref with custom colors
+\usepackage[
+  colorlinks=true,
+  linkcolor=customblue,
+  urlcolor=customblue,
+  citecolor=customblue,
+  filecolor=customblue,
+  bookmarksnumbered=true,
+  bookmarksopen=true
+]{hyperref}
 
 % Package being documented
 \usepackage[backend=biber]{biblatex}
@@ -30,7 +43,7 @@
        \Large American Sociological Association Style for \textsf{biblatex}}
 \author{Yuqi Liang\\
         \texttt{yuqi.liang.1900@gmail.com}}
-\date{Version 1.0.0\\January 7, 2025}
+\date{Version 1.0.0\\July 3, 2025}
 
 \begin{document}
 
@@ -67,36 +80,62 @@ The \textsf{biblatex-asa} package provides citation and bibliography formatting 
 
 \subsection{Package Requirements}
 
-The \textsf{biblatex-asa} package requires:
+You will need to be using a recent LaTeX distribution and the following packages:
+
 \begin{itemize}
-  \item A working LaTeX distribution (TeX Live, MiKTeX, etc.)
-  \item The \textsf{biblatex} package
-  \item The \textsf{biber} backend (recommended)
+  \item \textbf{LaTeX distribution:} TeX Live 2020 or later, MiKTeX 2020 or later
+  \item \textbf{biblatex:} Version 3.14 or later (provides the underlying bibliography system)
+  \item \textbf{biber:} Version 2.14 or later (recommended backend for processing bibliography data)
+  \item \textbf{etoolbox:} (automatically loaded by biblatex, provides programming facilities)
+\end{itemize}
+
+\textbf{Important notes:}
+\begin{itemize}
+  \item The \textsf{biblatex-asa} package is built on top of the \texttt{standard} and \texttt{authoryear} styles from biblatex
+  \item While bibtex backend is supported, \textbf{biber is strongly recommended} for full functionality and better Unicode support
+  \item If you're using an older LaTeX distribution, some features may not work correctly
+  \item The package automatically loads biblatex with appropriate ASA-specific options
 \end{itemize}
 
 \subsection{Installation Methods}
 
-\subsubsection{Local Installation}
+\subsubsection{Automatic Installation (Recommended)}
 
-For use in a single project, copy the following files to your project directory:
+For most users, the package can be installed automatically through your TeX distribution's package manager:
+
 \begin{itemize}
-  \item \texttt{biblatex-asa.sty}
-  \item \texttt{asa.bbx}
-  \item \texttt{asa.cbx}
+  \item \textbf{TeX Live}: The package is available through \texttt{tlmgr}
+  \begin{verbatim}
+  tlmgr install biblatex-asa
+  \end{verbatim}
+  
+  \item \textbf{MiKTeX}: The package is available through the MiKTeX Package Manager or automatically installed when first used
+  
+  \item \textbf{Overleaf}: The package is pre-installed and ready to use
 \end{itemize}
 
-\subsubsection{System-wide Installation}
+\subsubsection{Manual Installation}
 
-For system-wide installation, place the files in your local \texttt{texmf} tree:
-\begin{verbatim}
-texmf/tex/latex/biblatex-asa/
-\end{verbatim}
+If automatic installation is not available or you need the latest development version:
 
-After installation, update your filename database:
-\begin{itemize}
-  \item TeX Live: run \texttt{texhash} or \texttt{mktexlsr}
-  \item MiKTeX: run \texttt{initexmf --update-fndb}
-\end{itemize}
+\begin{enumerate}
+  \item Download the package files from CTAN or GitHub
+  \item For local use in a single project, copy these files to your project directory:
+  \begin{itemize}
+    \item \texttt{biblatex-asa.sty}
+    \item \texttt{asa.bbx}
+    \item \texttt{asa.cbx}
+  \end{itemize}
+  \item For system-wide installation, place the files in your local \texttt{texmf} tree:
+  \begin{verbatim}
+  texmf/tex/latex/biblatex-asa/
+  \end{verbatim}
+  \item Update your filename database:
+  \begin{itemize}
+    \item TeX Live: run \texttt{texhash} or \texttt{mktexlsr}
+    \item MiKTeX: run \texttt{initexmf --update-fndb}
+  \end{itemize}
+\end{enumerate}
 
 \section{Usage}
 
@@ -165,14 +204,50 @@ The package also provides convenience commands:
 
 \section{Compilation}
 
-To compile a document using \textsf{biblatex-asa}:
+\subsection{Overleaf Compilation (Recommended for Beginners)}
+
+If you're using Overleaf, the compilation process is much simpler:
+
+\begin{itemize}
+  \item Overleaf automatically handles the compilation sequence for you
+  \item Simply click the \textbf{Recompile} button and Overleaf will run the necessary commands in the correct order
+  \item Make sure your project settings use:
+  \begin{itemize}
+    \item \textbf{Compiler:} pdfLaTeX
+    \item \textbf{TeX Live version:} 2020 or later (recommended)
+  \end{itemize}
+  \item You can access these settings via \texttt{Menu > Settings > Compiler}
+\end{itemize}
+
+\subsection{Local Compilation (Command Line)}
+
+To compile a document using \textsf{biblatex-asa} on your local machine, you need to run the following commands in your terminal/command prompt. Make sure you are in the same directory as your \texttt{.tex} file:
 
 \begin{enumerate}
   \item \texttt{pdflatex document.tex}
+  
+  \textbf{What this does:} Compiles your LaTeX document into a PDF for the first time. This creates auxiliary files needed for the bibliography, but the references won't show up yet.
+  
   \item \texttt{biber document}
+  
+  \textbf{What this does:} Processes your bibliography file (\texttt{.bib}) and creates the formatted reference list according to ASA style. Note: use the filename \emph{without} the \texttt{.tex} extension.
+  
   \item \texttt{pdflatex document.tex}
+  
+  \textbf{What this does:} Compiles the document again, now incorporating the processed bibliography. Your citations and reference list will appear.
+  
   \item \texttt{pdflatex document.tex}
+  
+  \textbf{What this does:} Final compilation to ensure all cross-references, page numbers, and table of contents are correct.
 \end{enumerate}
+
+\textbf{Important notes:}
+\begin{itemize}
+  \item Replace \texttt{document} with your actual filename
+  \item You must have a working LaTeX installation (TeX Live, MiKTeX, etc.)
+  \item Open your terminal (Mac/Linux) or Command Prompt (Windows)
+  \item Navigate to your document's folder using \texttt{cd /path/to/your/folder}
+\end{itemize}
 
 \section{ASA Format Implementation}
 
@@ -214,9 +289,47 @@ The \textsf{biblatex-asa} package supports all standard \textsf{biblatex} entry 
 \subsection{Common Issues}
 
 \begin{description}
-  \item[References not showing] Ensure you run \texttt{biber} (not \texttt{bibtex})
-  \item[File not found errors] Check that all package files are in the correct location
-  \item[Encoding problems] Save all files as UTF-8
+  \item[References not showing] Ensure you run \texttt{biber} (not \texttt{bibtex}).
+  
+  \textbf{How to do this:}
+  \begin{itemize}
+    \item If you use the command line, compile your document with this sequence:
+    \begin{enumerate}
+      \item \texttt{pdflatex yourfile.tex}
+      \item \texttt{biber yourfile}
+      \item \texttt{pdflatex yourfile.tex}
+      \item \texttt{pdflatex yourfile.tex}
+    \end{enumerate}
+    \item If you use an editor (TeXShop, TeXworks, Overleaf, VS Code with LaTeX Workshop), make sure the bibliography tool is set to \texttt{biber}, not \texttt{bibtex}. In Overleaf, go to \texttt{Menu > Settings > Compiler} and select \texttt{biber}.
+  \end{itemize}
+  
+  \item[File not found errors] Solutions depend on your installation method.
+  
+  \textbf{For automatic installation (recommended):}
+  \begin{itemize}
+    \item \textbf{TeX Live:} Check if installed: \texttt{tlmgr list --installed \textbar\ grep biblatex-asa}
+    \item If not found, install: \texttt{tlmgr install biblatex-asa}
+    \item Try updating: \texttt{tlmgr update --all}
+    \item \textbf{MiKTeX:} Open MiKTeX Console > Packages, refresh database, search for "biblatex-asa"
+    \item \textbf{Overleaf:} Package should be pre-installed; if issues persist, contact Overleaf support
+  \end{itemize}
+  
+  \textbf{For manual installation:}
+  \begin{itemize}
+    \item Local: Ensure \texttt{biblatex-asa.sty}, \texttt{asa.bbx}, \texttt{asa.cbx} are in your project directory
+    \item System-wide: Files should be in \texttt{texmf/tex/latex/biblatex-asa/}
+    \item Run \texttt{texhash} (TeX Live) or \texttt{initexmf --update-fndb} (MiKTeX) after installation
+         \item If using \texttt{\\def\\input@path\{\{../../src/\}\}}, ensure the path is correct
+  \end{itemize}
+  
+  \item[Encoding problems] Save all files as UTF-8.
+  
+  \textbf{How to do this:}
+  \begin{itemize}
+    \item In most editors (VS Code, Sublime Text, TeXShop, etc.), choose \texttt{Save with Encoding} or \texttt{Save As} and select UTF-8.
+    \item In Overleaf, files are saved as UTF-8 by default.
+    \item If unsure, open the file in your editor and check the encoding setting at the bottom of the window or in the menu.
+  \end{itemize}
 \end{description}
 
 \section{License and Contact}
@@ -224,7 +337,7 @@ The \textsf{biblatex-asa} package supports all standard \textsf{biblatex} entry 
 This work is distributed under the LaTeX Project Public License (LPPL), version 1.3c or later.
 
 \begin{description}
-  \item[Author:] Yuqi Liang
+  \item[Author:] Yuqi Liang, University of Oxford
   \item[Email:] \texttt{yuqi.liang.1900@gmail.com}
   \item[GitHub:] \url{https://github.com/yuqi-liang-qiqi/biblatex-asa}
 \end{description}
