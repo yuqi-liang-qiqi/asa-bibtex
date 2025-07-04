@@ -21,7 +21,7 @@
     <a href="#installation">Quick Start</a> •
     <a href="#usage">Usage Guide</a> •
     <a href="#examples">Examples</a> •
-    <a href="docs/biblatex-asa-manual.pdf">Full Manual</a> •
+    <a href="docs/biblatex-asa-manual.pdf">Documentation</a> •
     <a href="#contributing">Contributing</a>
   </p>
 </div>
@@ -54,16 +54,23 @@
 </tr>
 </table>
 
-### New to LaTeX or Referencing Systems?
+### Documentation
 
-If you're new to LaTeX, biblatex, or academic referencing in general, we recommend starting with our comprehensive **[User Manual](docs/biblatex-asa-manual.pdf)**, which includes:
+We provide two versions of the documentation to suit different needs:
 
-- **Beginner's Guide** (Section 1.2): Understanding different referencing styles (ASA, APA, Chicago, Harvard)
+- **[Concise Manual](docs/ctan-version/biblatex-asa-manual.pdf)** (6 pages) - Technical reference with essential information
+- **[Complete Guide](docs/beginner-guide/biblatex-asa-manual-full.pdf)** (14 pages) - Comprehensive tutorial with beginner's guide
+
+The **Complete Guide** includes:
+- **Beginner's Guide**: Understanding different referencing styles (ASA, APA, Chicago, Harvard)
 - **BibTeX vs. biblatex**: Why we use the modern biblatex system  
 - **Citation Commands**: When to use `\parencite{}`, `\textcite{}`, and more
 - **Step-by-step examples**: From installation to your first compiled document
+- **Detailed troubleshooting**: Platform-specific solutions
 
-The manual is designed to be beginner-friendly while maintaining academic rigor—perfect for building a solid foundation!
+Choose the **Concise Manual** for quick reference, or the **Complete Guide** if you're new to LaTeX or need detailed explanations.
+
+See [`docs/README.md`](docs/README.md) for detailed information about our documentation structure.
 
 ---
 
@@ -128,7 +135,13 @@ biblatex-asa/
 │   └── asa.cbx                  # Citation style definitions
 │
 ├── docs/                         # Documentation
-│   ├── biblatex-asa-manual.pdf
+│   ├── beginner-guide/          # Complete tutorial (14 pages)
+│   │   ├── biblatex-asa-manual-full.pdf
+│   │   └── biblatex-asa-manual-full.tex
+│   ├── ctan-version/            # Concise manual (6 pages)
+│   │   ├── biblatex-asa-manual.pdf
+│   │   └── biblatex-asa-manual.tex
+│   ├── README.md                # Documentation guide
 │   ├── COMPILE_BIBLATEX_ASA_LOCALLY.md
 │   └── requirements.md
 │
