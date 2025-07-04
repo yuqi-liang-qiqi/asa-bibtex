@@ -184,23 +184,125 @@ Example with options:
 
 \subsection{Standard Commands}
 
-The package supports all standard \textsf{biblatex} citation commands:
+The package supports all standard \textsf{biblatex} citation commands. Here are detailed examples of when and how to use each:
 
 \begin{description}
-  \item[\cs{parencite}] Parenthetical citation: (Author Year)
-  \item[\cs{textcite}] In-text citation: Author (Year)
-  \item[\cs{cite}] Bare citation: Author Year
-  \item[\cs{footcite}] Footnote citation
+  \item[\cs{parencite\{key\}}] Parenthetical citation: (Author Year)
+  
+  \textbf{When to use:} At the end of a sentence or when supporting a claim.
+  
+  \textbf{Examples:}
+  \begin{itemize}
+    \item Studies show increasing social inequality \texttt{\cs{parencite\{smith2020\}}} → Studies show increasing social inequality (Smith 2020).
+    \item Research supports this theory \texttt{\cs{parencite\{jones2019,brown2021\}}} → Research supports this theory (Jones 2019; Brown 2021).
+    \item For page-specific references: \texttt{\cs{parencite[p.~42]\{doe2018\}}} → (Doe 2018, p. 42).
+  \end{itemize}
+  
+  \item[\cs{textcite\{key\}}] In-text citation: Author (Year)
+  
+  \textbf{When to use:} When the author's name is part of your sentence.
+  
+  \textbf{Examples:}
+  \begin{itemize}
+    \item \texttt{\cs{textcite\{wilson2022\}} argues that social media impacts behavior} → Wilson (2022) argues that social media impacts behavior.
+    \item \texttt{According to \cs{textcite\{garcia2020\}}, urban development follows predictable patterns} → According to Garcia (2020), urban development follows predictable patterns.
+    \item \texttt{\cs{textcite[pp.~15--20]\{taylor2019\}} provides detailed analysis} → Taylor (2019, pp. 15--20) provides detailed analysis.
+  \end{itemize}
+  
+  \item[\cs{cite\{key\}}] Bare citation: Author Year (no parentheses)
+  
+  \textbf{When to use:} Rarely in ASA style, mainly in special contexts.
+  
+  \textbf{Examples:}
+  \begin{itemize}
+    \item In footnotes: \texttt{See also \cs{cite\{brown2021\}} for alternative perspectives} → See also Brown 2021 for alternative perspectives.
+    \item In custom formatting situations where you want to control punctuation manually.
+  \end{itemize}
+  
+  \item[\cs{footcite\{key\}}] Footnote citation
+  
+  \textbf{When to use:} For supplementary information or additional sources (less common in ASA style).
+  
+  \textbf{Examples:}
+  \begin{itemize}
+    \item \texttt{This finding is controversial\cs{footcite\{debate2020\}}.} → This finding is controversial.\footnote{(Debate 2020).}
+    \item Useful for providing additional context without interrupting the main text flow.
+  \end{itemize}
 \end{description}
 
 \subsection{Convenience Commands}
 
-The package also provides convenience commands:
+The package provides convenience commands for two main reasons:
+
+\textbf{1. Clarity and Consistency:} Makes it immediately clear you're using ASA style.
+\textbf{2. Future Flexibility:} Allows for style-specific customizations if needed.
 
 \begin{description}
-  \item[\cs{asacite}] Equivalent to \cs{parencite}
-  \item[\cs{asatextcite}] Equivalent to \cs{textcite}
+  \item[\cs{asacite\{key\}}] Equivalent to \cs{parencite}
+  
+  \textbf{Why use this:} Makes your LaTeX code more readable and explicitly indicates ASA-style citations. If future versions need ASA-specific modifications to parenthetical citations, this command can be updated without changing your document.
+  
+  \textbf{Example:}
+  \begin{itemize}
+    \item \texttt{Social mobility varies by region \cs{asacite\{johnson2023\}}} → Social mobility varies by region (Johnson 2023).
+    \item Multiple sources: \texttt{\cs{asacite\{lee2020,kim2021,park2022\}}} → (Lee 2020; Kim 2021; Park 2022).
+  \end{itemize}
+  
+  \item[\cs{asatextcite\{key\}}] Equivalent to \cs{textcite}
+  
+  \textbf{Why use this:} Same benefits as \texttt{\cs{asacite}} but for in-text citations. Makes your intent explicit and allows for future ASA-specific enhancements.
+  
+  \textbf{Example:}
+  \begin{itemize}
+    \item \texttt{\cs{asatextcite\{martinez2021\}} demonstrates clear patterns} → Martinez (2021) demonstrates clear patterns.
+    \item \texttt{As \cs{asatextcite\{chen2020\}} notes, methodology matters} → As Chen (2020) notes, methodology matters.
+  \end{itemize}
 \end{description}
+
+\subsection{Advanced Citation Examples}
+
+\textbf{Common Usage Patterns:}
+
+\begin{enumerate}
+  \item \textbf{Introducing an author's argument:}
+  \begin{itemize}
+    \item \texttt{\cs{textcite\{author2023\}} argues that...} → Author (2023) argues that...
+    \item \texttt{According to \cs{textcite\{researcher2022\}}, the data shows...} → According to Researcher (2022), the data shows...
+  \end{itemize}
+  
+  \item \textbf{Supporting your claims:}
+  \begin{itemize}
+    \item \texttt{This trend is well-documented \cs{parencite\{study2021\}}.} → This trend is well-documented (Study 2021).
+    \item \texttt{Multiple studies confirm this pattern \cs{parencite\{one2020,two2021,three2022\}}.} → Multiple studies confirm this pattern (One 2020; Two 2021; Three 2022).
+  \end{itemize}
+  
+  \item \textbf{Citing specific pages:}
+  \begin{itemize}
+    \item \texttt{\cs{parencite[p.~25]\{book2019\}}} → (Book 2019, p. 25)
+    \item \texttt{\cs{textcite[pp.~100--105]\{article2020\}}} → Article (2020, pp. 100--105)
+  \end{itemize}
+  
+  \item \textbf{Distinguishing same-year publications:}
+  \begin{itemize}
+    \item \texttt{\cs{parencite\{smith2020a,smith2020b\}}} → (Smith 2020a, 2020b)
+    \item The package automatically handles year disambiguation with a, b, c suffixes.
+  \end{itemize}
+\end{enumerate}
+
+\textbf{Quick Reference - When to Use Which Command:}
+
+\begin{center}
+\begin{tabular}{ll}
+\hline
+\textbf{Situation} & \textbf{Command} \\
+\hline
+End of sentence, supporting claim & \texttt{\cs{parencite}} \\
+Author name is part of your sentence & \texttt{\cs{textcite}} \\
+Footnote or special formatting & \texttt{\cs{cite}} or \texttt{\cs{footcite}} \\
+Want to be explicitly ASA-focused & \texttt{\cs{asacite}} or \texttt{\cs{asatextcite}} \\
+\hline
+\end{tabular}
+\end{center}
 
 \section{Compilation}
 
