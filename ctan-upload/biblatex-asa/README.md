@@ -27,6 +27,23 @@ The package provides three ways to use the ASA style:
 The first option (biblatex-asa.sty) is recommended for most users as it
 provides appropriate defaults and handles common configuration automatically.
 
+Package Contents:
+
+Source files:
+  biblatex-asa.sty            - LaTeX package wrapper
+  asa.bbx                     - Bibliography style file  
+  asa.cbx                     - Citation style file
+
+Documentation:
+  biblatex-asa-manual.pdf     - User manual
+  INSTALL                     - Installation instructions
+  LICENSE                     - License information
+
+Examples:
+  examples/basic/             - Basic usage example with .tex, .bib, and .pdf
+  examples/with-package/      - Package wrapper example
+  tests/                      - Comprehensive test documents
+
 Please refer to biblatex-asa-manual.pdf for detailed documentation, including
 installation instructions, usage examples, and troubleshooting information.
 
