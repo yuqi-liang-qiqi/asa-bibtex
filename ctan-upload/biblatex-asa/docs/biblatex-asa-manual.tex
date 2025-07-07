@@ -90,11 +90,11 @@ Install through your TeX distribution's package manager:
 
 \subsection{Manual Installation}
 
-For local use, copy these files to your project directory:
+For local use, first generate the style files from the provided sources:
 \begin{itemize}
-  \item \texttt{biblatex-asa.sty}
-  \item \texttt{asa.bbx}
-  \item \texttt{asa.cbx}
+  \item Run \texttt{latex biblatex-asa.ins} in the package directory.
+  \item This will create \texttt{biblatex-asa.sty}, \texttt{asa.bbx}, and \texttt{asa.cbx}.
+  \item Copy these files to your project directory (or leave them in place if working in the same folder).
 \end{itemize}
 
 For system-wide installation, place files in your local \texttt{texmf} tree under \texttt{texmf/tex/latex/biblatex-asa/} and run \texttt{texhash} (TeX Live) or \texttt{initexmf --update-fndb} (MiKTeX).

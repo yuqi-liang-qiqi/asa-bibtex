@@ -1,16 +1,21 @@
+% Before compiling this example, you must generate the style files from the source:
+%     latex biblatex-asa.ins
+% This will produce biblatex-asa.sty, asa.bbx, and asa.cbx in the same directory.
+% Only after this step can you compile this example successfully.
 \documentclass{article}
-% Use relative path to package files
-\makeatletter
-\def\input@path{{../../src/}}
-\makeatother
-\usepackage[backend=biber,style=asa,giveninits=false]{biblatex}
-\addbibresource{biblatex-asa-example-without-package.bib}
+% Example usage for biblatex-asa:
+% 1. If you installed biblatex-asa system-wide or copied biblatex-asa.sty, asa.bbx, and asa.cbx to your project directory, simply use:
+\usepackage{biblatex-asa}
+% 2. If you are developing locally, generate the style files from src/literate-programming/ using:
+%    latex biblatex-asa.ins
+%    and copy the resulting files to your project directory.
+\addbibresource{example-without-package.bib}
 
 \begin{document}
 
 \nocite{*} % Include all bibliography entries, even if not cited
 
-% ----------------- In-text citation tests (added by AI) -----------------
+% ----------------- In-text citation tests -----------------
 
 \section*{In-text Citation Examples}
 
