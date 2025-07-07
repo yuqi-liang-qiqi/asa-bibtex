@@ -14,14 +14,14 @@
     <a href="https://www.latex-project.org/lppl/"><img src="https://img.shields.io/badge/License-LPPL-blue.svg" alt="License: LPPL"/></a>
     <a href="https://github.com/yuqi-liang-qiqi/biblatex-asa/releases"><img src="https://img.shields.io/github/v/release/yuqi-liang-qiqi/biblatex-asa?label=Latest%20Release" alt="Latest Release"/></a>
     <a href="https://ctan.org/pkg/biblatex-asa"><img src="https://img.shields.io/badge/CTAN-biblatex--asa-brightgreen" alt="CTAN Package"/></a>
-    <a href="docs/beginner-guide/biblatex-asa-manual-full.pdf"><img src="https://img.shields.io/badge/Documentation-PDF-red" alt="Documentation"/></a>
+    <a href="ctan-upload/biblatex-asa/docs/biblatex-asa-manual.pdf"><img src="https://img.shields.io/badge/Documentation-PDF-red" alt="Documentation"/></a>
   </p>
   
   <p>
     <a href="#installation">Quick Start</a> •
     <a href="#usage">Usage Guide</a> •
     <a href="#examples">Examples</a> •
-    <a href="docs/beginner-guide/biblatex-asa-manual-full.pdf">Documentation</a> •
+    <a href="ctan-upload/biblatex-asa/docs/biblatex-asa-manual.pdf">Documentation</a> •
     <a href="#contributing">Contributing</a>
   </p>
 </div>
@@ -169,17 +169,6 @@ You will need a recent LaTeX distribution and the following packages:
 - **etoolbox**: (automatically loaded by biblatex, provides programming facilities)
 
 **Note**: This package is built on top of biblatex's `standard` and `authoryear` styles.
-
-### Why You Do NOT Need MacTeX or Homebrew
-
-This project works with any standard LaTeX installation. You do NOT need to install MacTeX via Homebrew:
-
-- The official [TeX Live installer](https://tug.org/texlive/) is sufficient and recommended
-- TeX Live 2025 has been tested and works perfectly
-- No extra GUI tools or the large MacTeX "full package" required
-- Using the official TeX Live installer saves disk space and gives you more control
-
-**Summary:** If you can compile with `pdflatex`, `biber`, and `biblatex` from TeX Live, you are ready to use this project.
 
 ## Installation
 
