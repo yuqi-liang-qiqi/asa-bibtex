@@ -1,0 +1,529 @@
+% \iffalse
+%<*driver>
+\ProvidesFile{biblatex-asa.dtx}
+\documentclass{ltxdoc}
+\usepackage{biblatex}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+\begin{document}
+  \DocInput{biblatex-asa.dtx}
+\end{document}
+%</driver>
+% \fi
+
+% \title{\textsf{biblatex-asa} package}
+% \author{Yuqi Liang}
+% \date{7 July 2025}
+% \maketitle
+
+% \section{Introduction}
+% This package is designed to help LaTeX users in sociology and related fields easily produce ASA-compliant (American Sociological Association) bibliographies and citations.
+
+% \section{Implementation}
+
+% \subsection{biblatex-asa.sty}
+% \begin{macrocode}
+%<*sty>
+%% biblatex-asa.sty
+%% Copyright (C) 2025 Yuqi Liang
+%% 
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{biblatex-asa}[2025/01/07 v1.0.0 ASA citation style for biblatex]
+
+\makeatletter
+
+% Package options - simplified approach
+\def\asa@giveninits{false}  % Default: use full given names (ASA style)
+
+\DeclareOption{giveninits}{\def\asa@giveninits{true}}
+\DeclareOption{nogiveninits}{\def\asa@giveninits{false}}
+\DeclareOption{backend=biber}{\PassOptionsToPackage{backend=biber}{biblatex}}
+\DeclareOption{backend=bibtex}{\PassOptionsToPackage{backend=bibtex}{biblatex}}
+\DeclareOption*{\PassOptionsToPackage{\CurrentOption}{biblatex}}
+
+\ProcessOptions\relax
+
+% Load biblatex with our custom ASA style
+\RequirePackage[style=asa]{biblatex}
+
+% Set biblatex options for ASA style
+\ExecuteBibliographyOptions{
+  giveninits=\asa@giveninits,
+  autocite=inline,
+  autopunct=true,
+  labeldateparts=true,
+  uniquename=full,
+  uniquelist=false,
+  maxnames=2,
+  minnames=1,
+  maxcitenames=2,
+  mincitenames=1
+}
+
+
+
+\makeatother
+
+\endinput
+%% End of biblatex-asa.sty 
+%</sty>
+% \end{macrocode}
+
+% \subsection{asa.bbx}
+% \begin{macrocode}
+%<*bbx>
+\ProvidesFile{asa.bbx}[2025/07/03 v1.0.0 ASA bibliography style]
+
+% ASA bibliography style based on American Sociological Association requirements
+% Author: Yuqi Liang
+% Date: 2025-07-03
+% License: LaTeX Project Public License v1.3c or later
+
+\RequireBibliographyStyle{standard}
+
+% ========================================
+% Global style settings
+% ========================================
+
+% Use full names (not initials)
+\ExecuteBibliographyOptions{
+  giveninits=false,
+  uniquename=full,
+  uniquelist=false,
+  sorting=nyt,
+  maxbibnames=999,
+  minbibnames=1,
+  maxcitenames=999,
+  mincitenames=1,
+  isbn=false,
+  url=true,
+  doi=true,
+  eprint=false
+}
+
+% ========================================
+% Date formatting
+% ========================================
+
+% Only show year, handle special cases  
+\newbibmacro*{date+extradate}{%
+  \iffieldundef{labelyear}%
+    {\printtext{n.d.}}%
+    {\iffieldequalstr{labelyear}{Forthcoming}%
+      {\printtext{Forthcoming}}%
+      {\iffieldequalstr{labelyear}{n.d.}%
+        {\printtext{n.d.}}%
+        {\printfield{labelyear}%
+         \printfield{extradate}}%
+      }%
+    }%
+}
+
+% ========================================
+% Author name formatting
+% ========================================
+
+% ASA author name format: First author "Last, First", others "First Last"
+% But institutional authors keep natural order
+\DeclareNameFormat{author}{%
+  \ifboolexpr{
+    test {\ifdefvoid\namepartgiven}
+  }
+  {% Institutional author: print full name as-is
+   \namepartfamily%
+   \ifdefvoid\namepartprefix{}{\namepartprefix\space}%
+   \ifdefvoid\namepartsuffix{}{\space\namepartsuffix}%
+  }
+  {% Personal author
+   \ifnumequal{\value{listcount}}{1}
+     {% First author: "Last, First"
+      \usebibmacro{name:family-given}
+        {\namepartfamily}
+        {\namepartgiven}
+        {\namepartprefix}
+        {\namepartsuffix}}
+     {% Other authors: "First Last"
+      \usebibmacro{name:given-family}
+        {\namepartfamily}
+        {\namepartgiven}
+        {\namepartprefix}
+        {\namepartsuffix}}%
+  }%
+}
+
+% Editor name format: All editors "First Last"
+\DeclareNameFormat{editor}{%
+  \usebibmacro{name:given-family}
+    {\namepartfamily}
+    {\namepartgiven}
+    {\namepartprefix}
+    {\namepartsuffix}%
+}
+
+% Set name delimiters for ASA style
+\renewcommand*{\multinamedelim}{\addcomma\space}
+\renewcommand*{\finalnamedelim}{\addcomma\space\bibstring{and}\space}
+
+% Custom author macro for ASA style
+\newbibmacro*{asa:author}{%
+  \ifboolexpr{
+    test \ifuseauthor
+    and
+    not test {\ifnameundef{author}}
+  }
+  {%
+    \printnames{author}%
+  }
+  {}%
+}
+
+% ========================================
+% Title formatting
+% ========================================
+
+\newbibmacro*{asa:title}{%
+  \ifboolexpr{
+    test {\iffieldundef{title}}
+    and
+    test {\iffieldundef{subtitle}}
+  }
+  {}
+  {%
+    \printfield[titlecase]{title}%
+    \setunit{\subtitlepunct}%
+    \printfield[titlecase]{subtitle}%
+  }%
+}
+
+\newbibmacro*{asa:title:quoted}{%
+  \ifboolexpr{
+    test {\iffieldundef{title}}
+    and
+    test {\iffieldundef{subtitle}}
+  }
+  {}
+  {%
+    \textquotedblleft%
+    \printfield[titlecase]{title}%
+    \setunit{\subtitlepunct}%
+    \printfield[titlecase]{subtitle}%
+    \textquotedblright%
+  }%
+}
+
+% ========================================
+% Journal formatting
+% ========================================
+
+\newbibmacro*{asa:journal+volume+pages}{%
+  \usebibmacro{journal}%
+  \setunit{\space}%
+  \printfield{volume}%
+  \iffieldundef{number}
+    {}
+    {\mkbibparens{\printfield{number}}}%
+  \setunit{\addcolon\space}%
+  \printfield{pages}%
+  \newunit%
+}
+
+% ========================================
+% Publisher formatting
+% ========================================
+
+\newbibmacro*{asa:publisher+location}{%
+  \printlist{location}%
+  \iflistundef{publisher}
+    {}
+    {\setunit{\addcolon\space}%
+     \printlist{publisher}}%
+  \newunit%
+}
+
+% ========================================
+% Field formats
+% ========================================
+
+% Pages format for incollection: ensure "Pp." prefix
+\DeclareFieldFormat[incollection]{pages}{Pp. #1}
+
+% ========================================
+% Entry drivers
+% ========================================
+
+% Book
+\DeclareBibliographyDriver{book}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{asa:author}%
+  \addperiod\space%
+  \usebibmacro{date+extradate}%
+  \addperiod\space%
+  \usebibmacro{asa:title}%
+  \addperiod\space%
+  \iffieldundef{translator}
+    {}
+    {\printtext{Translated by \printnames[editor]{translator}}%
+     \addperiod\space}%
+  \usebibmacro{asa:publisher+location}%
+  \setunit{\bibpagerefpunct}\newblock%
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}%
+}
+
+% Article
+\DeclareBibliographyDriver{article}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{asa:author}%
+  \addperiod\space%
+  \usebibmacro{date+extradate}%
+  \addperiod\space%
+  \usebibmacro{asa:title:quoted}%
+  \addperiod\space%
+  \usebibmacro{asa:journal+volume+pages}%
+  \newunit%
+  \printfield{url}%
+  \setunit{\bibpagerefpunct}\newblock%
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}%
+}
+
+% Collection/Incollection
+\DeclareBibliographyDriver{incollection}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{asa:author}%
+  \addperiod\space%
+  \usebibmacro{date+extradate}%
+  \addperiod\space%
+  \usebibmacro{asa:title:quoted}%
+  \addperiod\space%
+  \printtext{\printfield{pages} in\space}%
+  \printfield[title]{booktitle}%
+  \ifnameundef{editor}
+    {}
+    {\setunit{\addcomma\space}%
+     \printtext{edited by \printnames[editor]{editor}}}%
+  \addperiod\space%
+  \usebibmacro{asa:publisher+location}%
+  \setunit{\bibpagerefpunct}\newblock%
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}%
+}
+
+% PhD thesis
+\DeclareBibliographyDriver{phdthesis}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{asa:author}%
+  \addperiod\space%
+  \usebibmacro{date+extradate}%
+  \addperiod\space%
+  \usebibmacro{asa:title:quoted}%
+  \addperiod\space%
+  \usebibmacro{asa:publisher+location}%
+  \setunit{\bibpagerefpunct}\newblock%
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}%
+}
+%</bbx>
+
+% \subsection{asa.cbx}
+% \begin{macrocode}
+%<*cbx>
+\ProvidesFile{asa.cbx}[2025/07/03 v1.0.0 ASA citation style]
+
+% ASA citation style based on American Sociological Association requirements
+% Author: Yuqi Liang
+% Date: 2025-07-03
+% License: LaTeX Project Public License v1.3c or later
+
+\RequireCitationStyle{authoryear}
+
+% ========================================
+% Global citation settings
+% ========================================
+
+\ExecuteBibliographyOptions{
+  autocite=inline,
+  autopunct=true,
+  labeldateparts=true,
+  uniquename=full,
+  uniquelist=false,
+  maxnames=2,
+  minnames=1,
+  maxcitenames=2,
+  mincitenames=1,
+  giveninits=false
+}
+
+% Ensure bibliography shows all authors (override citation settings)
+\AtBeginBibliography{%
+  \defcounter{maxnames}{999}%
+  \defcounter{minnames}{1}%
+}
+
+% ========================================
+% Name formatting for citations
+% ========================================
+
+% Citation name format: use family names only in citations
+\DeclareNameFormat{labelname}{%
+  \usebibmacro{name:family}
+    {\namepartfamily}
+    {\namepartgiven}
+    {\namepartprefix}
+    {\namepartsuffix}%
+  \usebibmacro{name:andothers}%
+}
+
+% Set name delimiters for citations
+\DeclareDelimFormat[cite,parencite,textcite]{multinamedelim}{\addspace}
+\DeclareDelimFormat[cite,parencite,textcite]{finalnamedelim}{\addspace and\space}
+\DeclareDelimFormat[cite,parencite,textcite]{revsdnamedelim}{\addspace and\space}
+
+% ========================================
+% Date formatting for citations
+% ========================================
+
+\renewbibmacro*{cite:labeldate+extradate}{%
+  \iffieldundef{labelyear}
+    {\printtext{n.d.}}
+    {\iffieldequalstr{labelyear}{Forthcoming}
+      {\printtext{Forthcoming}}
+      {\iffieldequalstr{labelyear}{n.d.}
+        {\printtext{n.d.}}
+        {\printfield{labelyear}\printfield{extradate}}}}%
+}
+
+% ========================================
+% Basic citation macros
+% ========================================
+
+\renewbibmacro*{cite:label}{%
+  \iffieldundef{label}
+    {\printtext[bibhyperref]{\printfield[citetitle]{labeltitle}}}
+    {\printtext[bibhyperref]{\printfield{label}}}%
+}
+
+\newbibmacro*{cite:labelname}{%
+  \ifnameundef{labelname}
+    {\usebibmacro{cite:label}}
+    {\printtext[bibhyperref]{\printnames{labelname}}}%
+}
+
+% For parenthetical citations (parencite) - simple author year format
+\newbibmacro*{cite:labelname+labeldate:parens}{%
+  \usebibmacro{cite:labelname}%
+  \setunit{\addspace}%
+  \iffieldundef{labelyear}
+    {\printtext{n.d.}}
+    {\iffieldequalstr{labelyear}{Forthcoming}
+      {\printtext{Forthcoming}}
+      {\iffieldequalstr{labelyear}{n.d.}
+        {\printtext{n.d.}}
+        {\printfield{labelyear}\printfield{extradate}}}}%
+}
+
+
+
+% ========================================
+% Citation commands
+% ========================================
+
+% \parencite command - (Author Year)
+\DeclareCiteCommand{\parencite}[\mkbibparens]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{cite:labelname+labeldate:parens}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+% \textcite command - Author (Year)
+\DeclareCiteCommand{\textcite}
+  {\boolfalse{cbx:parens}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{cite:labelname}%
+   \addspace%
+   \mkbibparens{%
+     \iffieldundef{labelyear}
+       {\printtext{n.d.}}
+       {\iffieldequalstr{labelyear}{Forthcoming}}
+         {\printtext{Forthcoming}}
+         {\iffieldequalstr{labelyear}{n.d.}
+           {\printtext{n.d.}}
+           {\printfield{labelyear}\printfield{extradate}}}}}}
+  {\ifbool{cbx:parens}
+     {\bibcloseparen\global\boolfalse{cbx:parens}}
+     {}%
+   \multicitedelim}
+  {\usebibmacro{textcite:postnote}}
+
+% \cite command - defaults to \parencite
+\DeclareCiteCommand{\cite}[\mkbibparens]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{cite:labelname+labeldate:parens}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+% \autocite command - defaults to \parencite
+\DeclareCiteCommand{\autocite}[\mkbibparens]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{cite:labelname+labeldate:parens}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+% ========================================
+% Multiple citation formatting
+% ========================================
+
+\renewbibmacro*{textcite:postnote}{%
+  \iffieldundef{postnote}
+    {\ifbool{cbx:parens}
+       {\bibcloseparen\global\boolfalse{cbx:parens}}
+       {}}
+    {\ifbool{cbx:parens}
+       {\setunit{\postnotedelim}}
+       {\setunit{\addspace\bibopenparen}%
+        \global\booltrue{cbx:parens}}%
+     \printfield{postnote}%
+     \ifbool{cbx:parens}
+       {\bibcloseparen\global\boolfalse{cbx:parens}}
+       {}}}
+
+% ========================================
+% Multi-citation delimiter
+% ========================================
+
+\renewcommand*{\multicitedelim}{\addsemicolon\space}
+\renewcommand*{\compcitedelim}{\addsemicolon\space}
+\renewcommand*{\textcitedelim}{\addcomma\space}
+
+% ========================================
+% Prenote and postnote formatting
+% ========================================
+
+\renewbibmacro*{prenote}{\printfield{prenote}}
+
+\renewbibmacro*{postnote}{%
+  \iffieldundef{postnote}
+    {}
+    {\setunit{\postnotedelim}%
+     \printfield{postnote}}}
+
+\endinput 
+%</cbx>
+
+</code_block_to_apply_changes_from> 
