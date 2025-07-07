@@ -14,14 +14,14 @@
     <a href="https://www.latex-project.org/lppl/"><img src="https://img.shields.io/badge/License-LPPL-blue.svg" alt="License: LPPL"/></a>
     <a href="https://github.com/yuqi-liang-qiqi/biblatex-asa/releases"><img src="https://img.shields.io/github/v/release/yuqi-liang-qiqi/biblatex-asa?label=Latest%20Release" alt="Latest Release"/></a>
     <a href="https://ctan.org/pkg/biblatex-asa"><img src="https://img.shields.io/badge/CTAN-biblatex--asa-brightgreen" alt="CTAN Package"/></a>
-    <a href="docs/biblatex-asa-manual.pdf"><img src="https://img.shields.io/badge/Documentation-PDF-red" alt="Documentation"/></a>
+    <a href="docs/beginner-guide/biblatex-asa-manual-full.pdf"><img src="https://img.shields.io/badge/Documentation-PDF-red" alt="Documentation"/></a>
   </p>
   
   <p>
     <a href="#installation">Quick Start</a> •
     <a href="#usage">Usage Guide</a> •
     <a href="#examples">Examples</a> •
-    <a href="docs/biblatex-asa-manual.pdf">Documentation</a> •
+    <a href="docs/beginner-guide/biblatex-asa-manual-full.pdf">Documentation</a> •
     <a href="#contributing">Contributing</a>
   </p>
 </div>
@@ -56,21 +56,12 @@
 
 ### Documentation
 
-We provide two versions of the documentation to suit different needs:
+The main documentation is the **Complete User Guide**:
 
-- **[Concise Manual](docs/ctan-version/biblatex-asa-manual.pdf)** (6 pages) - Technical reference with essential information
-- **[Complete Guide](docs/beginner-guide/biblatex-asa-manual-full.pdf)** (14 pages) - Comprehensive tutorial with beginner's guide
+- [`docs/beginner-guide/biblatex-asa-manual-full.pdf`](docs/beginner-guide/biblatex-asa-manual-full.pdf)  
+  A comprehensive tutorial and reference for all users, including beginners.
 
-The **Complete Guide** includes:
-- **Beginner's Guide**: Understanding different referencing styles (ASA, APA, Chicago, Harvard)
-- **BibTeX vs. biblatex**: Why we use the modern biblatex system  
-- **Citation Commands**: When to use `\parencite{}`, `\textcite{}`, and more
-- **Step-by-step examples**: From installation to your first compiled document
-- **Detailed troubleshooting**: Platform-specific solutions
-
-Choose the **Concise Manual** for quick reference, or the **Complete Guide** if you're new to LaTeX or need detailed explanations.
-
-See [`docs/README.md`](docs/README.md) for detailed information about our documentation structure.
+See [`docs/README.md`](docs/README.md) for details about the documentation structure.
 
 ---
 
@@ -192,123 +183,44 @@ This project works with any standard LaTeX installation. You do NOT need to inst
 
 ## Installation
 
-### Option 1: Automatic Installation (Recommended)
+### From CTAN or Source
 
-For most users, install through your TeX distribution's package manager:
-
-**TeX Live:**
-```bash
-tlmgr install biblatex-asa
-```
-
-**MiKTeX:** The package is available through MiKTeX Package Manager or automatically installed when first used.
-
-**Overleaf:** The package is pre-installed and ready to use.
-
-Then in your LaTeX document:
-```latex
-\usepackage{biblatex-asa}
-\addbibresource{your-bibliography.bib}
-```
-
-### Option 2: Manual Installation (Development/Latest Version)
-
-1. **Download from CTAN or GitHub**
-2. **For single project:** Copy these files to your project directory:
+1. Download the package from CTAN or GitHub.
+2. The source includes only `biblatex-asa.dtx` and `biblatex-asa.ins`.
+3. **Before use, generate the style files** by running:
+   ```bash
+   latex biblatex-asa.ins
    ```
-   src/biblatex-asa.sty
-   src/asa.bbx  
-   src/asa.cbx
-   ```
+   This will create:
+   - `biblatex-asa.sty`
+   - `asa.bbx`
+   - `asa.cbx`
+4. Place these files in your project directory or your local texmf tree.
 
-3. **For system-wide installation:** See the [`INSTALL`](INSTALL) file for detailed instructions.
-
-### Option 3: Direct Style Usage
-
-If you only need the style files:
-```latex
-\usepackage[backend=biber,style=asa]{biblatex}
-\addbibresource{your-bibliography.bib}
-```
+See [`INSTALL`](INSTALL) for more details.
 
 ## Usage
 
-### Basic Usage with Package Wrapper
-
 ```latex
 \documentclass{article}
 \usepackage{biblatex-asa}
 \addbibresource{references.bib}
 
 \begin{document}
-
 This is a citation \parencite{key2023}.
 \textcite{author2022} argues that...
-
 \printbibliography
-
 \end{document}
 ```
-
-### Direct Style Usage
-
-```latex
-\documentclass{article}
-\usepackage[backend=biber,style=asa,giveninits=false]{biblatex}
-\addbibresource{references.bib}
-
-\begin{document}
-
-Here is a citation~\parencite{smith2020}.
-\printbibliography
-
-\end{document}
-```
-
-### Sample Bibliography Entry
-
-```bibtex
-@article{smith2020,
-  author = {John Smith and Jane Doe},
-  title = {Sociological Research},
-  journal = {American Sociological Review},
-  year = {2020},
-  volume = {85},
-  number = {2},
-  pages = {123-145},
-  doi = {10.1234/asr.2020.12345}
-}
-```
-
-### Compilation Steps
-
-```bash
-pdflatex document.tex
-biber document        # Use biber, not bibtex  
-pdflatex document.tex
-pdflatex document.tex
-```
-
-> **Pro Tip**: Most modern LaTeX editors (VS Code, TeXShop, etc.) can be configured to run this sequence automatically!
 
 ## Examples
 
-The project includes comprehensive examples in the [`examples/`](examples/) directory:
+Example usage files are provided in `ctan-upload/biblatex-asa/docs/`:
 
-### Basic Example
-- **Location**: [`examples/basic/`](examples/basic/)
-- **Description**: Simple usage with direct style loading
-- **Files**: `example.tex`, `example.bib`, `example.pdf`
+- `example-with-package.tex` / `example-with-package.bib`
+- `example-without-package.tex` / `example-without-package.bib`
 
-### Package Wrapper Example  
-- **Location**: [`examples/with-package/`](examples/with-package/)
-- **Description**: Usage with the package wrapper
-- **Files**: `example-with-package.tex`, `example.bib`
-
-### Comprehensive Test
-- **Location**: [`tests/`](tests/)
-- **Description**: Extensive testing of all ASA features
-- **Files**: `test-asa.tex`, `test-asa.bib`, `test-asa.pdf`
+**Note:** Before compiling these examples, you must generate the style files as described above.
 
 ## ASA Format Features
 
