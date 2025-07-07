@@ -15,30 +15,37 @@ INSTALLATION OPTIONS
 
 Option 1: Local Installation (Recommended for single project)
 --------------------------------------------------------------
-1. Copy the following files to your project directory:
-   - biblatex-asa.sty
-   - asa.bbx  
-   - asa.cbx
-
-2. In your LaTeX document, use:
-   \usepackage{biblatex-asa}
-   \addbibresource{your-bibliography.bib}
+1. In the source package, only biblatex-asa.dtx and biblatex-asa.ins are provided.
+2. Before using the package, you must generate the style files by running:
+     latex biblatex-asa.ins
+   This will create the following files in the same directory:
+     - biblatex-asa.sty
+     - asa.bbx
+     - asa.cbx
+3. Copy these three files to your project directory (or leave them in place if working in the same folder).
+4. In your LaTeX document, use:
+     \usepackage{biblatex-asa}
+     \addbibresource{your-bibliography.bib}
 
 Option 2: System-wide Installation
 -----------------------------------
-1. Find your local texmf tree:
+1. In the source package, only biblatex-asa.dtx and biblatex-asa.ins are provided.
+2. Generate the style files by running:
+     latex biblatex-asa.ins
+   This will create:
+     - biblatex-asa.sty
+     - asa.bbx
+     - asa.cbx
+3. Find your local texmf tree:
    - On TeX Live: typically ~/texmf/
    - On MiKTeX: typically ~/AppData/Local/MiKTeX/texmf/
-
-2. Create the directory structure:
+4. Create the directory structure:
    texmf/tex/latex/biblatex-asa/
-
-3. Copy the package files:
+5. Copy the generated files:
    - biblatex-asa.sty → texmf/tex/latex/biblatex-asa/
    - asa.bbx → texmf/tex/latex/biblatex-asa/
    - asa.cbx → texmf/tex/latex/biblatex-asa/
-
-4. Update the filename database:
+6. Update the filename database:
    - TeX Live: run `texhash` or `mktexlsr`
    - MiKTeX: run `initexmf --update-fndb`
 
@@ -87,9 +94,9 @@ Compile your document with:
 
 TROUBLESHOOTING
 --------------
-- Ensure all three files (.sty, .bbx, .cbx) are in the same directory
+- If you are using local/manual installation, ensure you have generated all three files (.sty, .bbx, .cbx) from the provided .ins script, and that they are present in your project or texmf directory
 - Use biber backend for best results
 - Check that your bibliography entries follow standard biblatex format
-- See test-asa.tex for working examples
+- See example files in the docs/ directory for working usage
 
 For more information, see README.md and the example files. 
