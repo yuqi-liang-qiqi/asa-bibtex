@@ -1,0 +1,88 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+% Use relative path to package files
+\makeatletter
+\def\input@path{{../../src/}}
+\makeatother
+\usepackage[backend=biber]{biblatex-asa}
+
+% Add your bibliography file
+\addbibresource{example.bib}
+
+\title{Using the biblatex-asa Package: A Demonstration}
+\author{Example Author}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+This document demonstrates the usage of the \texttt{biblatex-asa} package, which provides American Sociological Association (ASA) citation and bibliography formatting for LaTeX documents.
+
+\section{Citation Examples}
+
+\subsection{Parenthetical Citations}
+
+Basic parenthetical citations using \verb|\parencite|:
+\begin{itemize}
+    \item Single author: \parencite{brown2022}
+    \item Two authors: \parencite{kao2003}
+    \item Multiple citations: \parencite{brown2022,kao2003,smith2020a}
+\end{itemize}
+
+\subsection{Text Citations}
+
+In-text citations using \verb|\textcite|:
+\begin{itemize}
+    \item \textcite{brown2022} argues that methodology is crucial.
+    \item \textcite{kao2003} provide empirical evidence.
+    \item According to \textcite{smith2020a}, recent developments suggest new directions.
+\end{itemize}
+
+\subsection{Different Entry Types}
+
+The package handles various types of sources:
+\begin{itemize}
+    \item Journal articles: \parencite{brown2022}
+    \item Books: \parencite{johnson2019}
+    \item Book chapters: \parencite{wilson2021}
+    \item Organizational reports: \parencite{WHO2022}
+    \item Miscellaneous sources: \parencite{ASA1997}
+\end{itemize}
+
+\section{Package Options}
+
+The \texttt{biblatex-asa} package supports several options:
+
+\begin{itemize}
+    \item \texttt{giveninits}: Use initials for given names
+    \item \texttt{nogiveninits}: Use full given names (default)
+    \item \texttt{backend=biber}: Use biber backend (recommended)
+    \item \texttt{backend=bibtex}: Use bibtex backend
+\end{itemize}
+
+Example usage with options:
+\begin{verbatim}
+\usepackage[giveninits,backend=biber]{biblatex-asa}
+\end{verbatim}
+
+\section{Compilation}
+
+To compile this document:
+\begin{enumerate}
+    \item \texttt{pdflatex example-with-package.tex}
+    \item \texttt{biber example-with-package}
+    \item \texttt{pdflatex example-with-package.tex}
+    \item \texttt{pdflatex example-with-package.tex}
+\end{enumerate}
+
+\section{Conclusion}
+
+The \texttt{biblatex-asa} package provides a convenient way to format citations and bibliographies according to ASA standards. It combines the power of biblatex with ASA-specific formatting requirements.
+
+\printbibliography
+
+\end{document} 
