@@ -107,55 +107,61 @@ This project provides a **complete `biblatex` style implementation** for LaTeX, 
 
 ## Project Structure
 
+This repository contains both the full development history (for developers and advanced users) and the final CTAN upload package (for official distribution). Below is a guide to help you understand what each part is for.
+
+### Full Repository Structure (for development and reference)
+
 <details>
-<summary>Click to expand project structure</summary>
+<summary>Click to expand full repository structure</summary>
 
 ```
 biblatex-asa/
-├── README.md                     # Main documentation
-├── INSTALL                       # Installation instructions  
-├── MANIFEST                      # Package contents list
-├── .gitignore                    # Git ignore patterns
-│
-├── assets/                       # Project assets
-│   └── logo.svg                  # Project logo
-│
-├── src/                          # Core package files
-│   ├── biblatex-asa.sty         # LaTeX package wrapper
-│   ├── asa.bbx                  # Bibliography style definitions
-│   └── asa.cbx                  # Citation style definitions
-│
-├── docs/                         # Documentation
-│   ├── beginner-guide/          # Complete tutorial (14 pages)
-│   │   ├── biblatex-asa-manual-full.pdf
-│   │   └── biblatex-asa-manual-full.tex
-│   ├── ctan-version/            # Concise manual (6 pages)
-│   │   ├── biblatex-asa-manual.pdf
-│   │   └── biblatex-asa-manual.tex
-│   ├── README.md                # Documentation guide
-│   ├── COMPILE_BIBLATEX_ASA_LOCALLY.md
-│   └── requirements.md
-│
-├── examples/                     # Usage examples
-│   ├── basic/                   # Basic usage example
-│   │   ├── example.tex
-│   │   ├── example.bib
-│   │   └── example.pdf
-│   └── with-package/            # Using package wrapper
-│       ├── example-with-package.tex
-│       └── example.bib
-│
-├── tests/                        # Test files
-│   ├── test-asa.tex
-│   ├── test-asa.bib
-│   └── test-asa.pdf
-│
-└── scripts/                      # Build automation
-    ├── build.sh                 # Build and test script
-    └── clean.sh                 # Cleanup temporary files
+├── README.md         # Main project documentation (this file)
+├── INSTALL           # General installation instructions
+├── LICENSE           # License information
+├── .gitignore        # Git ignore rules
+├── assets/           # Project assets (e.g., logo)
+├── docs/             # Additional documentation, guides, and requirements
+├── src/              # Source code and development files
+├── examples/         # Example projects and test cases
+├── scripts/          # Build and utility scripts
+├── ctan-upload/      # Directory for preparing the official CTAN upload
+│   └── biblatex-asa/ # The actual CTAN upload package (see below)
+└── ...               # Other files and folders for development
+```
+</details>
+
+- **Most users only need the files in `ctan-upload/biblatex-asa/` (see below).**
+- The rest of the repository is for development, extended documentation, and advanced use.
+
+### CTAN Upload Package (official release)
+
+The actual content submitted to CTAN is located in `ctan-upload/biblatex-asa/` and contains only the files required for distribution and end users:
+
+```
+ctan-upload/biblatex-asa/
+├── README.md                # Package overview and usage
+├── INSTALL                  # Installation instructions for end users
+├── LICENSE                  # License information
+├── biblatex-asa.dtx         # Documented source (literate programming)
+├── biblatex-asa.ins         # Installation script to generate style files
+└── docs/                    # Documentation and usage examples
+    ├── biblatex-asa-manual.pdf         # User manual (PDF)
+    ├── biblatex-asa-manual.tex         # User manual (LaTeX source)
+    ├── example-with-package.tex        # Example usage (package wrapper)
+    ├── example-with-package.bib        # Example bibliography
+    ├── example-with-package.pdf        # Example output (PDF)
+    ├── example-without-package.tex     # Example usage (direct style)
+    ├── example-without-package.bib     # Example bibliography
+    └── example-without-package.pdf     # Example output (PDF)
 ```
 
-</details>
+**What does this mean for you?**
+- If you are a typical user or want to install the package, you only need the files in `ctan-upload/biblatex-asa/`.
+- If you are a developer, want to contribute, or are interested in the full history and extra documentation, you can explore the rest of the repository.
+- **Only the files in `ctan-upload/biblatex-asa/` are included in the official CTAN release.**
+
+If you are new to LaTeX or CTAN packages, start with the files in `ctan-upload/biblatex-asa/` and follow the instructions in the included `INSTALL` and `README.md` files.
 
 ---
 
