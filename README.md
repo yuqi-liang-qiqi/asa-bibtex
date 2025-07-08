@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/logo.svg" alt="biblatex-asa Logo" width="200"/>
+  <img src="assets/logo.png" alt="biblatex-asa Logo" width="200"/>
   
   <h1>biblatex-asa</h1>
   <h3>American Sociological Association (ASA) Style for biblatex</h3>
