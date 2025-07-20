@@ -381,6 +381,173 @@ Special formatting (rarely used) & \texttt{\cs{cite}} \\
 
 \textbf{Important Note:} ASA style uses the author-date citation system. All citations should be in-text using the format: (Author Year) or Author (Year). Footnote citations are not used in ASA style.
 
+\section{Important Note on Prenote Spacing in Citations}
+
+\subsection{How to Correctly Use e.g., i.e., and Other Prenotes in biblatex}
+
+When using \textsf{biblatex} (and thus \textsf{biblatex-asa}), it is common to add explanatory text before a citation, such as ``e.g.,'' or ``see also.'' This is called a \emph{prenote}. The correct way to include a prenote is:
+
+\begin{lstlisting}[language=TeX]
+\parencite[e.g., ][]{abbott1981,phillips2001}
+\end{lstlisting}
+
+Notice the \textbf{space after the comma} in ``e.g., '' inside the square brackets. This space is important for correct output:
+
+\begin{itemize}
+  \item \texttt{[e.g., ][]} → (e.g., Abbott 1981; Phillips and Zuckerman 2001)
+  \item \texttt{[e.g.,][]}  → (e.g.,Abbott 1981; Phillips and Zuckerman 2001)\hspace{1em}(\textcolor{red}{no space!})
+\end{itemize}
+
+\subsection{Why the Syntax Matters: Understanding biblatex Parameter Parsing}
+
+This section explains \textbf{why} the syntax matters, which helps prevent common mistakes.
+
+\subsubsection*{The Two Optional Parameters of \texttt{\textbackslash parencite}}
+
+The \texttt{\textbackslash parencite} command in biblatex is designed to accept \textbf{two optional parameters}:
+
+\begin{lstlisting}[language=TeX]
+\parencite[prenote][postnote]{citation_keys}
+\end{lstlisting}
+
+Where:
+\begin{itemize}
+  \item \texttt{[prenote]} is explanatory text that comes \textbf{before} the citation (like ``e.g.,'' ``see also,'' etc.)
+  \item \texttt{[postnote]} is additional information that comes \textbf{after} the citation (like page numbers, chapter numbers, etc.)
+  \item \texttt{\{citation\_keys\}} are the actual references you want to cite
+\end{itemize}
+
+\subsubsection*{The Critical Difference: Why \texttt{[e.g., ]\{...\}} Doesn't Work}
+
+Many users try to write:
+\begin{lstlisting}[language=TeX]
+\parencite[e.g., ]{abbott1981,phillips2001}  % WRONG!
+\end{lstlisting}
+
+This produces incorrect output like:
+\begin{center}
+\textcolor{red}{(Abbott 1981; Phillips and Zuckerman 2001, e.g., )}
+\end{center}
+
+\textbf{Why does this happen?}
+
+When you write \texttt{[e.g., ]\{...\}}, biblatex's parameter parser gets confused:
+
+\begin{enumerate}
+  \item \textbf{biblatex expects}: \texttt{[prenote][postnote]\{keys\}}
+  \item \textbf{You provide}: \texttt{[prenote]\{keys\}} (missing postnote parameter)
+  \item \textbf{biblatex's reaction}: The parser may misinterpret the parameters, leading to incorrect placement of the prenote
+\end{enumerate}
+
+\subsubsection*{The Correct Syntax: \texttt{[e.g., ][]\{...\}}}
+
+The correct way is to explicitly provide both parameters:
+\begin{lstlisting}[language=TeX]
+\parencite[e.g., ][]{abbott1981,phillips2001}  % CORRECT!
+\end{lstlisting}
+
+This produces the correct output:
+\begin{center}
+\textcolor{green}{(e.g., Abbott 1981; Phillips and Zuckerman 2001)}
+\end{center}
+
+\textbf{Why this works:}
+\begin{itemize}
+  \item \texttt{[e.g., ]} is clearly the prenote (explanatory text)
+  \item \texttt{[]} is an empty postnote (no additional information)
+  \item \texttt{\{abbott1981,phillips2001\}} are the citation keys
+  \item biblatex can parse this unambiguously
+\end{itemize}
+
+\subsubsection*{Why is the space after the comma important?}
+\begin{itemize}
+  \item \textbf{biblatex does not automatically add a space} between the prenote and the citation. The user must add it manually.
+  \item This is the standard practice in all major biblatex styles (APA, Chicago, etc.).
+  \item The official \textsf{biblatex} manual (section 3.10.2) states: ``If the prenote ends with a punctuation mark, you should add a space before the closing bracket to ensure correct spacing in the output.''
+\end{itemize}
+
+\subsection{Common Mistakes and How to Avoid Them}
+
+\subsubsection*{Mistake 1: Missing the second set of brackets}
+\begin{lstlisting}[language=TeX]
+% WRONG - Missing postnote parameter
+\parencite[e.g., ]{abbott1981,phillips2001}
+% Output: (Abbott 1981; Phillips and Zuckerman 2001, e.g., )
+
+% CORRECT - Explicit empty postnote
+\parencite[e.g., ][]{abbott1981,phillips2001}
+% Output: (e.g., Abbott 1981; Phillips and Zuckerman 2001)
+\end{lstlisting}
+
+\subsubsection*{Mistake 2: Missing space after punctuation}
+\begin{lstlisting}[language=TeX]
+% WRONG - No space after comma
+\parencite[e.g.,][]{abbott1981,phillips2001}
+% Output: (e.g.,Abbott 1981; Phillips and Zuckerman 2001)
+
+% CORRECT - Space after comma
+\parencite[e.g., ][]{abbott1981,phillips2001}
+% Output: (e.g., Abbott 1981; Phillips and Zuckerman 2001)
+\end{lstlisting}
+
+\subsubsection*{Mistake 3: Confusing prenote and postnote}
+\begin{lstlisting}[language=TeX]
+% WRONG - Page number as prenote (should be postnote)
+\parencite[p.~25]{abbott1981}
+% Output: (p. 25 Abbott 1981)
+
+% CORRECT - Page number as postnote
+\parencite[][p.~25]{abbott1981}
+% Output: (Abbott 1981, p. 25)
+\end{lstlisting}
+
+\subsection{Complete Examples}
+
+\begin{lstlisting}[language=TeX]
+% Basic prenote
+For example, some classic studies \parencite[e.g., ][]{abbott1981,phillips2001} have discussed this topic.
+
+% Prenote with page numbers
+See \parencite[e.g., ][p.~25]{abbott1981} for detailed analysis.
+
+% Multiple prenotes and postnotes
+\parencite[see also][pp.~15--20]{jones2019,brown2021} provide additional evidence.
+
+% Just page numbers (no prenote)
+\parencite[][p.~42]{smith2020} shows this trend clearly.
+\end{lstlisting}
+
+\subsection{User Perspective: Why This Matters}
+
+\begin{itemize}
+  \item \textbf{Consistency}: Using the correct syntax ensures your citations always appear in the right place
+  \item \textbf{Professional appearance}: Properly formatted citations look more professional
+  \item \textbf{Time saving}: Understanding the syntax prevents trial-and-error formatting
+  \item \textbf{Compatibility}: This syntax works across all biblatex styles, not just ASA
+\end{itemize}
+
+\subsubsection*{Quick Reference}
+\begin{center}
+\begin{tabular}{ll}
+\hline
+\textbf{What you want} & \textbf{How to write it} \\
+\hline
+Just citation & \texttt{\cs{parencite}\{key\}} \\
+Prenote only & \texttt{\cs{parencite}[prenote][]\{key\}} \\
+Postnote only & \texttt{\cs{parencite}[][postnote]\{key\}} \\
+Both & \texttt{\cs{parencite}[prenote][postnote]\{key\}} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection*{References}
+\begin{itemize}
+  \item \href{https://ctan.org/pkg/biblatex}{biblatex manual, section 3.10.2}
+  \item biblatex-apa, biblatex-chicago example documents
+\end{itemize}
+
+\textbf{Summary:} Always use \texttt{[prenote][]\{keys\}} format (with empty postnote brackets) and add a space after punctuation in prenotes for correct citation formatting in biblatex and biblatex-asa.
+
 \section{Compilation}
 
 \subsection{Overleaf Compilation (Recommended for Beginners)}

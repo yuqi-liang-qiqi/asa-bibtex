@@ -22,9 +22,9 @@
 
 % \section{Implementation}
 
+%<*sty>
 % \subsection{biblatex-asa.sty}
 % \begin{macrocode}
-%<*sty>
 %% biblatex-asa.sty
 %% Copyright (C) 2025 Yuqi Liang
 %% 
@@ -77,14 +77,12 @@
 
 \makeatother
 
-\endinput
-%% End of biblatex-asa.sty 
-%</sty>
 % \end{macrocode}
+%</sty>
 
+%<*bbx>
 % \subsection{asa.bbx}
 % \begin{macrocode}
-%<*bbx>
 \ProvidesFile{asa.bbx}[2025/07/03 v1.0.0 ASA bibliography style]
 
 % ASA bibliography style based on American Sociological Association requirements
@@ -344,12 +342,12 @@
   \usebibmacro{pageref}%
   \usebibmacro{finentry}%
 }
-%</bbx>
 % \end{macrocode}
+%</bbx>
 
+%<*cbx>
 % \subsection{asa.cbx}
 % \begin{macrocode}
-%<*cbx>
 \ProvidesFile{asa.cbx}[2025/07/03 v1.0.0 ASA citation style]
 
 % ASA citation style based on American Sociological Association requirements
@@ -494,6 +492,8 @@
   {\multicitedelim}
   {\usebibmacro{postnote}}
 
+
+
 % ========================================
 % Multiple citation formatting
 % ========================================
@@ -524,7 +524,10 @@
 % Prenote and postnote formatting
 % ========================================
 
-\renewbibmacro*{prenote}{\printfield{prenote}}
+\renewbibmacro*{prenote}{%
+  \iffieldundef{prenote}
+    {}
+    {\printfield{prenote}\addspace}}
 
 \renewbibmacro*{postnote}{%
   \iffieldundef{postnote}
@@ -532,7 +535,8 @@
     {\setunit{\postnotedelim}%
      \printfield{postnote}}}
 
-\endinput 
+% \end{macrocode}
 %</cbx>
+\endinput
 
 </code_block_to_apply_changes_from> 

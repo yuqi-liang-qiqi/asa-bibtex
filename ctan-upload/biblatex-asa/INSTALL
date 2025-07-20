@@ -19,13 +19,13 @@ Option 1: Local Installation (Recommended for single project)
 2. Before using the package, you must generate the style files by running:
      latex biblatex-asa.ins
    This will create the following files in the same directory:
-     - biblatex-asa.sty
-     - asa.bbx
-     - asa.cbx
+   - biblatex-asa.sty
+   - asa.bbx  
+   - asa.cbx
 3. Copy these three files to your project directory (or leave them in place if working in the same folder).
 4. In your LaTeX document, use:
-     \usepackage{biblatex-asa}
-     \addbibresource{your-bibliography.bib}
+   \usepackage{biblatex-asa}
+   \addbibresource{your-bibliography.bib}
 
 Option 2: System-wide Installation
 -----------------------------------

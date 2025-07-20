@@ -7,16 +7,18 @@
 %% biblatex-asa.dtx  (with options: `cbx')
 %% This is a generated file. See biblatex-asa.dtx for documentation and source.
 
-
-
-
-
-
 \ProvidesFile{asa.cbx}[2025/07/03 v1.0.0 ASA citation style]
 
+% ASA citation style based on American Sociological Association requirements
+% Author: Yuqi Liang
+% Date: 2025-07-03
+% License: LaTeX Project Public License v1.3c or later
 
 \RequireCitationStyle{authoryear}
 
+% ========================================
+% Global citation settings
+% ========================================
 
 \ExecuteBibliographyOptions{
   autocite=inline,
@@ -31,12 +33,17 @@
   giveninits=false
 }
 
+% Ensure bibliography shows all authors (override citation settings)
 \AtBeginBibliography{%
   \defcounter{maxnames}{999}%
   \defcounter{minnames}{1}%
 }
 
+% ========================================
+% Name formatting for citations
+% ========================================
 
+% Citation name format: use family names only in citations
 \DeclareNameFormat{labelname}{%
   \usebibmacro{name:family}
     {\namepartfamily}
@@ -46,10 +53,14 @@
   \usebibmacro{name:andothers}%
 }
 
+% Set name delimiters for citations
 \DeclareDelimFormat[cite,parencite,textcite]{multinamedelim}{\addspace}
 \DeclareDelimFormat[cite,parencite,textcite]{finalnamedelim}{\addspace and\space}
 \DeclareDelimFormat[cite,parencite,textcite]{revsdnamedelim}{\addspace and\space}
 
+% ========================================
+% Date formatting for citations
+% ========================================
 
 \renewbibmacro*{cite:labeldate+extradate}{%
   \iffieldundef{labelyear}
@@ -61,6 +72,9 @@
         {\printfield{labelyear}\printfield{extradate}}}}%
 }
 
+% ========================================
+% Basic citation macros
+% ========================================
 
 \renewbibmacro*{cite:label}{%
   \iffieldundef{label}
@@ -74,6 +88,7 @@
     {\printtext[bibhyperref]{\printnames{labelname}}}%
 }
 
+% For parenthetical citations (parencite) - simple author year format
 \newbibmacro*{cite:labelname+labeldate:parens}{%
   \usebibmacro{cite:labelname}%
   \setunit{\addspace}%
@@ -86,7 +101,11 @@
         {\printfield{labelyear}\printfield{extradate}}}}%
 }
 
+% ========================================
+% Citation commands
+% ========================================
 
+% \parencite command - (Author Year)
 \DeclareCiteCommand{\parencite}[\mkbibparens]
   {\usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
@@ -94,6 +113,7 @@
   {\multicitedelim}
   {\usebibmacro{postnote}}
 
+% \textcite command - Author (Year)
 \DeclareCiteCommand{\textcite}
   {\boolfalse{cbx:parens}}
   {\usebibmacro{citeindex}%
@@ -102,7 +122,7 @@
    \mkbibparens{%
      \iffieldundef{labelyear}
        {\printtext{n.d.}}
-       {\iffieldequalstr{labelyear}{Forthcoming}
+       {\iffieldequalstr{labelyear}{Forthcoming}}
          {\printtext{Forthcoming}}
          {\iffieldequalstr{labelyear}{n.d.}
            {\printtext{n.d.}}
@@ -113,6 +133,7 @@
    \multicitedelim}
   {\usebibmacro{textcite:postnote}}
 
+% \cite command - defaults to \parencite
 \DeclareCiteCommand{\cite}[\mkbibparens]
   {\usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
@@ -120,6 +141,7 @@
   {\multicitedelim}
   {\usebibmacro{postnote}}
 
+% \autocite command - defaults to \parencite
 \DeclareCiteCommand{\autocite}[\mkbibparens]
   {\usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
@@ -127,6 +149,9 @@
   {\multicitedelim}
   {\usebibmacro{postnote}}
 
+% ========================================
+% Multiple citation formatting
+% ========================================
 
 \renewbibmacro*{textcite:postnote}{%
   \iffieldundef{postnote}
@@ -142,13 +167,22 @@
        {\bibcloseparen\global\boolfalse{cbx:parens}}
        {}}}
 
+% ========================================
+% Multi-citation delimiter
+% ========================================
 
 \renewcommand*{\multicitedelim}{\addsemicolon\space}
 \renewcommand*{\compcitedelim}{\addsemicolon\space}
 \renewcommand*{\textcitedelim}{\addcomma\space}
 
+% ========================================
+% Prenote and postnote formatting
+% ========================================
 
-\renewbibmacro*{prenote}{\printfield{prenote}}
+\renewbibmacro*{prenote}{%
+  \iffieldundef{prenote}
+    {}
+    {\printfield{prenote}\addspace}}
 
 \renewbibmacro*{postnote}{%
   \iffieldundef{postnote}

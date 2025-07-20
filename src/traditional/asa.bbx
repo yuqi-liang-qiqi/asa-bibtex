@@ -173,6 +173,9 @@
 % Pages format for incollection: ensure "Pp." prefix
 \DeclareFieldFormat[incollection]{pages}{Pp. #1}
 
+% URL format: ensure no extra space between left parenthesis and "URL:"
+\DeclareFieldFormat{url}{(URL: #1)}
+
 % ========================================
 % Entry drivers
 % ========================================
@@ -281,7 +284,7 @@
   \addperiod\space%
   \iffieldundef{url}
     {}
-    {\mkbibparens{\printfield{url}}}%
+    {\printfield{url}}%
   \setunit{\bibpagerefpunct}\newblock%
   \usebibmacro{pageref}%
   \usebibmacro{finentry}%
