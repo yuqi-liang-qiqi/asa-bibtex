@@ -55,6 +55,10 @@
 % Load biblatex with our custom ASA style
 \RequirePackage[style=asa]{biblatex}
 
+% Configure URL breaking to prevent overflow
+\urlstyle{same}
+\setlength{\Urlmuskip}{0mu plus 1mu}
+
 % Set biblatex options for ASA style
 \ExecuteBibliographyOptions{
   giveninits=\asa@giveninits,
@@ -256,6 +260,10 @@
 % Pages format for incollection: ensure "Pp." prefix
 \DeclareFieldFormat[incollection]{pages}{Pp. #1}
 
+% URL format: ensure no extra space between left parenthesis and "URL:"
+% Also handle URL breaking to prevent overflow
+\DeclareFieldFormat{url}{(URL: \url{#1})}
+
 % ========================================
 % Entry drivers
 % ========================================
@@ -337,6 +345,7 @@
   \usebibmacro{finentry}%
 }
 %</bbx>
+% \end{macrocode}
 
 % \subsection{asa.cbx}
 % \begin{macrocode}

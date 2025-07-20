@@ -1,0 +1,161 @@
+%%
+%% This is file `asa.cbx',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% biblatex-asa.dtx  (with options: `cbx')
+%% This is a generated file. See biblatex-asa.dtx for documentation and source.
+
+
+
+
+
+
+\ProvidesFile{asa.cbx}[2025/07/03 v1.0.0 ASA citation style]
+
+
+\RequireCitationStyle{authoryear}
+
+
+\ExecuteBibliographyOptions{
+  autocite=inline,
+  autopunct=true,
+  labeldateparts=true,
+  uniquename=full,
+  uniquelist=false,
+  maxnames=2,
+  minnames=1,
+  maxcitenames=2,
+  mincitenames=1,
+  giveninits=false
+}
+
+\AtBeginBibliography{%
+  \defcounter{maxnames}{999}%
+  \defcounter{minnames}{1}%
+}
+
+
+\DeclareNameFormat{labelname}{%
+  \usebibmacro{name:family}
+    {\namepartfamily}
+    {\namepartgiven}
+    {\namepartprefix}
+    {\namepartsuffix}%
+  \usebibmacro{name:andothers}%
+}
+
+\DeclareDelimFormat[cite,parencite,textcite]{multinamedelim}{\addspace}
+\DeclareDelimFormat[cite,parencite,textcite]{finalnamedelim}{\addspace and\space}
+\DeclareDelimFormat[cite,parencite,textcite]{revsdnamedelim}{\addspace and\space}
+
+
+\renewbibmacro*{cite:labeldate+extradate}{%
+  \iffieldundef{labelyear}
+    {\printtext{n.d.}}
+    {\iffieldequalstr{labelyear}{Forthcoming}
+      {\printtext{Forthcoming}}
+      {\iffieldequalstr{labelyear}{n.d.}
+        {\printtext{n.d.}}
+        {\printfield{labelyear}\printfield{extradate}}}}%
+}
+
+
+\renewbibmacro*{cite:label}{%
+  \iffieldundef{label}
+    {\printtext[bibhyperref]{\printfield[citetitle]{labeltitle}}}
+    {\printtext[bibhyperref]{\printfield{label}}}%
+}
+
+\newbibmacro*{cite:labelname}{%
+  \ifnameundef{labelname}
+    {\usebibmacro{cite:label}}
+    {\printtext[bibhyperref]{\printnames{labelname}}}%
+}
+
+\newbibmacro*{cite:labelname+labeldate:parens}{%
+  \usebibmacro{cite:labelname}%
+  \setunit{\addspace}%
+  \iffieldundef{labelyear}
+    {\printtext{n.d.}}
+    {\iffieldequalstr{labelyear}{Forthcoming}
+      {\printtext{Forthcoming}}
+      {\iffieldequalstr{labelyear}{n.d.}
+        {\printtext{n.d.}}
+        {\printfield{labelyear}\printfield{extradate}}}}%
+}
+
+
+\DeclareCiteCommand{\parencite}[\mkbibparens]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{cite:labelname+labeldate:parens}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\textcite}
+  {\boolfalse{cbx:parens}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{cite:labelname}%
+   \addspace%
+   \mkbibparens{%
+     \iffieldundef{labelyear}
+       {\printtext{n.d.}}
+       {\iffieldequalstr{labelyear}{Forthcoming}
+         {\printtext{Forthcoming}}
+         {\iffieldequalstr{labelyear}{n.d.}
+           {\printtext{n.d.}}
+           {\printfield{labelyear}\printfield{extradate}}}}}}
+  {\ifbool{cbx:parens}
+     {\bibcloseparen\global\boolfalse{cbx:parens}}
+     {}%
+   \multicitedelim}
+  {\usebibmacro{textcite:postnote}}
+
+\DeclareCiteCommand{\cite}[\mkbibparens]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{cite:labelname+labeldate:parens}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\autocite}[\mkbibparens]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{cite:labelname+labeldate:parens}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+
+\renewbibmacro*{textcite:postnote}{%
+  \iffieldundef{postnote}
+    {\ifbool{cbx:parens}
+       {\bibcloseparen\global\boolfalse{cbx:parens}}
+       {}}
+    {\ifbool{cbx:parens}
+       {\setunit{\postnotedelim}}
+       {\setunit{\addspace\bibopenparen}%
+        \global\booltrue{cbx:parens}}%
+     \printfield{postnote}%
+     \ifbool{cbx:parens}
+       {\bibcloseparen\global\boolfalse{cbx:parens}}
+       {}}}
+
+
+\renewcommand*{\multicitedelim}{\addsemicolon\space}
+\renewcommand*{\compcitedelim}{\addsemicolon\space}
+\renewcommand*{\textcitedelim}{\addcomma\space}
+
+
+\renewbibmacro*{prenote}{\printfield{prenote}}
+
+\renewbibmacro*{postnote}{%
+  \iffieldundef{postnote}
+    {}
+    {\setunit{\postnotedelim}%
+     \printfield{postnote}}}
+
+\endinput
+%%
+%% End of file `asa.cbx'.
